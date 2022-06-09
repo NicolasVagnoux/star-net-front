@@ -33,11 +33,11 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^7.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^2.3.2",
     "typescript": "^4.3.5",
-    "vite": "^2.4.1",
-    "husky": "^7.0.0"
+    "vite": "^2.4.1"
   },
   "pre-commit": "lint",
   "license": "MIT"
