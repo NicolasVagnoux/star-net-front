@@ -1,7 +1,37 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
+import ArticleCard from './ArticleCard';
+
+interface IArticle {
+  id: number;
+  title: string;
+  idUser: number;
+  mainImage: string;
+  mainContent: string;
+}
 
 const ArticleList = () => {
-  return <div></div>;
+  const [articleList, setArticleList] = useState<IArticle[]>([]);
+
+  useEffect(() => {
+    const getArticleList = async () => {
+      const url = 'http://localhost:3000/api/packages/1/articles';
+      const { data } = await axios.get(url);
+      setArticleList(data);
+    };
+    getArticleList();
+  }, []);
+  console.log(articleList);
+
+  return (
+    <div className="articleList">
+      <div className="articleList__list">
+        {articleList &&
+          articleList.map((article) => <ArticleCard key={article.id} {...article} />)}
+      </div>
+    </div>
+  );
 };
 
 export default ArticleList;
