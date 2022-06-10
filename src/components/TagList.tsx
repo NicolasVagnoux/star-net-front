@@ -18,7 +18,7 @@ const TagList = () => {
     getTagsList();
   }, []);
 
-  return <div>
+  return <div className='taglist'>
     {tagsList &&
           tagsList.map((tags, index) => <TagItem key={index} {...tags} />)}
   </div>;
