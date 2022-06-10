@@ -1,11 +1,7 @@
 import React from 'react';
 import ITagItem from '../interfaces/ITagItem';
 
-const TagItem = ({text}:ITagItem) => {
-  return (
-    <div className='tag'>
-      {text}
-    </div>
-  );
+const TagItem = ({ name }: ITagItem) => {
+  return <div className="tag">{name}</div>;
 };
 export default TagItem;

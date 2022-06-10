@@ -1,4 +1,5 @@
 export default interface ITagItem {
     index: number,
-    text: string, 
+    name: string, 
+    description:string
 }

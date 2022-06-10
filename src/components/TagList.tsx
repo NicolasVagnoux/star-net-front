@@ -1,36 +1,27 @@
-import React  from 'react';
+import React, { useEffect, useState } from 'react';
 import TagItem from './TagItem';
 import ITagItem from '../interfaces/ITagItem';
-// import axios from 'axios';
-// import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const TagList = () => {
-const tagsList = ["Blockchain", "Cryptomonnaie"];
+  // Defining table to gather data from our API call
+  const [tagsList, setTagList] = useState<ITagItem[]>();
 
-  // We gather idPackage to build our call 
-  // const {idPackage} 
+  // Fonction to get data from our API
+  useEffect(() => {
+    const getTagsList = async () => {
+      axios;
+      const url = `http://localhost:3000/api/packages/1/categories`;
+      const { data } = await axios.get(url);
+      setTagList(data);
+    };
+    getTagsList();
+  }, []);
 
-  // // We define a table to receive tags list from our API
-  // const [tagsList, setTagList] = useState(['blockchain']);
-  // const getTagsList = () => {
-  //   axios
-  //     .get(`http://localhost:3000/api/packages/1/categories`)
-  //     .then((res) => res.data.results)
-  //     .then((data) => {
-  //       setTagList(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  // useEffect(() => {
-  //   getTagsList();
-  // },[]);
-
-  return (
-    <div>
-      {tagsList && tagsList.map((text) => <TagItem {...text} />)}
-    </div>
-  );
+  return <div>
+    {tagsList &&
+          tagsList.map((tags, index) => <TagItem key={index} {...tags} />)}
+  </div>;
 };
 
 export default TagList;
