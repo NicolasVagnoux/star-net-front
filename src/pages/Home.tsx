@@ -3,6 +3,8 @@ import FollowedButton from '../components/FollowedButton';
 import TagItem from '../components/TagItem';
 import TagList from '../components/TagList';
 
+import ArticleList from '../components/ArticleList';
+
 const Home = () => {
   return (
     <div>
@@ -10,6 +12,7 @@ const Home = () => {
       <FollowedButton />
       <FollowedButton />
       <TagList />
+      <ArticleList />
     </div>
   );
 };

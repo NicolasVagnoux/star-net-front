@@ -14,7 +14,7 @@ const tagsList = ["Blockchain", "Cryptomonnaie"];
   // const [tagsList, setTagList] = useState(['blockchain']);
   // const getTagsList = () => {
   //   axios
-  //     .get(`http://localhost:3000/api/packages/:${idPackage}/categories`)
+  //     .get(`http://localhost:3000/api/packages/1/categories`)
   //     .then((res) => res.data.results)
   //     .then((data) => {
   //       setTagList(data);

@@ -8,14 +8,15 @@
   justify-content: center;
   gap: 6px;
   align-items: center;
-}
+  cursor: pointer;
 
-.button-followed {
+  &-followed {
     color: $primaryColor2;
     background-color: $secondaryColor4;
-}
+  }
 
-.button-notfollowed {
+  &-notfollowed {
     color: $secondaryColor4;
     background-color: $primaryColor2;
+  }
 }
