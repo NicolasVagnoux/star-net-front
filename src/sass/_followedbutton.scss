@@ -1,0 +1,22 @@
+.button {
+  border: 1px $primaryColor2 solid;
+  width: 102px;
+  height: 40px;
+  border-radius: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+
+  &-followed {
+    color: $primaryColor2;
+    background-color: $secondaryColor4;
+  }
+
+  &-notfollowed {
+    color: $secondaryColor4;
+    background-color: $primaryColor2;
+  }
+}
