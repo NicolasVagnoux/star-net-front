@@ -1,9 +1,9 @@
-import { RowDataPacket } from 'mysql2';
-
-export default interface IArticle extends RowDataPacket {
+export default interface IArticle {
   id: number;
-  name: string;
+  title: string;
   idUser: number;
   mainImage: string;
   mainContent: string;
+  creationDate: Date;
+  lastUpdateDate: Date;
 }

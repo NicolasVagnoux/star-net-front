@@ -1,15 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+import IArticle from '../../interfaces/IArticle';
 import ArticleCard from './ArticleCard';
-
-interface IArticle {
-  id: number;
-  title: string;
-  idUser: number;
-  mainImage: string;
-  mainContent: string;
-}
 
 const ArticleList = () => {
   const [articleList, setArticleList] = useState<IArticle[]>([]);
