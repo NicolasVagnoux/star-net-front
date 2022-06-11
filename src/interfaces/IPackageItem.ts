@@ -1,4 +1,4 @@
-export default interface ITagItem {
+export default interface IPackageItem {
   id: number;
   name: string;
   description: string;

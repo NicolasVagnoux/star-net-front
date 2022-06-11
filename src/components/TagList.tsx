@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import TagItem from './TagItem';
-import ITagItem from '../interfaces/ITagItem';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-const TagList = () => {
+import IPackageItem from '../interfaces/IPackageItem';
+import ITagItem from '../interfaces/ITagItem';
+import TagItem from './TagItem';
+
+const TagList = ({ id }: IPackageItem) => {
   // Defining table to gather data from our API call
   const [tagsList, setTagList] = useState<ITagItem[]>();
 
@@ -11,17 +13,18 @@ const TagList = () => {
   useEffect(() => {
     const getTagsList = async () => {
       axios;
-      const url = `http://localhost:3000/api/packages/1/categories`;
+      const url = `http://localhost:3000/api/packages/${id}/categories`;
       const { data } = await axios.get(url);
       setTagList(data);
     };
     getTagsList();
   }, []);
 
-  return <div className='taglist'>
-    {tagsList &&
-          tagsList.map((tags, index) => <TagItem key={index} {...tags} />)}
-  </div>;
+  return (
+    <div className="taglist">
+      {tagsList && tagsList.map((tags, index) => <TagItem key={index} {...tags} />)}
+    </div>
+  );
 };
 
 export default TagList;

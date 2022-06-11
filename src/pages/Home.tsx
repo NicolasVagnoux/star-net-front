@@ -1,16 +1,12 @@
 import React from 'react';
-import FollowedButton from '../components/FollowedButton';
-import TagList from '../components/TagList';
-import ArticleList from '../components/ArticleList';
+
+import PackageList from '../components/PackageList';
 
 const Home = () => {
   return (
-    <div>
-      <h1>HELLO HOME</h1>
-      <FollowedButton />
-      <FollowedButton />
-      <TagList />
-      <ArticleList />
+    <div className="home">
+      <h1> Lisez, découvrez, apprenez </h1>
+      <PackageList />
     </div>
   );
 };
