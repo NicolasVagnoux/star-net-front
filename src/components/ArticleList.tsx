@@ -16,7 +16,6 @@ const ArticleList = ({ id }: IPackageItem) => {
     };
     getArticleList();
   }, []);
-  console.log(articleList);
 
   return (
     <div className="articleList">
