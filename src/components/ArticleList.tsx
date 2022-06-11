@@ -2,14 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import IArticle from '../../interfaces/IArticle';
+import IPackageItem from '../interfaces/IPackageItem';
 import ArticleCard from './ArticleCard';
 
-const ArticleList = () => {
+const ArticleList = ({ id }: IPackageItem) => {
   const [articleList, setArticleList] = useState<IArticle[]>([]);
 
   useEffect(() => {
     const getArticleList = async () => {
-      const url = 'http://localhost:3000/api/packages/1/articles';
+      const url = `http://localhost:3000/api/packages/${id}/articles`;
       const { data } = await axios.get(url);
       setArticleList(data);
     };
