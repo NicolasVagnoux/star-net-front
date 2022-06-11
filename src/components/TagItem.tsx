@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ITagItem from '../interfaces/ITagItem';
 
 const TagItem = ({ name }: ITagItem) => {

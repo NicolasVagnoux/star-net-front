@@ -1,7 +1,7 @@
 import React from 'react';
 
 const RoundButton = () => {
-  return <div></div>;
+  return <div className="roundbutton"> 35% </div>;
 };
 
 export default RoundButton;
