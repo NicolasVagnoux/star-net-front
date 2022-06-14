@@ -1,5 +1,5 @@
-import { mdiBookmark, mdiBookmarkOutline } from '@mdi/js';
-import Icon from '@mdi/react';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -36,14 +36,14 @@ const ArticleCard = ({ id, title, mainImage, idUser, lastUpdateDate }: IArticle)
           onClick={() => {
             setIsBookmarked(!isBookmarked);
           }}>
-          {isBookmarked && <Icon path={mdiBookmark} size={1.6} color="#6a8eae" />}
+          {isBookmarked && <BookmarkIcon />}
         </button>
         <button
           className="articleCard__bookmark__svg"
           onClick={() => {
             setIsBookmarked(!isBookmarked);
           }}>
-          {!isBookmarked && <Icon path={mdiBookmarkOutline} size={1.6} color="#6a8eae" />}
+          {!isBookmarked && <BookmarkBorderIcon />}
         </button>
       </div>
     </div>
