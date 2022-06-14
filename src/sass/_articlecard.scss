@@ -33,7 +33,7 @@
     }
     &__bookmark {
         height: 100%;
-        width: 40px;
+        width: 45px;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
@@ -42,6 +42,11 @@
             border: none;
             margin-top: -8px;
             cursor: pointer;
+            &>* {
+                width: 36px;
+                height: 36px;
+                color: $primaryColor2;
+            }
         }
     }
 }

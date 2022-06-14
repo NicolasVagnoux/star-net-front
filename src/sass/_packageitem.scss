@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     gap: 2vh;
-    margin: 8vh 2vw;
-
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+    margin-left: 2vw;
   &__title {
     display: flex;
     flex-direction: row;
