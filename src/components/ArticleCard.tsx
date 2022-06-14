@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import IArticle from '../../interfaces/IArticle';
 import IUser from '../../interfaces/IUser';
 
-const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate }: IArticle) => {
+const ArticleCard = ({ id, title, mainImage, idUser, lastUpdateDate }: IArticle) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUser>();
 

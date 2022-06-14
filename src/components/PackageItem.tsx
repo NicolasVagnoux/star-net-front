@@ -1,15 +1,14 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+import IArticle from '../../interfaces/IArticle';
 import IPackageItem from '../interfaces/IPackageItem';
 import ArticleList from './ArticleList';
 import FollowedButton from './FollowedButton';
 import RoundButton from './RoundButton';
 import TagList from './TagList';
-import IArticle from '../../interfaces/IArticle';
-import axios from 'axios';
 
 const PackageItem = ({ name, id, description }: IPackageItem) => {
-
   const [articleList, setArticleList] = useState<IArticle[]>([]);
 
   useEffect(() => {
