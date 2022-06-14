@@ -1,0 +1,57 @@
+.article {
+  height: 100%;
+  width: 100vw;
+  padding: 5vh 10vw;
+  background: url('../assets/background1.jpeg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+
+  &__button {
+    margin-top: 5vh;
+  }
+  &__title {
+    margin-top: 2vh;
+
+    &__h1 {
+      font-family: $secondaryFont;
+      color: $primaryBlack;
+      font-size: 3rem;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  &__desc {
+    &__h2 {
+      font-family: $primaryFont;
+      color: $primaryBlack;
+      font-size: 1.6rem;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    position: relative;
+
+    &__img {
+      height: 30vh;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__text {
+    &__content {
+      font-family: $primaryFont;
+      width: 100%;
+      text-align: left;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10vh;
+      text-align: justify;
+    }
+  }
+}
