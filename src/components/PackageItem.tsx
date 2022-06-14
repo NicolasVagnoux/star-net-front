@@ -25,7 +25,6 @@ const PackageItem = ({ name, id, description }: IPackageItem) => {
       <div className="packageitem__title">
         <CompletionChart />
         <h2 className="packageitem__title__main">
-          {' '}
           {name} <span> ({articleList.length} articles) </span>
         </h2>
         <FollowedButton />
