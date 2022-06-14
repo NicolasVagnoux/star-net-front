@@ -9,9 +9,7 @@ const FollowedButton = () => {
   // Definition of the function which changes the attributes of the button
   const handleFollowed = () => {
     isFollowed ? setText('SUIVI') : setText('SUIVRE');
-    isFollowed
-      ? setSrc('/assets/icons/checked.svg')
-      : setSrc('/assets/icons/plus.svg');
+    isFollowed ? setSrc('/assets/icons/checked.svg') : setSrc('/assets/icons/plus.svg');
   };
 
   // Use effect to control the function call
