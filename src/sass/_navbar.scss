@@ -1,14 +1,14 @@
 .main-menu {
-  background-color: rgb(190, 206, 225);
+  background-color: $primaryWhite;
   position: fixed;
   height: 100vh;
   left: 0;
   overflow: hidden;
-  -webkit-transition: width 0.05s linear;
-  transition: width 0.2s linear;
   z-index: 1000;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.418);
+  // border-right: solid $primaryBlack 1px;
   &:hover {
-    width: 13vw;
+    width: 250px;
     overflow: visible;
   }
   &__element {
@@ -29,8 +29,8 @@
       font-size: 2rem;
       padding-left: 10px;
       &:hover {
-        background-color: rgb(152, 184, 223);
-        width: 12.5vw;
+        background-color: $primaryColor5;
+        width: 250px;
       }
 
       &__nav-text {
@@ -43,10 +43,16 @@
   }
   &__element-logout {
     position: absolute;
-    border-top: solid;
-    border-color: black;
     width: 100%;
     bottom: 0;
+    &__border {
+      border: solid black 1px;
+      color: $primaryBlack;
+      width: 50%;
+      align-items: center;
+      margin: auto;
+    }
+
     &__nav {
       position: relative;
       text-align: center;
@@ -67,7 +73,7 @@
     }
     cursor: pointer;
     :hover {
-      background-color: rgb(152, 184, 223);
+      background-color: $primaryColor5;
     }
   }
 }

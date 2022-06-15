@@ -1,12 +1,11 @@
 import './App.scss';
-import { Route, Routes } from 'react-router-dom';
 
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-
-import Home from './pages/Home';
 import Article from './pages/Article';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/articles/:idArticle" element={<Article />} />
       </Routes>
-
     </div>
   );
 }

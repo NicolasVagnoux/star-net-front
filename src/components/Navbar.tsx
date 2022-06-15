@@ -25,8 +25,8 @@ const Navbar = () => {
             <p className="main-menu__element__nav__nav-text">Mon compte</p>
           </li>
         </ul>
-
         <ul className="main-menu__element-logout">
+          <hr className="main-menu__element-logout__border" />
           <li className="main-menu__element-logout__nav">
             <LogoutIcon
               className="main-menu__element-logout__nav__icon"
