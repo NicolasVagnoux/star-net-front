@@ -1,0 +1,73 @@
+.main-menu {
+  background-color: rgb(190, 206, 225);
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  -webkit-transition: width 0.05s linear;
+  transition: width 0.2s linear;
+  z-index: 1000;
+  &:hover {
+    width: 13vw;
+    overflow: visible;
+  }
+  &__element {
+    margin-top: 30vh;
+    cursor: pointer;
+
+    &__nav {
+      margin-bottom: 1vh;
+      margin-top: 1vh;
+      position: relative;
+      width: 50px;
+      height: 7vh;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-family: $primaryFont;
+      font-size: 2rem;
+      padding-left: 10px;
+      &:hover {
+        background-color: rgb(152, 184, 223);
+        width: 12.5vw;
+      }
+
+      &__nav-text {
+        position: relative;
+        vertical-align: middle;
+        padding-left: 2vh;
+        white-space: nowrap;
+      }
+    }
+  }
+  &__element-logout {
+    position: absolute;
+    border-top: solid;
+    border-color: black;
+    width: 100%;
+    bottom: 0;
+    &__nav {
+      position: relative;
+      text-align: center;
+      display: flex;
+      height: 7vh;
+      flex-direction: row;
+      padding-left: 0.5vw;
+      align-items: center;
+      font-family: $primaryFont;
+      font-size: 2rem;
+      padding-left: 10px;
+
+      &__nav-text {
+        position: relative;
+        vertical-align: middle;
+        margin-left: 2vh;
+      }
+    }
+    cursor: pointer;
+    :hover {
+      background-color: rgb(152, 184, 223);
+    }
+  }
+}
