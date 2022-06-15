@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import BackgroundParticles from '../components/BackgroundParticles';
 import IArticle from '../../interfaces/IArticle';
 import IUser from '../../interfaces/IUser';
 
@@ -33,34 +33,36 @@ const Article = () => {
   }, []);
 
   return (
-    <article className="article">
-      {article && user && (
-        <>
-          <div className="article__button">
-            <button className="article__button__btn" type="submit"></button>
-          </div>
-          <div className="article__title">
-            <h1 className="article__title__h1">{article.title}</h1>
-          </div>
-          <div className="article__desc">
-            <h2 className="article__desc__h2">
-              Par {user?.firstName} {user?.lastName}, le {article.lastUpdateDate}
-            </h2>
-          </div>
-          <div className="article__tag">
-            <h3 className="article__tag__h3">Tags</h3>
-          </div>
-          <div className="article__image">
-            <img
-              className="article__image__img"
-              src={article.mainImage}
-              alt="articleimg"
-            />
-          </div>
-          <div className="article__text">
-            <p className="article__text__content">
-              {article.mainContent}
-              {`Une cryptomonnaie repose sur une blockchain, un registre distribué (ou grand
+    <>
+      <BackgroundParticles />
+      <article className="article">
+        {article && user && (
+          <>
+            <div className="article__button">
+              <button className="article__button__btn" type="submit"></button>
+            </div>
+            <div className="article__title">
+              <h1 className="article__title__h1">{article.title}</h1>
+            </div>
+            <div className="article__desc">
+              <h2 className="article__desc__h2">
+                Par {user?.firstName} {user?.lastName}, le {article.lastUpdateDate}
+              </h2>
+            </div>
+            <div className="article__tag">
+              <h3 className="article__tag__h3">Tags</h3>
+            </div>
+            <div className="article__image">
+              <img
+                className="article__image__img"
+                src={article.mainImage}
+                alt="articleimg"
+              />
+            </div>
+            <div className="article__text">
+              <p className="article__text__content">
+                {article.mainContent}
+                {`Une cryptomonnaie repose sur une blockchain, un registre distribué (ou grand
           livre de comptes), consultable par tous, qui répertorie l'ensemble des actions
           du réseau depuis l'origine. Les informations à ajouter sont appelées
           transactions, et sont groupées dans des blocs4. Une transaction peut par exemple
@@ -77,11 +79,12 @@ const Article = () => {
           importants lors de l'envoi ou la réception de transactions et blocs à travers le
           réseau. Dans le cas où différentes versions d'une même chaine existent, la règle
           est de choisir la chaine valide la plus longue.`}
-            </p>
-          </div>
-        </>
-      )}
-    </article>
+              </p>
+            </div>
+          </>
+        )}
+      </article>
+    </>
   );
 };
 

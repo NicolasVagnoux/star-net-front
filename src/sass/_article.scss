@@ -1,10 +1,7 @@
 .article {
   height: 100%;
-  width: 100vw;
+  width: 100%;
   padding: 5vh 10vw;
-  background: url('../assets/background1.jpeg');
-  background-size: cover;
-  background-position: center;
   display: flex;
   flex-direction: column;
   gap: 2vh;
@@ -25,9 +22,10 @@
 
   &__desc {
     &__h2 {
-      font-family: $primaryFont;
+      font-family: $secondaryFont;
       color: $primaryBlack;
       font-size: 1.6rem;
+      font-weight: 300;
       letter-spacing: 0.5px;
     }
   }
@@ -37,7 +35,7 @@
     position: relative;
 
     &__img {
-      height: 30vh;
+      height: 40vh;
       width: 100%;
       object-fit: cover;
     }
@@ -45,13 +43,15 @@
 
   &__text {
     &__content {
-      font-family: $primaryFont;
+      font-family: $secondaryFont;
       width: 100%;
       text-align: left;
       font-size: 1.5rem;
       font-weight: bold;
       margin-bottom: 10vh;
       text-align: justify;
+      font-weight: 300;
+      line-height: 1.3;
     }
   }
 }
