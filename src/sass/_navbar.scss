@@ -1,0 +1,85 @@
+.main-menu {
+  background-color: $primaryWhite;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.418);
+  // border-right: solid $primaryBlack 1px;
+  a:visited {
+    color: $primaryBlack;
+  }
+  &:hover {
+    width: 250px;
+    overflow: visible;
+  }
+  &__element {
+    cursor: pointer;
+    height: 93vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__nav {
+      margin-bottom: 1vh;
+      margin-top: 1vh;
+      position: relative;
+      width: 50px;
+      height: 7vh;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-family: $primaryFont;
+      font-size: 2rem;
+      padding-left: 10px;
+      &:hover {
+        background-color: $primaryColor5;
+        width: 250px;
+      }
+
+      &__nav-text {
+        position: relative;
+        vertical-align: middle;
+        padding-left: 2vh;
+        white-space: nowrap;
+      }
+    }
+  }
+  &__element-logout {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    &__border {
+      border: solid black 1px;
+      color: $primaryBlack;
+      width: 50%;
+      align-items: center;
+      margin: auto;
+    }
+
+    &__nav {
+      position: relative;
+      text-align: center;
+      display: flex;
+      height: 7vh;
+      flex-direction: row;
+      padding-left: 0.5vw;
+      align-items: center;
+      font-family: $primaryFont;
+      font-size: 2rem;
+      padding-left: 10px;
+
+      &__nav-text {
+        position: relative;
+        vertical-align: middle;
+        margin-left: 2vh;
+      }
+    }
+    cursor: pointer;
+    :hover {
+      background-color: $primaryColor5;
+    }
+  }
+}
