@@ -3,16 +3,19 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <div>
       <nav className="main-menu">
         <ul className="main-menu__element">
-          <li className="main-menu__element__nav">
-            <SearchIcon className="main-menu__element__nav__icon" fontSize="large" />
-            <p className="main-menu__element__nav__nav-text">Decouvrir</p>
-          </li>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <li className="main-menu__element__nav">
+              <SearchIcon className="main-menu__element__nav__icon" fontSize="large" />
+              <p className="main-menu__element__nav__nav-text">Decouvrir</p>
+            </li>
+          </Link>
           <li className="main-menu__element__nav">
             <CachedIcon className="main-menu__element__nav__icon" fontSize="large" />
             <p className="main-menu__element__nav__nav-text">Utiliser</p>
