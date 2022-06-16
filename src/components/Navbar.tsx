@@ -3,8 +3,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate: NavigateFunction = useNavigate();
+
+  const logout = () => {
+    navigate('/');
+  };
+
   return (
     <div>
       <nav className="main-menu">
@@ -27,13 +34,16 @@ const Navbar = () => {
         </ul>
         <ul className="main-menu__element-logout">
           <hr className="main-menu__element-logout__border" />
-          <li className="main-menu__element-logout__nav">
+          <button
+            className="main-menu__element-logout__nav"
+            type="button"
+            onClick={logout}>
             <LogoutIcon
               className="main-menu__element-logout__nav__icon"
               fontSize="large"
             />
             <p className="main-menu__element-logout__nav__nav-text">Deconnexion</p>
-          </li>
+          </button>
         </ul>
       </nav>
     </div>

@@ -103,6 +103,15 @@
                 font-weight: 500;
             }
         }
+        &__error {
+            position: absolute;
+            transform: translate(0px, 80px);
+            width: 350px;
+            text-align: center;
+            color: red;
+            font-family: $secondaryFont;
+            font-weight: 500;
+        }
         &__submit {
             width: 90%;
             height: 45px;
