@@ -17,7 +17,7 @@ const Navbar = () => {
     <div>
       <nav className="main-menu">
         <ul className="main-menu__element">
-          <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/home" style={{ textDecoration: 'none' }}>
             <li className="main-menu__element__nav">
               <SearchIcon className="main-menu__element__nav__icon" fontSize="large" />
               <p className="main-menu__element__nav__nav-text">Decouvrir</p>
