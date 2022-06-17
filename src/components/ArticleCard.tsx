@@ -4,8 +4,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import IArticle from '../../interfaces/IArticle';
-import IUser from '../../interfaces/IUser';
+import IArticle from '../interfaces/IArticle';
+import IUser from '../interfaces/IUser';
 
 const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);

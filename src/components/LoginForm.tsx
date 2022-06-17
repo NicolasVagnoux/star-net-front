@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-import IUser from '../../interfaces/IUser';
+import IUser from '../interfaces/IUser';
 
 interface Props {
   setHasAccount: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,7 +22,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      const { data } = await axios.post<IUser>(
+      await axios.post<IUser>(
         'http://localhost:3000/api/login',
         { email, password },
         {
@@ -31,12 +31,9 @@ const LoginForm = ({ setHasAccount }: Props) => {
           withCredentials: true,
         },
       );
-      console.log(data);
       setErrorMessage('');
       redirectHome();
     } catch (err: any) {
-      console.log(err.response.status);
-      console.log(err.response.data.message);
       if (err.response?.status === 401) {
         setErrorMessage('Mot de passe incorrect');
       }
@@ -45,14 +42,13 @@ const LoginForm = ({ setHasAccount }: Props) => {
       }
       if (err.response?.status === 422) {
         if (err.response.data.message.includes('password')) {
-          setErrorMessage('Le mot de passe doit contenir 6 caractères minimum');
+          setErrorMessage('Le mot de passe doit contenir entre 6 et 50 caractères');
         } else {
           setErrorMessage('Email incorrect');
         }
       }
     }
   };
-  console.log(errorMessage);
 
   return (
     <div className="loginForm">

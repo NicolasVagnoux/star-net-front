@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import IArticle from '../../interfaces/IArticle';
-import IUser from '../../interfaces/IUser';
+
 import Navbar from '../components/Navbar';
+import IArticle from '../interfaces/IArticle';
+import IUser from '../interfaces/IUser';
 
 const Article = () => {
   // we gather param idArticle from l'url
