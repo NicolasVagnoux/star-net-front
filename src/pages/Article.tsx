@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import ArticleRating from '../components/ArticleRating';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
-import TagList from '../components/TagList';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
 
