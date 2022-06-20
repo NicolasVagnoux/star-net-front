@@ -1,20 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-<<<<<<< Updated upstream
-
 import ArticleRating from '../components/ArticleRating';
-import Navbar from '../components/Navbar';
-import IArticle from '../interfaces/IArticle';
-import IUser from '../interfaces/IUser';
-=======
-import IArticle from '../interfaces/IArticle';
-import IUser from '../interfaces/IUser';
-import ArticleRating from '../components/ArticleRating';
-import Navbar from '../components/Navbar';
 import BackgroundParticles from '../components/BackgroundParticles';
+import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
->>>>>>> Stashed changes
+import IArticle from '../interfaces/IArticle';
+import IUser from '../interfaces/IUser';
 
 const Article = () => {
   // we gather param idArticle from l'url
@@ -47,7 +39,6 @@ const Article = () => {
   return (
     <>
       <Navbar />
-      <BackgroundParticles />
       <article className="article">
         {article && user && (
           <>
@@ -63,7 +54,7 @@ const Article = () => {
               </h2>
             </div>
             <div className="article__tag">
-              <h3 className="article__tag__articletag"></h3>
+              <h3 className="article__tag__articletag">tag</h3>
             </div>
             <div className="article__image">
               <img
