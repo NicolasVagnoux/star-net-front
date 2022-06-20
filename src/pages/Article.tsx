@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import IArticle from '../../interfaces/IArticle';
+import IUser from '../../interfaces/IUser';
+import ArticleRating from '../components/ArticleRating';
 import Navbar from '../components/Navbar';
-import IArticle from '../interfaces/IArticle';
-import IUser from '../interfaces/IUser';
 
 const Article = () => {
   // we gather param idArticle from l'url
@@ -81,6 +81,9 @@ const Article = () => {
           réseau. Dans le cas où différentes versions d'une même chaine existent, la règle
           est de choisir la chaine valide la plus longue.`}
               </p>
+            </div>
+            <div className='ranking_container'>
+             <ArticleRating /> 
             </div>
           </>
         )}
