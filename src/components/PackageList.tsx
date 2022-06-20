@@ -11,7 +11,7 @@ const PackageList = () => {
   useEffect(() => {
     const getPackageItems = async () => {
       const url = `http://localhost:3000/api/packages`;
-      const { data } = await axios.get(url);
+      const { data } = await axios.get(url, { withCredentials: true });
       setPackageItems(data);
     };
     getPackageItems();
