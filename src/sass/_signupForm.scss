@@ -91,6 +91,21 @@
         &__password1, &__password2 {
             margin-top: -20px;
         }
+        &__password2--wrong {
+            input {
+                border: 1px solid red;
+                color: red;
+                &:focus {
+                    border: 2px solid red;
+                }
+            }
+            label {
+                color: red;
+            }
+            button {
+                color: red;
+            }
+        }
         &__cgu {
             align-self: flex-start;
             padding-left: 20px;
@@ -136,5 +151,12 @@
         font-size: 0.9rem;
         color: rgb(103, 80, 164);
         cursor: pointer;
+    }
+    &__error {
+        margin-top: 28px;
+        font-family: $secondaryFont;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: red;
     }
 }

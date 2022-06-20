@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-import IArticle from '../../interfaces/IArticle';
+import IArticle from '../interfaces/IArticle';
 import IPackageItem from '../interfaces/IPackageItem';
 import ArticleList from './ArticleList';
 import CompletionChart from './CompletionChart';
