@@ -1,37 +1,47 @@
-.articleCard {
+.articleContainer {
+  position: relative;
   height: 120px;
   width: 460px;
-  background-color: white;
-  border: 2px solid $primaryColor2;
-  border-radius: 15px;
-  overflow: hidden;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  &__image {
-    height: 100%;
-    width: 120px;
-    object-fit: cover;
-  }
-  &__text {
-    padding-left: 10px;
-    height: 100%;
-    width: 300px;
+
+  &__articleCard {
+    height: 120px;
+    width: 460px;
+    background-color: white;
+    border: 2px solid $primaryColor2;
+    border-radius: 15px;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    font-family: $primaryFont;
-    &__title {
-      font-size: 1.2rem;
-      color: $secondaryColor5;
+    justify-content: flex-start;
+    align-items: center;
+    &__image {
+      height: 100%;
+      width: 120px;
+      object-fit: cover;
     }
-    &__author {
-      font-size: 1rem;
-      color: $primaryColor2;
+    &__text {
+      padding-left: 10px;
+      height: 100%;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+      font-family: $primaryFont;
+      &__title {
+        font-size: 1.2rem;
+        color: $secondaryColor5;
+      }
+      &__author {
+        font-size: 1rem;
+        color: $primaryColor2;
+      }
     }
   }
   &__bookmark {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    z-index: 50;
     height: 100%;
     width: 45px;
     display: flex;

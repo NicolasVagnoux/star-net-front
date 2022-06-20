@@ -22,34 +22,37 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
   }, []);
 
   return (
-    <Link to={`/articles/${id}`} style={{ textDecoration: 'none' }}>
-      <div className="articleCard">
-        <img className="articleCard__image" src={mainImage} alt="" />
-        <div className="articleCard__text">
-          <h4 className="articleCard__text__title">{title}</h4>
-          <p className="articleCard__text__author">
-            Par {userData?.firstName} {userData?.lastName}, le{' '}
-            {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
-          </p>
+    <div className="articleContainer">
+      <Link to={`/articles/${id}`} style={{ textDecoration: 'none' }}>
+        <div className="articleContainer__articleCard">
+          <img className="articleContainer__articleCard__image" src={mainImage} alt="" />
+          <div className="articleContainer__articleCard__text">
+            <h4 className="articleContainer__articleCard__text__title">{title}</h4>
+            <p className="articleContainer__articleCard__text__author">
+              Par {userData?.firstName} {userData?.lastName}, le{' '}
+              {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
+            </p>
+          </div>
         </div>
-        <div className="articleCard__bookmark">
-          <button
-            className="articleCard__bookmark__svg"
-            onClick={() => {
-              setIsBookmarked(!isBookmarked);
-            }}>
-            {isBookmarked && <BookmarkIcon />}
-          </button>
-          <button
-            className="articleCard__bookmark__svg"
-            onClick={() => {
-              setIsBookmarked(!isBookmarked);
-            }}>
-            {!isBookmarked && <BookmarkBorderIcon />}
-          </button>
-        </div>
+      </Link>
+
+      <div className="articleContainer__bookmark">
+        <button
+          className="articleContainer__bookmark__svg"
+          onClick={() => {
+            setIsBookmarked(!isBookmarked);
+          }}>
+          {isBookmarked && <BookmarkIcon />}
+        </button>
+        <button
+          className="articleContainer__bookmark__svg"
+          onClick={() => {
+            setIsBookmarked(!isBookmarked);
+          }}>
+          {!isBookmarked && <BookmarkBorderIcon />}
+        </button>
       </div>
-    </Link>
+    </div>
   );
 };
 
