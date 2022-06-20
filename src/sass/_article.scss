@@ -7,12 +7,12 @@
   gap: 2vh;
 
   &__button {
-    margin-top: 5vh;
+    margin-top: 2vh;
   }
   &__title {
     margin-top: 2vh;
 
-    &__h1 {
+    &__articletitle {
       font-family: $secondaryFont;
       color: $primaryBlack;
       font-size: 3rem;
@@ -21,7 +21,7 @@
   }
 
   &__desc {
-    &__h2 {
+    &__articledesc {
       font-family: $secondaryFont;
       color: $primaryBlack;
       font-size: 1.6rem;
@@ -34,7 +34,7 @@
     width: 100%;
     position: relative;
 
-    &__img {
+    &__articleimage {
       height: 40vh;
       width: 100%;
       object-fit: cover;
@@ -42,7 +42,7 @@
   }
 
   &__text {
-    &__content {
+    &__articletext {
       font-family: $secondaryFont;
       width: 100%;
       text-align: left;
