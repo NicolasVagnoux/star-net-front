@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import IArticle from '../../interfaces/IArticle';
-import IUser from '../../interfaces/IUser';
+
 import ArticleRating from '../components/ArticleRating';
 import Navbar from '../components/Navbar';
+import IArticle from '../interfaces/IArticle';
+import IUser from '../interfaces/IUser';
 
 const Article = () => {
   // we gather param idArticle from l'url
@@ -20,6 +21,7 @@ const Article = () => {
       // get response and sets data to article
       const articleResponse = await axios.get<IArticle>(
         `http://localhost:3000/api/articles/${idArticle}`,
+        { withCredentials: true },
       );
       // we use setArticle param on url to squeeze the await from url
       setArticle(articleResponse.data);
@@ -82,8 +84,8 @@ const Article = () => {
           est de choisir la chaine valide la plus longue.`}
               </p>
             </div>
-            <div className='ranking_container'>
-             <ArticleRating /> 
+            <div className="ranking_container">
+              <ArticleRating />
             </div>
           </>
         )}
