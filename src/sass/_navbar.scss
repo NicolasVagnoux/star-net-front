@@ -70,6 +70,9 @@
       font-family: $primaryFont;
       font-size: 2rem;
       padding-left: 10px;
+      border: none;
+      background-color: rgb(0,0,0,0);
+      cursor: pointer;
 
       &__nav-text {
         position: relative;
