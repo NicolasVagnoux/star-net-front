@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import Rating from '@mui/material/Rating';
+import React, { useState } from 'react';
 
 const ArticleRating = () => {
   const [value, setValue] = useState<number>(1);
-  const [hover, setHover] = useState<number>(0);
+  // const [hover, setHover] = useState<number>(0);
 
   return (
     <div className="rating">
@@ -15,12 +15,12 @@ const ArticleRating = () => {
         }}
         value={value}
         precision={0.5}
-        onChange={(event: React.SyntheticEvent<Element, Event>, newValue) => {
+        onChange={(event: React.SyntheticEvent<Element, Event>, newValue: any) => {
           setValue(newValue);
         }}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
+        // onChangeActive={(event, newHover) => {
+        //   setHover(newHover);
+        // }}
       />
     </div>
   );
