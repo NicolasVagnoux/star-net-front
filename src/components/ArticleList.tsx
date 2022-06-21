@@ -5,7 +5,12 @@ import IArticle from '../interfaces/IArticle';
 import IPackageItem from '../interfaces/IPackageItem';
 import ArticleCard from './ArticleCard';
 
-const ArticleList = ({ id }: IPackageItem) => {
+// interface props
+interface Props {
+  id: number;
+}
+
+const ArticleList = ({ id }: Props) => {
   const [articleList, setArticleList] = useState<IArticle[]>([]);
 
   useEffect(() => {

@@ -1,16 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import ArticleRating from '../components/ArticleRating';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
-import TagList from '../components/TagList';
+import TagListArticle from '../components/TagListArticle';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
 
 const Article = () => {
   // we gather param idArticle from l'url
   const { idArticle } = useParams<string>();
+  const idArticleNumber = Number(idArticle);
   // we gather the article matching id from API
   const [article, setArticle] = useState<IArticle>();
   // we gather the autor of the article
@@ -54,7 +56,9 @@ const Article = () => {
               </h2>
             </div>
             <div className="article__tag">
-              <h3 className="article__tag__articletag">tag</h3>
+              <h3 className="article__tag__articletag">
+                <TagListArticle id={idArticleNumber} />
+              </h3>
             </div>
             <div className="article__image">
               <img
