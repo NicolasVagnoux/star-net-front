@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import ArticleRating from '../components/ArticleRating';
 import Navbar from '../components/Navbar';
+import ReturnButton from '../components/ReturnButton';
+import TagList from '../components/TagList';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
 
@@ -42,28 +43,28 @@ const Article = () => {
         {article && user && (
           <>
             <div className="article__button">
-              <button className="article__button__btn" type="submit"></button>
+              <ReturnButton />
             </div>
             <div className="article__title">
-              <h1 className="article__title__h1">{article.title}</h1>
+              <h1 className="article__title__articletitle">{article.title}</h1>
             </div>
             <div className="article__desc">
-              <h2 className="article__desc__h2">
+              <h2 className="article__desc__articledesc">
                 Par {user?.firstName} {user?.lastName}, le {article.lastUpdateDate}
               </h2>
             </div>
             <div className="article__tag">
-              <h3 className="article__tag__h3">Tags</h3>
+              <h3 className="article__tag__articletag">tag</h3>
             </div>
             <div className="article__image">
               <img
-                className="article__image__img"
+                className="article__image__articleimage"
                 src={article.mainImage}
                 alt="articleimg"
               />
             </div>
             <div className="article__text">
-              <p className="article__text__content">
+              <p className="article__text__articletext">
                 {article.mainContent}
                 {`Une cryptomonnaie repose sur une blockchain, un registre distribué (ou grand
           livre de comptes), consultable par tous, qui répertorie l'ensemble des actions
