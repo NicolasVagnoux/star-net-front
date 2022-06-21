@@ -32,7 +32,7 @@ const PackageItem = ({ name, id, description }: IPackageItem) => {
       <div className="packageitem__taglist">
         <TagList id={id} name={name} description={description} />
       </div>
-      <ArticleList id={id} name={name} description={description} />
+      <ArticleList id={id} />
     </div>
   );
 };
