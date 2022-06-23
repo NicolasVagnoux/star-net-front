@@ -1,7 +1,10 @@
 .article {
   height: 100%;
   width: 100%;
-  padding: 5vh 10vw;
+  padding-left: calc(10vw + 50px);
+  padding-right: 10vw;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
   display: flex;
   flex-direction: column;
   gap: 2vh;

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import CachedIcon from '@mui/icons-material/Cached';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -8,7 +9,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [removeCookie] = useCookies(['user_token']);
+  const [cookie, setCookie, removeCookie] = useCookies(['user_token']);
   const navigate: NavigateFunction = useNavigate();
   const [isLogoutModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
 
