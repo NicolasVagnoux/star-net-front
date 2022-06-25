@@ -29,7 +29,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
           <div className="articleContainer__articleCard__text">
             <h4 className="articleContainer__articleCard__text__title">{title}</h4>
             <p className="articleContainer__articleCard__text__author">
-              Par {userData?.firstName} {userData?.lastName}, le{' '}
+              Par {userData?.firstName} {userData?.lastName},<br /> le{' '}
               {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
             </p>
           </div>
