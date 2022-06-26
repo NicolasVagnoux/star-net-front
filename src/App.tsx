@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import BackgroundParticles from './components/BackgroundParticles';
 import Article from './pages/Article';
+import Bookmarks from './pages/Bookmarks';
 import Home from './pages/Home';
 import Login from './pages/Login';
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/articles/:idArticle" element={<Article />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
         </Routes>
       </CookiesProvider>
     </div>
