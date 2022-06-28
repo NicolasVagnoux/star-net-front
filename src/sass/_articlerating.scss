@@ -1,6 +1,26 @@
-.rating {
+.comment {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+
+  &__form {
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    gap: 10px;
+
+    &__text {
+      height: 100px;
+      width: 300px;
+    }
+
+    &__submit {
+        height: 30px;
+        width: 100px;
+        border: none;
+        background-color: $primaryColor2;
+    }
+  }
 }

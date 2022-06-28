@@ -1,12 +1,18 @@
 import Rating from '@mui/material/Rating';
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const ArticleRating = () => {
   const [rating, setRating] = useState<number>(1);
   const [text, setText] = useState<string>("");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    try {
     e.preventDefault();
     console.log(rating, text);
+    await axios.post<IComment>(`http://localhost:3000/api/comments`, {})
+    } catch (err:any) {
+      console.log(err.response);
+    }
   };
 
   return (
@@ -34,9 +40,9 @@ const ArticleRating = () => {
             onChange={(e) => {
               setText(e.target.value);
             }}
-            placeholder="Mon commentaire"
+            className="comment__form__text"
+            placeholder="Commentaire(facultatif)"
             id="comment"
-            required
           />
         <input className="comment__form__submit" type="submit" value="Soumettre" />
       </form>
