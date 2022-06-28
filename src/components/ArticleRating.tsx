@@ -2,26 +2,44 @@ import Rating from '@mui/material/Rating';
 import React, { useState } from 'react';
 
 const ArticleRating = () => {
-  const [value, setValue] = useState<number>(1);
-  // const [hover, setHover] = useState<number>(0);
+  const [rating, setRating] = useState<number>(1);
+  const [text, setText] = useState<string>("");
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(rating, text);
+  };
 
   return (
-    <div className="rating">
+    <div className="comment">
       <h2> Avez-vous aimé cette article ? </h2>
-      <Rating
-        name="hover-feedback"
-        sx={{
-          fontSize: '2.3rem',
-        }}
-        value={value}
-        precision={0.5}
-        onChange={(event: React.SyntheticEvent<Element, Event>, newValue: any) => {
-          setValue(newValue);
-        }}
-        // onChangeActive={(event, newHover) => {
-        //   setHover(newHover);
-        // }}
-      />
+      <form
+        className="comment__form"
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+          handleSubmit(e);
+        }}>
+        <Rating
+          name="hover-feedback"
+          sx={{
+            fontSize: '2.3rem',
+          }}
+          value={rating}
+          precision={0.5}
+          onChange={(event: React.SyntheticEvent<Element, Event>, newValue: any) => {
+            setRating(newValue);
+          }}
+        />
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+            placeholder="Mon commentaire"
+            id="comment"
+            required
+          />
+        <input className="comment__form__submit" type="submit" value="Soumettre" />
+      </form>
     </div>
   );
 };
