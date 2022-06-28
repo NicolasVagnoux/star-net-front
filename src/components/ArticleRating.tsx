@@ -1,25 +1,34 @@
 import Rating from '@mui/material/Rating';
 import axios from 'axios';
 import React, { useState } from 'react';
-import IComment from '../interfaces/IComment'
+import IComment from '../interfaces/IComment';
+import jwt_decode from 'jwt-decode';
+import IUser from '../interfaces/IUser';
+import { useCookies } from 'react-cookie';
 
-const ArticleRating = () => {
+// To collect the idArticle related to the comment, I created this interface
+interface Props {
+  id:number;
+}
+
+const ArticleRating = ({id}: Props) => {
   const [rating, setRating] = useState<number>(1);
   const [text, setText] = useState<string>('');
 
-  // Collect the idArticle related to the comment 
   
-  // Collect the userId (the one connected)
+  // Collect the userId (the one connected) with the cookie
+  const [cookie, setCookie, removeCookie] = useCookies(['user_token']);
+  const user: IUser = jwt_decode(cookie.user_token);
 
   // Sending/Posting inputs to the database 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       console.log(rating, text);
-      await axios.post<IComment>(`http://localhost:3000/api/users/${idUser}/comments`, {
+      await axios.post<IComment>(`http://localhost:3000/api/users/${user.id}/comments`, {
         text: text,
         rating: rating,
-        idArticle: idArticle,
+        idArticle: id,
       }, {
         method: "POST", 
         headers: {'Content-Type': 'application/json'}, 

@@ -90,7 +90,7 @@ const Article = () => {
               </p>
             </div>
             <div className="ranking_container">
-              <ArticleRating />
+             <ArticleRating id={idArticleNumber} />
             </div>
           </>
         )}
