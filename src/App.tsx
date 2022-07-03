@@ -3,6 +3,7 @@ import './App.scss';
 import React from 'react';
 import { CookiesProvider } from 'react-cookie';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import BackgroundParticles from './components/BackgroundParticles';
 import Article from './pages/Article';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/articles/:idArticle" element={<Article />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
         </Routes>
+        <ToastContainer />
       </CookiesProvider>
     </div>
   );
