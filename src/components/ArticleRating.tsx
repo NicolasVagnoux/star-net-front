@@ -1,39 +1,56 @@
 import Rating from '@mui/material/Rating';
 import axios from 'axios';
 import React, { useState } from 'react';
-import IComment from '../interfaces/IComment';
+import ICompletedArticle from '../interfaces/ICompletedArticle';
 import jwt_decode from 'jwt-decode';
 import IUser from '../interfaces/IUser';
 import { useCookies } from 'react-cookie';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 // To collect the idArticle related to the comment, I created this interface
 interface Props {
-  id:number;
+  id: number;
+  setIsCompleted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ArticleRating = ({id}: Props) => {
+const ArticleRating = ({ id, setIsCompleted }: Props) => {
   const [rating, setRating] = useState<number>(1);
-  const [text, setText] = useState<string>('');
 
-  
   // Collect the userId (the one connected) with the cookie
-  const [cookie, setCookie, removeCookie] = useCookies(['user_token']);
+  const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
 
-  // Sending/Posting inputs to the database 
+  // Notify success ratings
+  const notifySuccess = () =>
+    toast.success('Votre note a bien été prise en compte', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  // Sending/Posting inputs to the database
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      console.log(rating, text);
-      await axios.post<IComment>(`http://localhost:3000/api/users/${user.id}/comments`, {
-        text: text,
-        rating: rating,
-        idArticle: id,
-      }, {
-        method: "POST", 
-        headers: {'Content-Type': 'application/json'}, 
-        withCredentials: true,
-      });
+      await axios.post<ICompletedArticle>(
+        `http://localhost:3000/api/users/${user.id}/completedArticles`,
+        {
+          // This is the body
+          rating: rating,
+          idArticle: id,
+        },
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        },
+      );
+      setIsCompleted(true);
+      notifySuccess();
     } catch (err: any) {
       console.log(err.response);
     }
@@ -41,7 +58,7 @@ const ArticleRating = ({id}: Props) => {
 
   return (
     <div className="comment">
-      <h2> Avez-vous aimé cette article ? </h2>
+      <h2> Avez-vous aimé cet article ? </h2>
       <form
         className="comment__form"
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -58,7 +75,7 @@ const ArticleRating = ({id}: Props) => {
             setRating(newValue);
           }}
         />
-        <input
+        {/* <input
           type="text"
           value={text}
           onChange={(e) => {
@@ -67,7 +84,7 @@ const ArticleRating = ({id}: Props) => {
           className="comment__form__text"
           placeholder="Commentaire(facultatif)"
           id="comment"
-        />
+        /> */}
         <input className="comment__form__submit" type="submit" value="Soumettre" />
       </form>
     </div>

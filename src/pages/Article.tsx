@@ -10,13 +10,15 @@ import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
 
 const Article = () => {
-  // we gather param idArticle from l'url
+  // we gather param idArticle from url
   const { idArticle } = useParams<string>();
   const idArticleNumber = Number(idArticle);
   // we gather the article matching id from API
   const [article, setArticle] = useState<IArticle>();
   // we gather the autor of the article
   const [user, setUser] = useState<IUser>();
+  // we gather the article completion
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     const getArticleInfos = async () => {
@@ -89,8 +91,12 @@ const Article = () => {
           est de choisir la chaine valide la plus longue.`}
               </p>
             </div>
-            <div className="ranking_container">
-             <ArticleRating id={idArticleNumber} />
+            <div className="article__ranking">
+              {!isCompleted ? (
+                <ArticleRating id={idArticleNumber} setIsCompleted={setIsCompleted} />
+              ) : (
+                <p>Ok, merci -- Voir l'article suivant </p>
+              )}
             </div>
           </>
         )}
