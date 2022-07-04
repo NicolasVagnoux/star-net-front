@@ -2,6 +2,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
@@ -39,7 +40,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
         `http://localhost:3000/api/users/${user.id}/completedarticles/${id}`,
         { withCredentials: true },
       );
-      data ? setIsCompleted(true) : setIsCompleted(false)
+      data ? setIsCompleted(true) : setIsCompleted(false);
     };
 
     getUserData();
@@ -107,7 +108,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
   };
 
   return (
-    <div className="articleContainer">
+    <div className={`articleContainer ${isCompleted && 'articleContainer--completed'}`}>
       <Link to={`/articles/${id}`} style={{ textDecoration: 'none' }}>
         <div className="articleContainer__articleCard">
           <img className="articleContainer__articleCard__image" src={mainImage} alt="" />
@@ -123,6 +124,11 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
       </Link>
 
       <div className="articleContainer__bookmark">
+        {isCompleted && (
+          <div className="articleContainer__bookmark__check">
+            <CheckIcon />
+          </div>
+        )}
         {isBookmarked && (
           <button
             className="articleContainer__bookmark__svg"
