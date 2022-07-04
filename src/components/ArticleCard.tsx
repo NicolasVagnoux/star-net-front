@@ -17,6 +17,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
   const [userData, setUserData] = useState<IUser>();
   const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -33,8 +34,17 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
       data ? setIsBookmarked(true) : setIsBookmarked(false);
     };
 
+    const getCompletedOrNot = async () => {
+      const { data } = await axios.get(
+        `http://localhost:3000/api/users/${user.id}/completedarticles/${id}`,
+        { withCredentials: true },
+      );
+      data ? setIsCompleted(true) : setIsCompleted(false)
+    };
+
     getUserData();
     getBookmarkOrNot();
+    getCompletedOrNot();
   }, []);
 
   interface IBookmark {
@@ -107,6 +117,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
               Par {userData?.firstName} {userData?.lastName},<br /> le{' '}
               {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
             </p>
+            {/* <p>{isCompleted ? "Ok" :"Not Ok"}</p> */}
           </div>
         </div>
       </Link>

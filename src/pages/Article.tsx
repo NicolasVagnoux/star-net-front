@@ -8,15 +8,23 @@ import ReturnButton from '../components/ReturnButton';
 import TagListArticle from '../components/TagListArticle';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
+import jwt_decode from 'jwt-decode';
+import { useCookies } from 'react-cookie';
 
 const Article = () => {
-  // we gather param idArticle from l'url
+  // we gather param idArticle from url
   const { idArticle } = useParams<string>();
   const idArticleNumber = Number(idArticle);
   // we gather the article matching id from API
   const [article, setArticle] = useState<IArticle>();
   // we gather the autor of the article
-  const [user, setUser] = useState<IUser>();
+  const [author, setAuthor] = useState<IUser>();
+  // we gather the article completion
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+
+  // We Collect the userId (the one connected) with the cookie
+  const cookie = useCookies(['user_token'])[0];
+  const user: IUser = jwt_decode(cookie.user_token);
 
   useEffect(() => {
     const getArticleInfos = async () => {
@@ -32,10 +40,20 @@ const Article = () => {
       const userResponse = await axios.get(
         `http://localhost:3000/api/users/${articleResponse.data.idUser}`,
       );
-      setUser(userResponse.data);
+      setAuthor(userResponse.data);
+    };
+
+    // check if article is completed/read  
+      const getCompletedOrNot = async () => {
+      const { data } = await axios.get(
+        `http://localhost:3000/api/users/${user.id}/completedarticles/${idArticleNumber}`,
+        { withCredentials: true },
+      );
+      data ? setIsCompleted(true) : setIsCompleted(false);
     };
 
     getArticleInfos();
+    getCompletedOrNot();
   }, []);
 
   return (
@@ -52,7 +70,7 @@ const Article = () => {
             </div>
             <div className="article__desc">
               <h2 className="article__desc__articledesc">
-                Par {user?.firstName} {user?.lastName}, le {article.lastUpdateDate}
+                Par {author?.firstName} {author?.lastName}, le {article.lastUpdateDate}
               </h2>
             </div>
             <div className="article__tag">
@@ -89,8 +107,12 @@ const Article = () => {
           est de choisir la chaine valide la plus longue.`}
               </p>
             </div>
-            <div className="ranking_container">
-             <ArticleRating id={idArticleNumber} />
+            <div className="article__ranking">
+              {!isCompleted ? (
+                <ArticleRating id={idArticleNumber} setIsCompleted={setIsCompleted} />
+              ) : (
+                <p>Ok, merci -- Voir l'article suivant </p>
+              )}
             </div>
           </>
         )}
