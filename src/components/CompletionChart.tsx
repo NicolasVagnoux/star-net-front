@@ -4,7 +4,7 @@ import React from 'react';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 
 const CompletionChart = () => {
-  const value = 80;
+  const value = 50;
 
   return (
     <div className="completionchart">
@@ -12,14 +12,15 @@ const CompletionChart = () => {
         value={value}
         text={`${value}%`}
         strokeWidth={15}
-        // background
-        backgroundPadding={10}
+        background
+        backgroundPadding={1}
         styles={buildStyles({
-          // backgroundColor: '#3e98c7',
-          textColor: '#primaryBlack',
+          backgroundColor: 'white',
+          textColor: 'black',
           textSize: '30px',
-          pathColor: '#secondaryColor5',
-          trailColor: '#secondaryColor2',
+          pathColor: '#6a8eae',
+          trailColor: '#6a8eae50',
+          strokeLinecap: 'butt',
         })}
       />
     </div>
