@@ -3,7 +3,7 @@ import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
-import BookmarkCard from '../components/BookmarkCard';
+import ArticleCard from '../components/ArticleCard';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
 import IArticle from '../interfaces/IArticle';
@@ -40,7 +40,7 @@ const Bookmarks = () => {
         <div className="bookmarks__list">
           {bookmarkList &&
             bookmarkList.map((bookmark) => (
-              <BookmarkCard key={bookmark.id} {...bookmark} />
+              <ArticleCard key={bookmark.id} {...bookmark} />
             ))}
         </div>
       </div>

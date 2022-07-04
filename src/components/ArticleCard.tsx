@@ -1,3 +1,5 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import axios from 'axios';
@@ -5,6 +7,7 @@ import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
@@ -38,6 +41,17 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
     idArticle: number;
   }
 
+  //toast when a bookmark is created
+  const notifyBookmark = () =>
+    toast.success("L'article a été sauvegardé avec succès !", {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   const addBookmark = async (e: React.FormEvent<HTMLButtonElement>) => {
     try {
       e.preventDefault();
@@ -51,10 +65,22 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
         },
       );
       setIsBookmarked(true);
+      notifyBookmark();
     } catch (err) {
       console.error(err);
     }
   };
+
+  //toast when a bookmark is deleted
+  const notifyDeletedBookmark = () =>
+    toast.success("L'article a bien été supprimé des articles sauvegardés", {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   const deleteBookmark = async (e: React.FormEvent<HTMLButtonElement>) => {
     try {
@@ -64,6 +90,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
         { withCredentials: true },
       );
       setIsBookmarked(false);
+      notifyDeletedBookmark();
     } catch (err) {
       console.log(err);
     }
@@ -77,7 +104,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
           <div className="articleContainer__articleCard__text">
             <h4 className="articleContainer__articleCard__text__title">{title}</h4>
             <p className="articleContainer__articleCard__text__author">
-              Par {userData?.firstName} {userData?.lastName}, le{' '}
+              Par {userData?.firstName} {userData?.lastName},<br /> le{' '}
               {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
             </p>
           </div>
