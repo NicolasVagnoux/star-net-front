@@ -39,7 +39,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
         `http://localhost:3000/api/users/${user.id}/completedarticles/${id}`,
         { withCredentials: true },
       );
-      data ? setIsCompleted(true) : setIsCompleted(false)
+      data ? setIsCompleted(true) : setIsCompleted(false);
     };
 
     getUserData();
@@ -117,7 +117,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
               Par {userData?.firstName} {userData?.lastName},<br /> le{' '}
               {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
             </p>
-            {/* <p>{isCompleted ? "Ok" :"Not Ok"}</p> */}
+            <p>{isCompleted ? "Ok" :"Not Ok"}</p>
           </div>
         </div>
       </Link>
