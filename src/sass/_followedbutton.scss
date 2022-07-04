@@ -11,12 +11,12 @@
   cursor: pointer;
 
   &-followed {
-    color: $primaryColor2;
-    background-color: $secondaryColor4;
+    color: $secondaryColor4;
+    background-color: $primaryColor2;
   }
 
   &-notfollowed {
-    color: $secondaryColor4;
-    background-color: $primaryColor2;
+    color: $primaryColor2;
+    background-color: $secondaryColor4;
   }
 }

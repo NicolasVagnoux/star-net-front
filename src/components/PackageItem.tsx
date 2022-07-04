@@ -28,12 +28,14 @@ const PackageItem = ({ name, id, description }: Props) => {
 
   return (
     <div className="packageitem">
-      <div className="packageitem__title">
+      <div className="packageitem__container">
         <CompletionChart />
-        <h2 className="packageitem__title__main">
-          {name} <span> ({articleList.length} articles) </span>
-        </h2>
-        <FollowedButton />
+        <div className="packageitem__container__title">
+          <h2 className="packageitem__container__title__main">
+            {name} <span> ({articleList.length} articles) </span>
+          </h2>
+          <FollowedButton />
+        </div>
       </div>
       <div className="packageitem__taglist">
         <TagList id={id} name={name} description={description} />
