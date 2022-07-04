@@ -1,7 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
@@ -23,16 +23,13 @@ const Login = () => {
     );
 
   return (
-    <>
-      <div className="loginSignup">
-        {hasAccount ? (
-          <LoginForm setHasAccount={setHasAccount} />
-        ) : (
-          <SignupForm setHasAccount={setHasAccount} notifySuccess={notifySuccess} />
-        )}
-      </div>
-      <ToastContainer />
-    </>
+    <div className="loginSignup">
+      {hasAccount ? (
+        <LoginForm setHasAccount={setHasAccount} />
+      ) : (
+        <SignupForm setHasAccount={setHasAccount} notifySuccess={notifySuccess} />
+      )}
+    </div>
   );
 };
 

@@ -20,7 +20,6 @@ const ArticleList = ({ id }: Props) => {
     };
     getArticleList();
   }, []);
-  console.log(articleList);
 
   return (
     <div className="articleList">

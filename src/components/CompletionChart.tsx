@@ -4,7 +4,7 @@ import React from 'react';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 
 const CompletionChart = () => {
-  const value = 66;
+  const value = 80;
 
   return (
     <div className="completionchart">

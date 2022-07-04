@@ -2,13 +2,19 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import IArticle from '../interfaces/IArticle';
-import IPackageItem from '../interfaces/IPackageItem';
 import ArticleList from './ArticleList';
 import CompletionChart from './CompletionChart';
 import FollowedButton from './FollowedButton';
 import TagList from './TagList';
 
-const PackageItem = ({ name, id, description }: IPackageItem) => {
+// interface props
+interface Props {
+  id: number;
+  name: string;
+  description: string;
+}
+
+const PackageItem = ({ name, id, description }: Props) => {
   // Function and API call to get articlesList lenght and display it to users
   const [articleList, setArticleList] = useState<IArticle[]>([]);
   useEffect(() => {

@@ -4,20 +4,20 @@ import { loadFull } from 'tsparticles';
 
 const BackgroundParticles = () => {
   const particlesInit = async (main: any): Promise<any> => {
-    console.log(main);
+    // console.log(main);
     await loadFull(main);
   };
 
-  const particlesLoaded = (container: any): any => {
-    console.log(container);
-  };
+  // const particlesLoaded = (container: any): any => {
+  //   console.log(container);
+  // };
 
   return (
     <div>
       <Particles
         id="tsparticles"
         init={particlesInit}
-        loaded={particlesLoaded}
+        // loaded={particlesLoaded}
         options={{
           fullScreen: {
             enable: true,

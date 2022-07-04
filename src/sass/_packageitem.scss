@@ -8,18 +8,26 @@
 
   &__container {
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    gap: 2vh;
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+    margin-left: 2vw;
+
     &__title {
-      width: 100%;
-      align-items: center;
-      justify-content: space-between;
       display: flex;
       flex-direction: row;
-      gap: 15px;
-      margin-left: 20px;
-      margin-right: 250px;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      justify-content: flex-start;
 
       &__main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.3rem;
         font-family: $primaryFont;
         font-size: 2rem;
         text-align: justify;

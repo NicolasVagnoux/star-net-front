@@ -28,7 +28,7 @@
       height: 200px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
       font-family: $primaryFont;
       &__title {
@@ -39,7 +39,7 @@
       }
       &__author {
         width: 100%;
-        margin-top: 20px;
+        margin-bottom: 45px;
         font-size: 1.2rem;
         color: $primaryColor2;
       }

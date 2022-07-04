@@ -1,16 +1,16 @@
-/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
-import BookmarkCard from '../components/bookmarkCard';
+import ArticleCard from '../components/ArticleCard';
 import Navbar from '../components/Navbar';
+import ReturnButton from '../components/ReturnButton';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
 
 const Bookmarks = () => {
-  const [cookie, setCookie, removeCookie] = useCookies(['user_token']);
+  const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
   const [bookmarkList, setBookmarkList] = useState<IArticle[]>([]);
 
@@ -28,6 +28,9 @@ const Bookmarks = () => {
     <>
       <Navbar />
       <div className="bookmarks">
+        <div className="bookmarks__return">
+          <ReturnButton />
+        </div>
         <h1 className="bookmarks__title">Mes articles sauvegardés</h1>
         <h2 className="bookmarks__count">
           {bookmarkList.length === 1
@@ -37,7 +40,7 @@ const Bookmarks = () => {
         <div className="bookmarks__list">
           {bookmarkList &&
             bookmarkList.map((bookmark) => (
-              <BookmarkCard key={bookmark.id} {...bookmark} />
+              <ArticleCard key={bookmark.id} {...bookmark} />
             ))}
         </div>
       </div>
