@@ -118,7 +118,6 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
               Par {userData?.firstName} {userData?.lastName},<br /> le{' '}
               {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
             </p>
-            <p>{isCompleted ? "Ok" :"Not Ok"}</p>
           </div>
         </div>
       </Link>
