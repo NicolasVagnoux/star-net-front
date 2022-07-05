@@ -111,12 +111,12 @@ const Article = () => {
               {!isCompleted ? (
                 <ArticleRating id={idArticleNumber} setIsCompleted={setIsCompleted} />
               ) : (
-                <>
+                <div className="article__read">
                   <p>Article complété</p>
                   <Link to="/home">
-                    <button type="button">Retourner à l&apos;accueil</button>
+                    <button type="button">RETOUR A L&apos;ACCUEIL</button>
                   </Link>
-                </>
+                </div>
               )}
             </div>
           </>
