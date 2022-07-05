@@ -38,7 +38,6 @@ const PackageItem = ({ name, id, description }: Props) => {
         `http://localhost:3000/api/users/${user.id}/packages/${id}/completedArticles`,
         { withCredentials: true },
       );
-      setArticleList(completedArticlesResponse.data);
 
       setCompletion(
         Math.round(
@@ -55,7 +54,11 @@ const PackageItem = ({ name, id, description }: Props) => {
         <CompletionChart value={completion} />
         <div className="packageitem__container__title">
           <h2 className="packageitem__container__title__main">
-            {name} <span> ({articleList.length} articles) </span>
+            {name}{' '}
+            <span>
+              {' '}
+              ({articleList.length} articles){' '}
+            </span>
           </h2>
           <div className="packageitem__container__title__button">
             <FollowedButton />
