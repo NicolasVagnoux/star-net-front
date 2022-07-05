@@ -3,9 +3,11 @@ import 'react-circular-progressbar/dist/styles.css';
 import React from 'react';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 
-const CompletionChart = () => {
-  const value = 50;
+interface Props {
+  value: number;
+}
 
+const CompletionChart = ({ value }: Props) => {
   return (
     <div className="completionchart">
       <CircularProgressbar
