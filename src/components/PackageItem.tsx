@@ -24,7 +24,7 @@ const PackageItem = ({ name, id, description }: Props) => {
 
   // Function and API call to get articlesList lenght and display it to users
   const [articleList, setArticleList] = useState<IArticle[]>([]);
-  const [completion, setCompletion] = useState<number | any>();
+  const [completion, setCompletion] = useState<number | any>(0);
   useEffect(() => {
     const getArticleList = async () => {
       const articleListResponse = await axios.get<IArticle[]>(
