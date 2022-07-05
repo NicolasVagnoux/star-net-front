@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import ICompletedArticle from '../interfaces/ICompletedArticle';
+
 import IPackageItem from '../interfaces/IPackageItem';
 import PackageItem from './PackageItem';
 
