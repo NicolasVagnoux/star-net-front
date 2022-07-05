@@ -24,6 +24,7 @@ const PackageItem = ({ name, id, description }: Props) => {
 
   // Function and API call to get articlesList lenght and display it to users
   const [articleList, setArticleList] = useState<IArticle[]>([]);
+  const [completedArticleList, setCompletedArticleList] = useState<IArticle[]>([]);
   const [completion, setCompletion] = useState<number | any>(0);
   useEffect(() => {
     const getArticleList = async () => {
@@ -38,7 +39,7 @@ const PackageItem = ({ name, id, description }: Props) => {
         `http://localhost:3000/api/users/${user.id}/packages/${id}/completedArticles`,
         { withCredentials: true },
       );
-      setArticleList(completedArticlesResponse.data);
+      setCompletedArticleList(completedArticlesResponse.data);
 
       setCompletion(
         Math.round(
@@ -55,7 +56,7 @@ const PackageItem = ({ name, id, description }: Props) => {
         <CompletionChart value={completion} />
         <div className="packageitem__container__title">
           <h2 className="packageitem__container__title__main">
-            {name} <span> ({articleList.length} articles) </span>
+            {name} <span> ({completedArticleList.length} / {articleList.length} articles) </span>
           </h2>
           <div className="packageitem__container__title__button">
             <FollowedButton />
