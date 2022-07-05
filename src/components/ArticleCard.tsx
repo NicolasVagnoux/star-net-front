@@ -2,6 +2,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
@@ -107,7 +108,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
   };
 
   return (
-    <div className="articleContainer">
+    <div className={`articleContainer ${isCompleted && 'articleContainer--completed'}`}>
       <Link to={`/articles/${id}`} style={{ textDecoration: 'none' }}>
         <div className="articleContainer__articleCard">
           <img className="articleContainer__articleCard__image" src={mainImage} alt="" />
@@ -117,12 +118,16 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
               Par {userData?.firstName} {userData?.lastName},<br /> le{' '}
               {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
             </p>
-            <p>{isCompleted ? 'Ok' : 'Not Ok'}</p>
           </div>
         </div>
       </Link>
 
       <div className="articleContainer__bookmark">
+        {isCompleted && (
+          <div className="articleContainer__bookmark__check">
+            <CheckIcon />
+          </div>
+        )}
         {isBookmarked && (
           <button
             className="articleContainer__bookmark__svg"

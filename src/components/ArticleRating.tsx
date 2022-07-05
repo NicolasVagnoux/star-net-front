@@ -25,7 +25,7 @@ const ArticleRating = ({ id, setIsCompleted }: Props) => {
 
   // Notify success ratings
   const notifySuccess = () =>
-    toast.success('Votre note a bien été prise en compte', {
+    toast.success("L'article a bien été validé. Merci pour votre retour !", {
       position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
@@ -87,7 +87,11 @@ const ArticleRating = ({ id, setIsCompleted }: Props) => {
           placeholder="Commentaire(facultatif)"
           id="comment"
         /> */}
-        <input className="comment__form__submit" type="submit" value="Soumettre" />
+        <input
+          className="comment__form__submit"
+          type="submit"
+          value="Valider l'article"
+        />
       </form>
     </div>
   );

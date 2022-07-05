@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import ArticleRating from '../components/ArticleRating';
 import Navbar from '../components/Navbar';
@@ -111,7 +111,12 @@ const Article = () => {
               {!isCompleted ? (
                 <ArticleRating id={idArticleNumber} setIsCompleted={setIsCompleted} />
               ) : (
-                <p>Ok, merci -- Voir article suivant </p>
+                <div className="article__read">
+                  <p>Article complété</p>
+                  <Link to="/home">
+                    <button type="button">RETOUR A L&apos;ACCUEIL</button>
+                  </Link>
+                </div>
               )}
             </div>
           </>
