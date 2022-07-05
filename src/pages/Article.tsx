@@ -1,5 +1,7 @@
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useParams } from 'react-router-dom';
 
 import ArticleRating from '../components/ArticleRating';
@@ -8,8 +10,6 @@ import ReturnButton from '../components/ReturnButton';
 import TagListArticle from '../components/TagListArticle';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
-import jwt_decode from 'jwt-decode';
-import { useCookies } from 'react-cookie';
 
 const Article = () => {
   // we gather param idArticle from url
@@ -43,8 +43,8 @@ const Article = () => {
       setAuthor(userResponse.data);
     };
 
-    // check if article is completed/read  
-      const getCompletedOrNot = async () => {
+    // check if article is completed/read
+    const getCompletedOrNot = async () => {
       const { data } = await axios.get(
         `http://localhost:3000/api/users/${user.id}/completedarticles/${idArticleNumber}`,
         { withCredentials: true },
@@ -111,7 +111,7 @@ const Article = () => {
               {!isCompleted ? (
                 <ArticleRating id={idArticleNumber} setIsCompleted={setIsCompleted} />
               ) : (
-                <p>Ok, merci -- Voir l'article suivant </p>
+                <p>Ok, merci -- Voir article suivant </p>
               )}
             </div>
           </>

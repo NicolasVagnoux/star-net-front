@@ -1,18 +1,18 @@
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+
 import IArticle from '../interfaces/IArticle';
-import ICompletedArticle from '../interfaces/ICompletedArticle';
+import IUser from '../interfaces/IUser';
 import ArticleList from './ArticleList';
 import CompletionChart from './CompletionChart';
 import FollowedButton from './FollowedButton';
 import TagList from './TagList';
-import IUser from '../interfaces/IUser';
-import jwt_decode from 'jwt-decode';
-import { useCookies } from 'react-cookie';
 
 // interface props
 interface Props {
-  id: number ;
+  id: number;
   name: string;
   description: string;
 }
@@ -24,8 +24,7 @@ const PackageItem = ({ name, id, description }: Props) => {
 
   // Function and API call to get articlesList lenght and display it to users
   const [articleList, setArticleList] = useState<IArticle[]>([]);
-  const [completedArticle, setCompletedArticles] = useState<ICompletedArticle[]>([]);
-  const [completion, setCompletion] = useState<number|any>();
+  const [completion, setCompletion] = useState<number | any>();
   useEffect(() => {
     const getArticleList = async () => {
       const articleListResponse = await axios.get<IArticle[]>(
@@ -41,7 +40,11 @@ const PackageItem = ({ name, id, description }: Props) => {
       );
       setArticleList(completedArticlesResponse.data);
 
-      setCompletion(Math.round((completedArticlesResponse.data.length) / (articleListResponse.data.length)*100));
+      setCompletion(
+        Math.round(
+          (completedArticlesResponse.data.length / articleListResponse.data.length) * 100,
+        ),
+      );
     };
     getArticleList();
   }, []);

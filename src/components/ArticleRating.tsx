@@ -1,12 +1,14 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import Rating from '@mui/material/Rating';
 import axios from 'axios';
-import React, { useState } from 'react';
-import ICompletedArticle from '../interfaces/ICompletedArticle';
 import jwt_decode from 'jwt-decode';
-import IUser from '../interfaces/IUser';
+import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
-import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+
+import ICompletedArticle from '../interfaces/ICompletedArticle';
+import IUser from '../interfaces/IUser';
 
 // To collect the idArticle related to the comment, I created this interface
 interface Props {
