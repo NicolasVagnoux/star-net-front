@@ -57,7 +57,9 @@ const PackageItem = ({ name, id, description }: Props) => {
           <h2 className="packageitem__container__title__main">
             {name} <span> ({articleList.length} articles) </span>
           </h2>
-          <FollowedButton />
+          <div className="packageitem__container__title__button">
+            <FollowedButton />
+          </div>
         </div>
       </div>
       <div className="packageitem__taglist">
