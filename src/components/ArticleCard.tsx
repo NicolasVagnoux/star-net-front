@@ -54,8 +54,8 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
 
   //toast when a bookmark is created
   const notifyBookmark = () =>
-    toast.success("L'article a été sauvegardé avec succès !", {
-      position: 'top-right',
+    toast.info("L'article a été sauvegardé avec succès !", {
+      position: 'bottom-right',
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -84,8 +84,8 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
 
   //toast when a bookmark is deleted
   const notifyDeletedBookmark = () =>
-    toast.success("L'article a bien été supprimé des articles sauvegardés", {
-      position: 'top-right',
+    toast.info("L'article a bien été supprimé des articles sauvegardés", {
+      position: 'bottom-right',
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,

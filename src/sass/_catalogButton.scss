@@ -1,0 +1,20 @@
+.catalogButton {
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+    border-radius: 25px;
+    background-color: $primaryColor2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    svg {
+        width: 30px;
+        height: 30px;
+    }
+    &:hover {
+      background-color: $primaryColor3;
+    }
+  }
+  

@@ -54,11 +54,7 @@ const PackageItem = ({ name, id, description }: Props) => {
         <CompletionChart value={completion} />
         <div className="packageitem__container__title">
           <h2 className="packageitem__container__title__main">
-            {name}{' '}
-            <span>
-              {' '}
-              ({articleList.length} articles){' '}
-            </span>
+            {name} <span> ({articleList.length} articles) </span>
           </h2>
           <div className="packageitem__container__title__button">
             <FollowedButton />

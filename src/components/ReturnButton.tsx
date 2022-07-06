@@ -4,10 +4,14 @@ import React from 'react';
 const ReturnButton = () => {
   return (
     <div className="return">
-      <a href="/home" className="return__content">
+      <button
+        onClick={() => {
+          window.history.back();
+        }}
+        className="return__content">
         <ArrowBackIosNewIcon fontSize="small" />
         <div className="return__content__text"> Retour </div>
-      </a>
+      </button>
     </div>
   );
 };
