@@ -1,0 +1,25 @@
+.bookmarks {
+    padding : 3vh 0 0 50px;
+    &__return {
+        margin-left: 2vw;
+    }
+    &__title {
+        font-family: 'Ubuntu Mono';
+        font-size: 3rem;
+        margin: 3vh 0 5vh 2vw;
+    }
+    &__count {
+        font-family: $primaryFont;
+        font-size: 1.8rem;
+        color: $secondaryColor5;
+        margin-left: 2vw;
+    }
+    &__list {
+        padding: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 3rem;
+    }
+}

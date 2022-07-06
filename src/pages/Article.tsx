@@ -1,19 +1,30 @@
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { Link, useParams } from 'react-router-dom';
 
 import ArticleRating from '../components/ArticleRating';
 import Navbar from '../components/Navbar';
+import ReturnButton from '../components/ReturnButton';
+import TagListArticle from '../components/TagListArticle';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
 
 const Article = () => {
-  // we gather param idArticle from l'url
+  // we gather param idArticle from url
   const { idArticle } = useParams<string>();
+  const idArticleNumber = Number(idArticle);
   // we gather the article matching id from API
   const [article, setArticle] = useState<IArticle>();
   // we gather the autor of the article
-  const [user, setUser] = useState<IUser>();
+  const [author, setAuthor] = useState<IUser>();
+  // we gather the article completion
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+
+  // We Collect the userId (the one connected) with the cookie
+  const cookie = useCookies(['user_token'])[0];
+  const user: IUser = jwt_decode(cookie.user_token);
 
   useEffect(() => {
     const getArticleInfos = async () => {
@@ -29,10 +40,20 @@ const Article = () => {
       const userResponse = await axios.get(
         `http://localhost:3000/api/users/${articleResponse.data.idUser}`,
       );
-      setUser(userResponse.data);
+      setAuthor(userResponse.data);
+    };
+
+    // check if article is completed/read
+    const getCompletedOrNot = async () => {
+      const { data } = await axios.get(
+        `http://localhost:3000/api/users/${user.id}/completedarticles/${idArticleNumber}`,
+        { withCredentials: true },
+      );
+      data ? setIsCompleted(true) : setIsCompleted(false);
     };
 
     getArticleInfos();
+    getCompletedOrNot();
   }, []);
 
   return (
@@ -42,28 +63,30 @@ const Article = () => {
         {article && user && (
           <>
             <div className="article__button">
-              <button className="article__button__btn" type="submit"></button>
+              <ReturnButton />
             </div>
             <div className="article__title">
-              <h1 className="article__title__h1">{article.title}</h1>
+              <h1 className="article__title__articletitle">{article.title}</h1>
             </div>
             <div className="article__desc">
-              <h2 className="article__desc__h2">
-                Par {user?.firstName} {user?.lastName}, le {article.lastUpdateDate}
+              <h2 className="article__desc__articledesc">
+                Par {author?.firstName} {author?.lastName}, le {article.lastUpdateDate}
               </h2>
             </div>
             <div className="article__tag">
-              <h3 className="article__tag__h3">Tags</h3>
+              <h3 className="article__tag__articletag">
+                <TagListArticle id={idArticleNumber} />
+              </h3>
             </div>
             <div className="article__image">
               <img
-                className="article__image__img"
+                className="article__image__articleimage"
                 src={article.mainImage}
                 alt="articleimg"
               />
             </div>
             <div className="article__text">
-              <p className="article__text__content">
+              <p className="article__text__articletext">
                 {article.mainContent}
                 {`Une cryptomonnaie repose sur une blockchain, un registre distribué (ou grand
           livre de comptes), consultable par tous, qui répertorie l'ensemble des actions
@@ -84,8 +107,17 @@ const Article = () => {
           est de choisir la chaine valide la plus longue.`}
               </p>
             </div>
-            <div className="ranking_container">
-              <ArticleRating />
+            <div className="article__ranking">
+              {!isCompleted ? (
+                <ArticleRating id={idArticleNumber} setIsCompleted={setIsCompleted} />
+              ) : (
+                <div className="article__read">
+                  <p>Article complété</p>
+                  <Link to="/home">
+                    <button type="button">RETOUR A L&apos;ACCUEIL</button>
+                  </Link>
+                </div>
+              )}
             </div>
           </>
         )}

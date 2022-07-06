@@ -1,4 +1,7 @@
 .bookmarksbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 50px;
   width: 50px;
   min-width: 50px;
@@ -9,8 +12,10 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
   &:hover {
     background-color: $primaryColor3;
+  }
+  & > * {
+    color: white;
   }
 }

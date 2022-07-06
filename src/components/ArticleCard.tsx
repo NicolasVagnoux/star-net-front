@@ -1,8 +1,14 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
@@ -10,7 +16,9 @@ import IUser from '../interfaces/IUser';
 const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUser>();
-  console.log(id);
+  const cookie = useCookies(['user_token'])[0];
+  const user: IUser = jwt_decode(cookie.user_token);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -18,38 +26,128 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
       const { data } = await axios.get(url);
       setUserData(data);
     };
+
+    const getBookmarkOrNot = async () => {
+      const { data } = await axios.get(
+        `http://localhost:3000/api/users/${user.id}/bookmarks/${id}`,
+        { withCredentials: true },
+      );
+      data ? setIsBookmarked(true) : setIsBookmarked(false);
+    };
+
+    const getCompletedOrNot = async () => {
+      const { data } = await axios.get(
+        `http://localhost:3000/api/users/${user.id}/completedarticles/${id}`,
+        { withCredentials: true },
+      );
+      data ? setIsCompleted(true) : setIsCompleted(false);
+    };
+
     getUserData();
+    getBookmarkOrNot();
+    getCompletedOrNot();
   }, []);
 
+  interface IBookmark {
+    idArticle: number;
+  }
+
+  //toast when a bookmark is created
+  const notifyBookmark = () =>
+    toast.success("L'article a été sauvegardé avec succès !", {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const addBookmark = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.post<IBookmark>(
+        `http://localhost:3000/api/users/${user.id}/bookmarks`,
+        { idArticle: id },
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        },
+      );
+      setIsBookmarked(true);
+      notifyBookmark();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //toast when a bookmark is deleted
+  const notifyDeletedBookmark = () =>
+    toast.success("L'article a bien été supprimé des articles sauvegardés", {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const deleteBookmark = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.delete<IBookmark>(
+        `http://localhost:3000/api/users/${user.id}/bookmarks/${id}`,
+        { withCredentials: true },
+      );
+      setIsBookmarked(false);
+      notifyDeletedBookmark();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <Link to={`/articles/${id}`} style={{ textDecoration: 'none' }}>
-      <div className="articleCard">
-        <img className="articleCard__image" src={mainImage} alt="" />
-        <div className="articleCard__text">
-          <h4 className="articleCard__text__title">{title}</h4>
-          <p className="articleCard__text__author">
-            Par {userData?.firstName} {userData?.lastName}, le{' '}
-            {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
-          </p>
+    <div className={`articleContainer ${isCompleted && 'articleContainer--completed'}`}>
+      <Link to={`/articles/${id}`} style={{ textDecoration: 'none' }}>
+        <div className="articleContainer__articleCard">
+          <img className="articleContainer__articleCard__image" src={mainImage} alt="" />
+          <div className="articleContainer__articleCard__text">
+            <h4 className="articleContainer__articleCard__text__title">{title}</h4>
+            <p className="articleContainer__articleCard__text__author">
+              Par {userData?.firstName} {userData?.lastName},<br /> le{' '}
+              {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
+            </p>
+          </div>
         </div>
-        <div className="articleCard__bookmark">
+      </Link>
+
+      <div className="articleContainer__bookmark">
+        {isCompleted && (
+          <div className="articleContainer__bookmark__check">
+            <CheckIcon />
+          </div>
+        )}
+        {isBookmarked && (
           <button
-            className="articleCard__bookmark__svg"
-            onClick={() => {
-              setIsBookmarked(!isBookmarked);
+            className="articleContainer__bookmark__svg"
+            onClick={(e: React.FormEvent<HTMLButtonElement>) => {
+              deleteBookmark(e);
             }}>
-            {isBookmarked && <BookmarkIcon />}
+            <BookmarkIcon />
           </button>
+        )}
+        {!isBookmarked && (
           <button
-            className="articleCard__bookmark__svg"
-            onClick={() => {
-              setIsBookmarked(!isBookmarked);
+            className="articleContainer__bookmark__svg"
+            onClick={(e: React.FormEvent<HTMLButtonElement>) => {
+              addBookmark(e);
             }}>
-            {!isBookmarked && <BookmarkBorderIcon />}
+            <BookmarkBorderIcon />
           </button>
-        </div>
+        )}
       </div>
-    </Link>
+    </div>
   );
 };
 
