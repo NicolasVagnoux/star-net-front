@@ -40,7 +40,7 @@ const Navbar = () => {
             <p className="main-menu__element__nav__nav-text">Mon compte</p>
           </li>
         </ul>
-        <Link to="/home" className="main-menu__element-contact">
+        <Link to="/support" className="main-menu__element-contact">
           <button type="button">
             <ContactSupportOutlinedIcon />
             <p>Contacter l&apos;équipe *Net</p>
