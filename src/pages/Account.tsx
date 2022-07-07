@@ -3,6 +3,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify';
 
 import Navbar from '../components/Navbar';
 import IUser from '../interfaces/IUser';
@@ -52,8 +53,18 @@ const Account = () => {
     setErrorMessage('');
   };
 
-  // update user data edit in DB with axios , handling with/out password
+  // Notify success update
+  const notifySuccess = () =>
+    toast.info('Les données ont bien été modifiées !', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
 
+  // update user data edit in DB with axios , handling with/out password
   const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
@@ -68,6 +79,7 @@ const Account = () => {
           withCredentials: true,
         },
       );
+      notifySuccess();
       setErrorMessage('');
     } catch (err: any) {
       if (err.response?.status === 422) {
