@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 const BookmarksButton = () => {
   return (
-    <div className="bookmarksbutton">
-      <Link to="/bookmarks">
+    <Link to="/bookmarks">
+      <div className="bookmarksbutton">
         <BookmarksIcon />
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

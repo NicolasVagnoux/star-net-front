@@ -25,7 +25,7 @@ const ArticleRating = ({ id, setIsCompleted }: Props) => {
 
   // Notify success ratings
   const notifySuccess = () =>
-    toast.success("L'article a bien été validé. Merci pour votre retour !", {
+    toast.info("L'article a bien été validé. Merci pour votre retour !", {
       position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
