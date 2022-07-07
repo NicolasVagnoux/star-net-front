@@ -32,13 +32,15 @@ const Navbar = () => {
             <CachedIcon className="main-menu__element__nav__icon" fontSize="large" />
             <p className="main-menu__element__nav__nav-text">Utiliser</p>
           </li>
-          <li className="main-menu__element__nav">
-            <PersonOutlineIcon
-              className="main-menu__element__nav__icon"
-              fontSize="large"
-            />
-            <p className="main-menu__element__nav__nav-text">Mon compte</p>
-          </li>
+          <Link to="/myaccount" style={{ textDecoration: 'none' }}>
+            <li className="main-menu__element__nav">
+              <PersonOutlineIcon
+                className="main-menu__element__nav__icon"
+                fontSize="large"
+              />
+              <p className="main-menu__element__nav__nav-text">Mon compte</p>
+            </li>
+          </Link>
         </ul>
         <ul className="main-menu__element-logout">
           <hr className="main-menu__element-logout__border" />

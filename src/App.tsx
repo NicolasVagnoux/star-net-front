@@ -10,6 +10,7 @@ import Article from './pages/Article';
 import Bookmarks from './pages/Bookmarks';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Account from './pages/Account';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/articles/:idArticle" element={<Article />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/myaccount" element={<Account />} />
         </Routes>
         <ToastContainer />
       </CookiesProvider>
