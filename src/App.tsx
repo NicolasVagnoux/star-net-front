@@ -12,6 +12,7 @@ import Catalog from './pages/Catalog';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Support from './pages/Support';
+import Rewards from './pages/Rewards';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/articles/:idArticle" element={<Article />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/rewards" element={<Rewards />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/support" element={<Support />} />
         </Routes>
