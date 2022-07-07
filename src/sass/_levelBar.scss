@@ -1,15 +1,28 @@
 .levelBar {
-  font-family: $primaryFont;
-  justify-content: center;
-  text-align: center;
-  align-self: center;
-  margin: auto;
-  height: 30px;
   width: 97%;
-  border-radius: 20px;
-  background-color: $primaryColor4;
-  font-size: 28px;
-
+  font-family: $primaryFont;
+  margin-bottom: 20px;
+  background-color: $primaryWhite;
+  padding: 20px;
+  &__title {
+    display: flex;
+    justify-content: center;
+    font-size: $text;
+    margin-bottom: 10px;
+    font-style: italic;
+    font-weight: 600;
+  }
+  &__background {
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    margin: auto;
+    height: 30px;
+    border-radius: 20px;
+    background-color: $primaryColor4;
+    font-size: 28px;
+    box-shadow: 0px 3px 10px rgb(80, 80, 80);
+  }
   &__xp {
     height: 28px;
     border-radius: 20px;
@@ -23,7 +36,4 @@
       $primaryColor6 50%
     );
   }
-
-  transition: 2s;
-  transition-duration: 2s;
 }

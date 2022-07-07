@@ -20,22 +20,22 @@ const BadgeList = () => {
   return (
     <div className="badgeList">
       <div className="badgeList__icons">
-        <StarsIcon sx={{ fontSize: 130, color: 'black' }} />
-        <WorkspacePremiumIcon sx={{ fontSize: 130, color: 'black' }} />
-        <SchoolIcon sx={{ fontSize: 130, color: 'black' }} />
-        <MilitaryTechIcon sx={{ fontSize: 130, color: 'black' }} />
-        <LocalPoliceOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <EmojiEventsOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <FactCheckOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <AnalyticsOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <CurrencyExchangeOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <CurrencyBitcoinOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <AutoGraphOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <InsertEmoticonOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <OnlinePredictionOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <NotificationsActiveOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <AllInclusiveOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
-        <AndroidOutlinedIcon sx={{ fontSize: 130, color: 'black' }} />
+        <StarsIcon sx={{ fontSize: 100, color: 'black' }} />
+        <WorkspacePremiumIcon sx={{ fontSize: 100, color: 'black' }} />
+        <SchoolIcon sx={{ fontSize: 100, color: 'black' }} />
+        <MilitaryTechIcon sx={{ fontSize: 100, color: 'black' }} />
+        <LocalPoliceOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <EmojiEventsOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <FactCheckOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <AnalyticsOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <CurrencyExchangeOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <CurrencyBitcoinOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <AutoGraphOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <InsertEmoticonOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <OnlinePredictionOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <NotificationsActiveOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <AllInclusiveOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
+        <AndroidOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
       </div>
     </div>
   );
