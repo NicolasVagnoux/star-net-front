@@ -9,8 +9,11 @@ import BackgroundParticles from './components/BackgroundParticles';
 import Account from './pages/Account';
 import Article from './pages/Article';
 import Bookmarks from './pages/Bookmarks';
+import Catalog from './pages/Catalog';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Support from './pages/Support';
+import Rewards from './pages/Rewards';
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
           <Route path="/articles/:idArticle" element={<Article />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/myaccount" element={<Account />} />
+          <Route path="/rewards" element={<Rewards />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/support" element={<Support />} />
         </Routes>
         <ToastContainer />
       </CookiesProvider>

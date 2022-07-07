@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 import CachedIcon from '@mui/icons-material/Cached';
+import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,7 +9,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [cookie, setCookie, removeCookie] = useCookies(['user_token']);
+  const removeCookie = useCookies(['user_token'])[2];
   const navigate: NavigateFunction = useNavigate();
   const [isLogoutModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
 
@@ -42,6 +42,12 @@ const Navbar = () => {
             </li>
           </Link>
         </ul>
+        <Link to="/support" className="main-menu__element-contact">
+          <button type="button">
+            <ContactSupportOutlinedIcon />
+            <p>Contacter l&apos;équipe *Net</p>
+          </button>
+        </Link>
         <ul className="main-menu__element-logout">
           <hr className="main-menu__element-logout__border" />
           <button
