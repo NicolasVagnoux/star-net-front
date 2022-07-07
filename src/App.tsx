@@ -6,11 +6,11 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import BackgroundParticles from './components/BackgroundParticles';
+import Account from './pages/Account';
 import Article from './pages/Article';
 import Bookmarks from './pages/Bookmarks';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Account from './pages/Account';
 
 function App() {
   return (

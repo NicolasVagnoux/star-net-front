@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { useCookies } from 'react-cookie';
-import jwt_decode from 'jwt-decode';
-import IUser from '../interfaces/IUser';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+
+import Navbar from '../components/Navbar';
+import IUser from '../interfaces/IUser';
 
 const Account = () => {
   // Collect idUser connected with the cookie
@@ -25,6 +26,8 @@ const Account = () => {
   const [newPasswordsEqual, setNewPasswordsEqual] = useState<boolean>(true);
   // usestate to set error messages
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  console.log(errorMessage);
 
   // useEffect to catch user connected data
   useEffect(() => {
@@ -53,6 +56,7 @@ const Account = () => {
 
   const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
+      e.preventDefault();
       await axios.put<IUser>(
         `http://localhost:3000/api/users/${user.id}`,
         newpassword && newpassword2 && newPasswordsEqual
