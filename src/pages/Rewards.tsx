@@ -12,9 +12,10 @@ const Rewards = () => {
       <Navbar />
       <ReturnButton />
       <h1>Recompenses decouverte</h1>
-      <LevelBar />
+
       <ProgressBar />
       <BadgesList />
+      <LevelBar />
     </div>
   );
 };

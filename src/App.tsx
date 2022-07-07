@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import BackgroundParticles from './components/BackgroundParticles';
 import Article from './pages/Article';
 import Bookmarks from './pages/Bookmarks';
+import Catalog from './pages/Catalog';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Rewards from './pages/Rewards';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/articles/:idArticle" element={<Article />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/rewards" element={<Rewards />} />
+          <Route path="/catalog" element={<Catalog />} />
         </Routes>
         <ToastContainer />
       </CookiesProvider>

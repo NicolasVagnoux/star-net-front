@@ -1,8 +1,8 @@
 .levelBar {
-  width: 97%;
+  bottom: 0;
+  margin-top: 80px;
+  width: 100%;
   font-family: $primaryFont;
-  margin-bottom: 20px;
-  background-color: $primaryWhite;
   padding: 20px;
   &__title {
     display: flex;
@@ -35,5 +35,8 @@
       $secondaryColor4 20%,
       $primaryColor6 50%
     );
+  }
+  :hover {
+    filter: brightness(1.1);
   }
 }

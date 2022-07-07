@@ -10,7 +10,7 @@ const Login = () => {
   const [hasAccount, setHasAccount] = useState<boolean>(true);
 
   const notifySuccess = () =>
-    toast.success(
+    toast.info(
       'Votre inscription a bien été prise en compte ! Vous pouvez désormais vous connecter.',
       {
         position: 'top-right',
