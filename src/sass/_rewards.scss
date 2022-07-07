@@ -1,0 +1,14 @@
+.rewards {
+  padding-left: 65px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  scroll-behavior: none;
+  h1 {
+    font-family: 'Ubuntu Mono';
+    color: #73739f;
+    font-size: 3rem;
+    margin-bottom: 3vh;
+    width: 100%;
+  }
+}
