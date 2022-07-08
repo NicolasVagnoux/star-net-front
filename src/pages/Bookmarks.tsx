@@ -16,7 +16,7 @@ const Bookmarks = () => {
 
   useEffect(() => {
     const getBookmarksList = async () => {
-      const url = `http://localhost:3000/api/users/${user.id}/articles`;
+      const url = `${import.meta.env.VITE_DB_URL}api/users/${user.id}/articles`;
       const { data } = await axios.get(url, { withCredentials: true });
       setBookmarkList(data);
     };

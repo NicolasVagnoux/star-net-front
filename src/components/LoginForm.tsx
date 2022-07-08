@@ -21,9 +21,10 @@ const LoginForm = ({ setHasAccount }: Props) => {
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
+      const url = `${import.meta.env.VITE_DB_URL}api/login`;
       e.preventDefault();
       await axios.post<IUser>(
-        'http://localhost:3000/api/login',
+        url,
         { email, password },
         {
           method: 'POST',

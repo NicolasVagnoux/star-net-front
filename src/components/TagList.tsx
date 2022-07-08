@@ -13,7 +13,7 @@ const TagList = ({ id }: IPackageItem) => {
   useEffect(() => {
     const getTagsList = async () => {
       axios;
-      const url = `http://localhost:3000/api/packages/${id}/categories`;
+      const url = `${import.meta.env.VITE_DB_URL}api/packages/${id}/categories`;
       const { data } = await axios.get(url);
       setTagList(data);
     };
