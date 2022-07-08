@@ -31,14 +31,14 @@ const Article = () => {
       // get articles by id
       // get response and sets data to article
       const articleResponse = await axios.get<IArticle>(
-        `http://localhost:3000/api/articles/${idArticle}`,
+        `${import.meta.env.VITE_DB_URL}api/articles/${idArticle}`,
         { withCredentials: true },
       );
       // we use setArticle param on url to squeeze the await from url
       setArticle(articleResponse.data);
       // once we have article's information, fetch author info
       const userResponse = await axios.get(
-        `http://localhost:3000/api/users/${articleResponse.data.idUser}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${articleResponse.data.idUser}`,
       );
       setAuthor(userResponse.data);
     };
@@ -46,7 +46,9 @@ const Article = () => {
     // check if article is completed/read
     const getCompletedOrNot = async () => {
       const { data } = await axios.get(
-        `http://localhost:3000/api/users/${user.id}/completedarticles/${idArticleNumber}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${
+          user.id
+        }/completedarticles/${idArticleNumber}`,
         { withCredentials: true },
       );
       data ? setIsCompleted(true) : setIsCompleted(false);

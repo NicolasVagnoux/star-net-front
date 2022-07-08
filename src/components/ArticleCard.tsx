@@ -22,14 +22,14 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
 
   useEffect(() => {
     const getUserData = async () => {
-      const url = `http://localhost:3000/api/users/${idUser}`;
+      const url = `${import.meta.env.VITE_DB_URL}api/users/${idUser}`;
       const { data } = await axios.get(url);
       setUserData(data);
     };
 
     const getBookmarkOrNot = async () => {
       const { data } = await axios.get(
-        `http://localhost:3000/api/users/${user.id}/bookmarks/${id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/bookmarks/${id}`,
         { withCredentials: true },
       );
       data ? setIsBookmarked(true) : setIsBookmarked(false);
@@ -37,7 +37,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
 
     const getCompletedOrNot = async () => {
       const { data } = await axios.get(
-        `http://localhost:3000/api/users/${user.id}/completedarticles/${id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/completedarticles/${id}`,
         { withCredentials: true },
       );
       data ? setIsCompleted(true) : setIsCompleted(false);
@@ -67,7 +67,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
     try {
       e.preventDefault();
       await axios.post<IBookmark>(
-        `http://localhost:3000/api/users/${user.id}/bookmarks`,
+        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/bookmarks`,
         { idArticle: id },
         {
           method: 'POST',
@@ -97,7 +97,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
     try {
       e.preventDefault();
       await axios.delete<IBookmark>(
-        `http://localhost:3000/api/users/${user.id}/bookmarks/${id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/bookmarks/${id}`,
         { withCredentials: true },
       );
       setIsBookmarked(false);
