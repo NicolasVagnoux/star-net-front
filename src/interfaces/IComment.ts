@@ -1,6 +1,4 @@
-import { RowDataPacket } from 'mysql2';
-
-export default interface IComment extends RowDataPacket {
+export default interface IComment {
   id: number;
   text: string;
   report: boolean;
