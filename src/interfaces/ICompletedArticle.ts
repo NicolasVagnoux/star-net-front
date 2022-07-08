@@ -1,6 +1,4 @@
-import { RowDataPacket } from 'mysql2';
-
-export default interface ICompletedArticle extends RowDataPacket {
+export default interface ICompletedArticle {
   id: number;
   idUser: number;
   idArticle: number;
