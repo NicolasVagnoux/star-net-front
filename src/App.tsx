@@ -12,8 +12,8 @@ import Bookmarks from './pages/Bookmarks';
 import Catalog from './pages/Catalog';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Support from './pages/Support';
 import Rewards from './pages/Rewards';
+import Support from './pages/Support';
 
 function App() {
   return (
