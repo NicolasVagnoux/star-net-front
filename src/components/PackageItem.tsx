@@ -28,14 +28,16 @@ const PackageItem = ({ name, id, description }: Props) => {
   useEffect(() => {
     const getArticleList = async () => {
       const articleListResponse = await axios.get<IArticle[]>(
-        `http://localhost:3000/api/packages/${id}/articles`,
+        `${import.meta.env.VITE_DB_URL}api/packages/${id}/articles`,
         { withCredentials: true },
       );
       setArticleList(articleListResponse.data);
       // Function and API call to get completedArticleLenght
 
       const completedArticlesResponse = await axios.get(
-        `http://localhost:3000/api/users/${user.id}/packages/${id}/completedArticles`,
+        `${import.meta.env.VITE_DB_URL}api/users/${
+          user.id
+        }/packages/${id}/completedArticles`,
         { withCredentials: true },
       );
 

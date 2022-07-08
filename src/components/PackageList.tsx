@@ -10,7 +10,7 @@ const PackageList = () => {
 
   useEffect(() => {
     const getPackageItems = async () => {
-      const url = `http://localhost:3000/api/packages`;
+      const url = `${import.meta.env.VITE_DB_URL}api/packages`;
       const { data } = await axios.get(url, { withCredentials: true });
       setPackageItems(data);
     };

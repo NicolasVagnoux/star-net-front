@@ -23,7 +23,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
     try {
       e.preventDefault();
       await axios.post<IUser>(
-        'http://localhost:3000/api/login',
+        '${import.meta.env.VITE_DB_URL}api/login',
         { email, password },
         {
           method: 'POST',

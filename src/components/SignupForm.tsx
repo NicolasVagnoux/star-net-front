@@ -25,9 +25,10 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
 
   const signup = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
+      const url = `${import.meta.env.VITE_DB_URL}api/users`;
       e.preventDefault();
       await axios.post<IUser>(
-        'http://localhost:3000/api/users',
+        url,
         { firstName: firstname, lastName: lastname, email: email, password: password2 },
         {
           method: 'POST',
