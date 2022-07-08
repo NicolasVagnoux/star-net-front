@@ -2,6 +2,7 @@
   background-color: $primaryWhite;
   position: fixed;
   height: 100vh;
+  top: 0;
   left: 0;
   overflow: hidden;
   z-index: 1000;
@@ -48,12 +49,44 @@
       }
     }
   }
+  &__element-contact {
+    position: absolute;
+    width: 250px;
+    bottom: 75px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+    button {
+      width: 100%;
+      padding-left: 15px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border: none;
+      background-color: rgb(0,0,0,0);
+      font-family: $primaryFont;
+      font-size: 1rem;
+      cursor: pointer;
+      &:hover {
+        background-color: $primaryColor5;
+      }
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+      p {
+        margin-left: 10px;
+      }
+    }
+  }
   &__element-logout {
     position: absolute;
     width: 100%;
     bottom: 0;
     &__border {
       border: solid black 1px;
+      background-color: black;
       color: $primaryBlack;
       width: 50%;
       align-items: center;
@@ -65,6 +98,7 @@
       text-align: center;
       display: flex;
       height: 7vh;
+      width: 100%;
       flex-direction: row;
       padding-left: 0.5vw;
       align-items: center;
@@ -74,7 +108,9 @@
       border: none;
       background-color: rgb(0, 0, 0, 0);
       cursor: pointer;
-
+      &:hover {
+        background-color: $primaryColor5;
+      }
       &__nav-text {
         position: relative;
         vertical-align: middle;
@@ -82,9 +118,6 @@
       }
     }
 
-    :hover {
-      background-color: $primaryColor5;
-    }
   }
   &__logout-modal {
     z-index: 1000;

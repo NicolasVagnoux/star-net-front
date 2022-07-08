@@ -1,0 +1,70 @@
+.progressBar {
+  font-family: $primaryFont;
+
+  &__card {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(255, 255, 255);
+    margin: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    &__percent {
+      flex-wrap: wrap;
+      margin: 10px;
+      padding-right: 10px;
+      font-size: 50px;
+    }
+    &__smallText {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      &__title {
+        flex-wrap: wrap;
+        display: flex;
+        padding-bottom: 15px;
+      }
+      &__current {
+        font-style: italic;
+        flex-wrap: wrap;
+      }
+    }
+    &__next {
+      color: $secondaryColor1;
+      font-size: $text;
+      padding-left: 10px;
+    }
+    &__readArticles {
+      margin: 10px;
+      width: 90%;
+      transition: width 1s ease-in-out;
+      animation: grow 2s;
+      background-color: $secondaryColor3;
+      border-radius: 100px;
+    }
+
+    &__packagesCompleted {
+      margin: 10px;
+      width: 90%;
+      transition: width 1s ease-in-out;
+      animation: grow 2s;
+      background-color: $secondaryColor3;
+      border-radius: 100px;
+    }
+    &__quizz {
+      margin: 10px;
+      width: 90%;
+      transition: width 1s ease-in-out;
+      animation: grow 2s;
+      background-color: $secondaryColor3;
+      border-radius: 100px;
+    }
+    .determinate {
+      background-color: $primaryColor2;
+      height: 100%;
+      border-radius: 100px;
+      text-align: center;
+      align-self: center;
+      color: white;
+    }
+  }
+}
