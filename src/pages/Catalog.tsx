@@ -19,7 +19,7 @@ const Catalog = () => {
   //Call for the article list
   useEffect(() => {
     const getArticleList = async () => {
-      let url = `http://localhost:3000/api/articles`;
+      let url = `${import.meta.env.VITE_DB_URL}api/articles`;
       if (titleFilter) {
         url += `?titleFilter=${titleFilter}`;
       }
@@ -39,7 +39,7 @@ const Catalog = () => {
   //Call for the category list
   useEffect(() => {
     const getTagList = async () => {
-      const { data } = await axios.get(`http://localhost:3000/api/categories`);
+      const { data } = await axios.get(`${import.meta.env.VITE_DB_URL}api/categories`);
       setTagList(data);
     };
     getTagList();

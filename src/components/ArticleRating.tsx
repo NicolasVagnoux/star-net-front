@@ -39,7 +39,7 @@ const ArticleRating = ({ id, setIsCompleted }: Props) => {
     try {
       e.preventDefault();
       await axios.post<ICompletedArticle>(
-        `http://localhost:3000/api/users/${user.id}/completedArticles`,
+        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/completedArticles`,
         {
           // This is the body
           rating: rating,

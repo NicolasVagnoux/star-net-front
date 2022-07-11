@@ -35,7 +35,7 @@ const Account = () => {
     const getData = async () => {
       // get user data
       const { data } = await axios.get<IUser>(
-        `http://localhost:3000/api/users/${user.id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${user.id}`,
         { withCredentials: true },
       );
       setUserData(data);
@@ -69,7 +69,7 @@ const Account = () => {
     try {
       e.preventDefault();
       await axios.put<IUser>(
-        `http://localhost:3000/api/users/${user.id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${user.id}`,
         newpassword && newpassword2 && newPasswordsEqual
           ? { firstName: firstname, lastName: lastname, password: newpassword2 }
           : { firstName: firstname, lastName: lastname },

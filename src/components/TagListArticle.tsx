@@ -17,7 +17,7 @@ const TagListArticle = ({ id }: Props) => {
   useEffect(() => {
     const getTagsListArticle = async () => {
       axios;
-      const url = `http://localhost:3000/api/articles/${id}/categories`;
+      const url = `${import.meta.env.VITE_DB_URL}api/articles/${id}/categories`;
       const { data } = await axios.get(url);
       setTagListArticle(data);
     };
