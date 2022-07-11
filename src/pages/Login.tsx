@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
+import BeGuided from '../components/BeGuided';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
 
@@ -24,6 +25,7 @@ const Login = () => {
 
   return (
     <div className="loginSignup">
+      <BeGuided />
       {hasAccount ? (
         <LoginForm setHasAccount={setHasAccount} />
       ) : (
