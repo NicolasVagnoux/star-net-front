@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 
 import Navbar from '../components/Navbar';
+import ReturnButton from '../components/ReturnButton';
 import IUser from '../interfaces/IUser';
 
 const Account = () => {
@@ -13,12 +14,15 @@ const Account = () => {
   const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
 
+  // useState to stock user data
   const [userData, setUserData] = useState<IUser>();
 
   // useState to edit your firstname
   const [firstname, setFirstname] = useState<string>('');
   // useState to edit your lastname
   const [lastname, setLastname] = useState<string>('');
+  // useState to valid your password
+  const [oldpassword, setOldPassword] = useState<string>('');
   // useState to edit your new password
   const [newpassword, setNewPassword] = useState<string>('');
   // useState to confirm your new password
@@ -41,6 +45,7 @@ const Account = () => {
       setUserData(data);
       setFirstname(data.firstName);
       setLastname(data.lastName);
+      console.log(data);
     };
     getData();
   }, []);
@@ -96,10 +101,13 @@ const Account = () => {
   return (
     <>
       <Navbar />
+      <div className="returnaccount">
+        <ReturnButton />
+      </div>
       <div className="account">
         <div className="account__myaccount">
           <h1 className="account__myaccount__title">Mon Compte</h1>
-          <h2 className="account__myaccount__secondtitle">Modifiez mes données</h2>
+          <h2 className="account__myaccount__secondtitle">Modifier mes données</h2>
           <form
             className="account__myaccount__form"
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -144,6 +152,28 @@ const Account = () => {
                 type="button"
                 onClick={() => {
                   setLastname('');
+                }}>
+                <HighlightOffIcon />
+              </button>
+            </div>
+
+            {/* oldpassword */}
+            <div className="account__myaccount__form__oldpassword">
+              <label htmlFor="oldpassword">Changer mon mot de passe</label>
+              <input
+                type="text"
+                value={oldpassword}
+                onChange={(e) => {
+                  setOldPassword(e.target.value);
+                }}
+                placeholder="Renseigner mon mot de passe actuel"
+                id="oldpassword"
+              />
+
+              <button
+                type="button"
+                onClick={() => {
+                  setOldPassword('');
                 }}>
                 <HighlightOffIcon />
               </button>

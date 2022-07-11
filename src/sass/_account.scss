@@ -3,7 +3,7 @@
     margin-top: 3rem;
     margin-left: 9rem;
     padding: 2rem;
-    height: 600px;
+    height: 100vh;
     width: 600px;
     border: 1px solid black;
     border-radius: 20px;
@@ -43,6 +43,7 @@
 
       &__firstname,
       &__lastname,
+      &__oldpassword,
       &__newpassword,
       &__newpassword2 {
         width: 95%;
@@ -103,4 +104,9 @@
       }
     }
   }
+}
+
+.returnaccount {
+  margin-top: 50px;
+  margin-left: 150px;
 }
