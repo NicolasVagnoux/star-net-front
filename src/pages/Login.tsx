@@ -21,7 +21,6 @@ const Login = () => {
         progress: undefined,
       },
     );
-
   return (
     <div className="loginSignup">
       {hasAccount ? (
