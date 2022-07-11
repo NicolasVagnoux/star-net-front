@@ -1,7 +1,6 @@
 .beGuided {
   z-index: 75;
   width: 100%;
-
   position: fixed;
   &__carousel {
     z-index: 100;
@@ -31,6 +30,38 @@
         width: 80%;
         height: 80%;
       }
+      &__button {
+        border: 1px solid $primaryColor2;
+        background-color: $primaryColor2;
+        width: 102px;
+        height: 40px;
+        border-radius: 100px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 6px;
+        align-items: center;
+        cursor: pointer;
+        color: white;
+      }
+      h1 {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+      p {
+        margin-top: 20px;
+      }
     }
+  }
+  .swiper-pagination-bullet {
+    --swiper-theme-color: #73739f;
+    transform: translateY(5px);
+    --swiper-pagination-bullet-width: 0.8rem;
+    --swiper-pagination-bullet-height: 0.8rem;
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    --swiper-navigation-size: 30px;
+    color: #73739f;
   }
 }

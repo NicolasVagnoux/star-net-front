@@ -87,6 +87,7 @@ const BeGuided = () => {
               </SwiperSlide>
             </Swiper>
             <button
+              className="beGuided__carousel__content__button"
               type="button"
               onClick={() => {
                 setIsHelpModalOpened(false);
