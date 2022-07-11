@@ -46,11 +46,11 @@ const Catalog = () => {
   }, []);
 
   // Function that handle sort by article name
-  const sortByTitle = (a: IArticle, b: IArticle) => {
-    if (a.title < b.title) {
+  const sortByDate = (a: IArticle, b: IArticle) => {
+    if (a.lastUpdateDate < b.lastUpdateDate) {
       return -1;
     }
-    if (a.title > b.title) {
+    if (a.lastUpdateDate > b.lastUpdateDate) {
       return 1;
     }
     return 0;
@@ -112,7 +112,8 @@ const Catalog = () => {
         <div className="catalog__articleList">
           {articleList &&
             articleList
-              .sort(sortByTitle)
+              .sort(sortByDate)
+              .reverse()
               .map((article) => <ArticleCard key={article.id} {...article} />)}
         </div>
       </div>

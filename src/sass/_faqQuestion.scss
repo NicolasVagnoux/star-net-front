@@ -1,0 +1,50 @@
+.faqQuestion {
+    list-style: none;
+    background-color: rgb(255,255,255,0.85);
+    padding: 1rem 2rem;
+    border: 1px solid $primaryColor2;
+    border-radius: 15px;
+    box-shadow: 0px 2px 5px grey;
+    width: 100%;
+    cursor: pointer;
+    &__question {
+        display: grid;
+        grid-template-columns: 30px 1fr 30px;
+        align-items: center;
+        color: $primaryColor2;
+        h4 {
+            font-family: $primaryFont;
+            font-size: 1.6rem;
+            font-weight: 400;
+            text-align: left;
+        }
+        >svg {
+            height: 30px;
+            width: 30px;
+            margin-left: -10px;
+        }
+        button {
+            border: none;
+            background-color: rgb(0,0,0,0);
+            svg {
+                color: $primaryColor2;
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+    &__question--withanswer {
+        button {
+            svg {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+    &__answer {
+        margin-top: 1rem;
+        font-family: $secondaryFont;
+        color: $secondaryColor5;
+        font-size: 1rem;
+        text-align: justify;
+    }
+}
