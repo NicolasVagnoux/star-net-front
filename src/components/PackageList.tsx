@@ -14,13 +14,14 @@ const PackageList = ({ userId }: Props) => {
 
   useEffect(() => {
     const getPackageItems = async () => {
-      const url = `${import.meta.env.VITE_DB_URL}api/packages`;
+      const url = `${import.meta.env.VITE_DB_URL}api/users/2/packages`;
       const { data } = await axios.get(url, { withCredentials: true });
       setPackageItems(data);
     };
     getPackageItems();
   }, []);
 
+  console.log("package item"+packageItems);
   // API call to gather all the followed packages by user connected
   const [followedPackageItems, setFollowedPackageItems] = useState<IPackageItem[]>([]);
 
@@ -33,9 +34,11 @@ const PackageList = ({ userId }: Props) => {
     getFollowedPackageItems();
   }, []);
 
+  console.log(followedPackageItems);
+
   return (
     <>
-      <h2> Mes packages </h2>
+      {followedPackageItems.length > 0 && <h2> Mes packages </h2>}
       <div>
         {followedPackageItems &&
           followedPackageItems.map((followedpackageitem) => (
@@ -51,8 +54,8 @@ const PackageList = ({ userId }: Props) => {
         {packageItems &&
           packageItems
             // .filter((packageitem) => !followedIdList?.includes(packageitem.id))
-            .map((packageitem) => (
-              <PackageItem key={packageitem.id} {...packageitem} userId={userId} />
+            .map((packageitem, index) => (
+              <PackageItem key={index} {...packageitem} userId={userId} />
             ))}
       </div>
     </>
