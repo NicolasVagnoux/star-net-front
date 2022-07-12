@@ -17,11 +17,13 @@ interface Props {
   name: string;
   description: string;
   userId: number;
+  setRefreshListFlag: React.Dispatch<React.SetStateAction<boolean>>;
+  refreshListFlag:boolean;
   // isFollowed: boolean;
   // setIsFollowed: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const PackageItem = ({ name, id: packageId, description, userId }: Props) => {
+const PackageItem = ({ name, id: packageId, description, userId, setRefreshListFlag,refreshListFlag }: Props) => {
   // We Collect the userId (the one connected) with the cookie
   const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
@@ -94,6 +96,7 @@ const PackageItem = ({ name, id: packageId, description, userId }: Props) => {
         },
       );
       setIsFollowed(true);
+      setRefreshListFlag(!refreshListFlag);
       notifyFollowed();
     } catch (err) {
       console.error(err);
@@ -108,6 +111,7 @@ const PackageItem = ({ name, id: packageId, description, userId }: Props) => {
         `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
       );
       setIsFollowed(false);
+      setRefreshListFlag(!refreshListFlag);
       notifyUnfollowed();
     } catch (err) {
       console.log(err);
