@@ -18,12 +18,17 @@ interface Props {
   description: string;
   userId: number;
   setRefreshListFlag: React.Dispatch<React.SetStateAction<boolean>>;
-  refreshListFlag:boolean;
-  // isFollowed: boolean;
-  // setIsFollowed: React.Dispatch<React.SetStateAction<boolean>>,
+  refreshListFlag: boolean;
 }
 
-const PackageItem = ({ name, id: packageId, description, userId, setRefreshListFlag,refreshListFlag }: Props) => {
+const PackageItem = ({
+  name,
+  id: packageId,
+  description,
+  userId,
+  setRefreshListFlag,
+  refreshListFlag,
+}: Props) => {
   // We Collect the userId (the one connected) with the cookie
   const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
@@ -140,7 +145,6 @@ const PackageItem = ({ name, id: packageId, description, userId, setRefreshListF
             {name} <span> ({articleList.length} articles) </span>
           </h2>
           <div className="packageitem__container__title__button">
-            <div>
               {isFollowed && (
                 <button
                   type="button"
@@ -149,7 +153,6 @@ const PackageItem = ({ name, id: packageId, description, userId, setRefreshListF
                     deleteFollowedPackage(e)
                   }>
                   <img src="/assets/icons/checked.svg" alt="unfollow" />
-                  SUIVI
                 </button>
               )}
               {!isFollowed && (
@@ -163,7 +166,6 @@ const PackageItem = ({ name, id: packageId, description, userId, setRefreshListF
                   SUIVRE
                 </button>
               )}
-            </div>
           </div>
         </div>
       </div>
