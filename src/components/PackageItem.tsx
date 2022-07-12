@@ -2,12 +2,13 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify';
 
 import IArticle from '../interfaces/IArticle';
+import IPackageItem from '../interfaces/IPackageItem';
 import IUser from '../interfaces/IUser';
 import ArticleList from './ArticleList';
 import CompletionChart from './CompletionChart';
-import FollowedButton from './FollowedButton';
 import TagList from './TagList';
 
 // interface props
@@ -16,12 +17,17 @@ interface Props {
   name: string;
   description: string;
   userId: number;
+  // isFollowed: boolean;
+  // setIsFollowed: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const PackageItem = ({ name, id: packageId, description, userId }: Props) => {
   // We Collect the userId (the one connected) with the cookie
   const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
+
+  // Set a boolean to handle button suivi/suivre state
+  const [isFollowed, setIsFollowed] = useState<boolean>(false);
 
   // Function and API call to get articlesList lenght and display it to users
   const [articleList, setArticleList] = useState<IArticle[]>([]);
@@ -52,6 +58,75 @@ const PackageItem = ({ name, id: packageId, description, userId }: Props) => {
     getArticleList();
   }, []);
 
+  //toast when a PACKAGE is unfollowed
+  const notifyUnfollowed = () =>
+    toast.info('Vous ne suivez plus ce package', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  //toast when a PACKAGE is Followed
+  const notifyFollowed = () =>
+    toast.info('Le package a été suivi avec succès !', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  // Add a followed article for one user
+  const addFollowedPackage = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.post<IPackageItem>(
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages`,
+        { idPackage: packageId },
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        },
+      );
+      setIsFollowed(true);
+      notifyFollowed();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // Delete a followed for one user
+  const deleteFollowedPackage = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.delete<IPackageItem>(
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
+      );
+      setIsFollowed(false);
+      notifyUnfollowed();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Check if the followed button should be follow or unfollow
+  useEffect(() => {
+  const getFollowedOrNot = async () => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
+      { withCredentials: true },
+    );
+    console.log(data);
+    data ? setIsFollowed(true) : setIsFollowed(false);
+  };
+  getFollowedOrNot();
+},[]);
+
   return (
     <div className="packageitem">
       <div className="packageitem__container">
@@ -61,7 +136,30 @@ const PackageItem = ({ name, id: packageId, description, userId }: Props) => {
             {name} <span> ({articleList.length} articles) </span>
           </h2>
           <div className="packageitem__container__title__button">
-            <FollowedButton userId={userId} packageId={packageId} />
+            <div>
+              {isFollowed && (
+                <button
+                  type="button"
+                  className="button button-followed"
+                  onClick={(e: React.FormEvent<HTMLButtonElement>) =>
+                    deleteFollowedPackage(e)
+                  }>
+                  <img src="/assets/icons/checked.svg" alt="unfollow" />
+                  SUIVI
+                </button>
+              )}
+              {!isFollowed && (
+                <button
+                  type="button"
+                  className="button button-notfollowed"
+                  onClick={(e: React.FormEvent<HTMLButtonElement>) =>
+                    addFollowedPackage(e)
+                  }>
+                  <img src="/assets/icons/plus.svg" alt="follow" />
+                  SUIVRE
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
