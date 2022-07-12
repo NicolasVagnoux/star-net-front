@@ -38,7 +38,7 @@ const Bookmarks = () => {
             : `${bookmarkList.length} articles sauvegardés`}
         </h2>
         <div className="bookmarks__list">
-          {bookmarkList &&
+          {bookmarkList.length &&
             bookmarkList.map((bookmark) => (
               <ArticleCard key={bookmark.id} {...bookmark} />
             ))}
