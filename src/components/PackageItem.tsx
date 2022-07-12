@@ -18,12 +18,19 @@ interface Props {
   description: string;
   userId: number;
   setRefreshListFlag: React.Dispatch<React.SetStateAction<boolean>>;
-  refreshListFlag:boolean;
+  refreshListFlag: boolean;
   // isFollowed: boolean;
   // setIsFollowed: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const PackageItem = ({ name, id: packageId, description, userId, setRefreshListFlag,refreshListFlag }: Props) => {
+const PackageItem = ({
+  name,
+  id: packageId,
+  description,
+  userId,
+  setRefreshListFlag,
+  refreshListFlag,
+}: Props) => {
   // We Collect the userId (the one connected) with the cookie
   const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
