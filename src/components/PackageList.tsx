@@ -21,7 +21,7 @@ const PackageList = ({ userId }: Props) => {
     getPackageItems();
   }, []);
 
-  console.log("package item"+packageItems);
+  console.log('package item' + packageItems);
   // API call to gather all the followed packages by user connected
   const [followedPackageItems, setFollowedPackageItems] = useState<IPackageItem[]>([]);
 
