@@ -10,7 +10,7 @@
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
     "lint": "npm run lint:format && npm run lint:fix ",
     "type-check": "tsc",
-    "prepare": "husky install && chmod ug+x .husky/*",
+    "prepare": "husky install",
     "ts": "tsc -w"
   },
   "dependencies": {
