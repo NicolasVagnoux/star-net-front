@@ -9,6 +9,9 @@ interface Props {
 }
 
 const PackageList = ({ userId }: Props) => {
+  // Set a flag to handle refresh
+  const [refreshListFlag, setRefreshListFlag] = useState<boolean>(false);
+
   // Function and API call that enables us to gather all the packages filtered without followed packages
   const [packageItems, setPackageItems] = useState<IPackageItem[]>([]);
 
@@ -19,9 +22,8 @@ const PackageList = ({ userId }: Props) => {
       setPackageItems(data);
     };
     getPackageItems();
-  }, []);
+  }, [refreshListFlag]);
 
-  console.log('package item' + packageItems);
   // API call to gather all the followed packages by user connected
   const [followedPackageItems, setFollowedPackageItems] = useState<IPackageItem[]>([]);
 
@@ -32,9 +34,7 @@ const PackageList = ({ userId }: Props) => {
       setFollowedPackageItems(data);
     };
     getFollowedPackageItems();
-  }, []);
-
-  console.log(followedPackageItems);
+  }, [refreshListFlag]);
 
   return (
     <>
@@ -46,6 +46,8 @@ const PackageList = ({ userId }: Props) => {
               key={followedpackageitem.id}
               {...followedpackageitem}
               userId={userId}
+              setRefreshListFlag={setRefreshListFlag}
+              refreshListFlag={refreshListFlag}
             />
           ))}
       </div>
@@ -55,7 +57,13 @@ const PackageList = ({ userId }: Props) => {
           packageItems
             // .filter((packageitem) => !followedIdList?.includes(packageitem.id))
             .map((packageitem, index) => (
-              <PackageItem key={index} {...packageitem} userId={userId} />
+              <PackageItem
+                key={index}
+                {...packageitem}
+                userId={userId}
+                setRefreshListFlag={setRefreshListFlag}
+                refreshListFlag={refreshListFlag}
+              />
             ))}
       </div>
     </>
