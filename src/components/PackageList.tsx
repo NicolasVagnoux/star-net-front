@@ -66,9 +66,9 @@ const PackageList = ({ userId }: Props) => {
         {packageItems &&
           packageItems
             // .filter((packageitem) => !followedIdList?.includes(packageitem.id))
-            .map((packageitem, index) => (
+            .map((packageitem) => (
               <PackageItem
-                key={index}
+                key={packageitem.id}
                 {...packageitem}
                 userId={userId}
                 setRefreshListFlag={setRefreshListFlag}

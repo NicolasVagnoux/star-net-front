@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
@@ -123,8 +124,11 @@ const PackageItem = ({
     }
   };
 
-  // Check if the followed button should be follow or unfollow
-  useEffect(() => {
+  // Debounce package to prevent multiple click
+  const deleteFollowedPackageDebounce = debounce(deleteFollowedPackage, 300);
+  const addFollowedPackageDebounce = debounce(addFollowedPackage, 300);
+
+  // Check and update if the followed button state (followed or unfollowed) for all package items
     const getFollowedOrNot = async () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
@@ -133,6 +137,8 @@ const PackageItem = ({
       console.log(data);
       data ? setIsFollowed(true) : setIsFollowed(false);
     };
+    
+    useEffect(() => {
     getFollowedOrNot();
   }, []);
 
@@ -150,7 +156,7 @@ const PackageItem = ({
                   type="button"
                   className="button button-followed"
                   onClick={(e: React.FormEvent<HTMLButtonElement>) =>
-                    deleteFollowedPackage(e)
+                    deleteFollowedPackageDebounce(e)
                   }>
                   <img src="/assets/icons/checked.svg" alt="unfollow" />
                 </button>
@@ -160,7 +166,7 @@ const PackageItem = ({
                   type="button"
                   className="button button-notfollowed"
                   onClick={(e: React.FormEvent<HTMLButtonElement>) =>
-                    addFollowedPackage(e)
+                    addFollowedPackageDebounce(e)
                   }>
                   <img src="/assets/icons/plus.svg" alt="follow" />
                   SUIVRE
@@ -178,3 +184,4 @@ const PackageItem = ({
 };
 
 export default PackageItem;
+
