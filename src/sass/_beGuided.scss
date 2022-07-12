@@ -33,7 +33,7 @@
       &__button {
         border: 1px solid $primaryColor2;
         background-color: $primaryColor2;
-        width: 102px;
+        width: 150px;
         height: 40px;
         border-radius: 100px;
         display: flex;
@@ -47,6 +47,7 @@
       h1 {
         margin-top: 10px;
         margin-bottom: 20px;
+        color: $primaryColor6;
       }
       p {
         margin-top: 20px;
@@ -54,7 +55,7 @@
     }
   }
   .swiper-pagination-bullet {
-    --swiper-theme-color: #73739f;
+    --swiper-theme-color: #6a8eae;
     transform: translateY(5px);
     --swiper-pagination-bullet-width: 0.8rem;
     --swiper-pagination-bullet-height: 0.8rem;
