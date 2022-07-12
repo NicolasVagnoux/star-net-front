@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import IPackageItem from '../interfaces/IPackageItem';
@@ -8,11 +8,10 @@ interface Props {
   userId: number;
   packageId: number;
   setIsFollowed: React.Dispatch<React.SetStateAction<boolean>>;
-  isFollowed:boolean;
+  isFollowed: boolean;
 }
 
 const FollowedButton = ({ userId, packageId, setIsFollowed, isFollowed }: Props) => {
-
   //toast when a PACKAGE is unfollowed
   const notifyUnfollowed = () =>
     toast.info('Vous ne suivez plus ce package', {
@@ -70,17 +69,16 @@ const FollowedButton = ({ userId, packageId, setIsFollowed, isFollowed }: Props)
 
   // Check if the followed button should be follow or unfollow
   useEffect(() => {
-  const getFollowedOrNot = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
-      { withCredentials: true },
-    );
-    console.log(data);
-    data ? setIsFollowed(true) : setIsFollowed(false);
-  };
-  getFollowedOrNot();
-},[isFollowed]);
-
+    const getFollowedOrNot = async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
+        { withCredentials: true },
+      );
+      console.log(data);
+      data ? setIsFollowed(true) : setIsFollowed(false);
+    };
+    getFollowedOrNot();
+  }, [isFollowed]);
 
   return (
     <div>
@@ -89,7 +87,7 @@ const FollowedButton = ({ userId, packageId, setIsFollowed, isFollowed }: Props)
           type="button"
           className="button button-notfollowed"
           onClick={(e: React.FormEvent<HTMLButtonElement>) => deleteFollowedPackage(e)}>
-          <img src='/assets/icons/plus.svg' alt="unfollow" />
+          <img src="/assets/icons/plus.svg" alt="unfollow" />
           SUIVI
         </button>
       )}

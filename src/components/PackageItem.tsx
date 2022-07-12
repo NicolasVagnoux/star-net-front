@@ -116,16 +116,16 @@ const PackageItem = ({ name, id: packageId, description, userId }: Props) => {
 
   // Check if the followed button should be follow or unfollow
   useEffect(() => {
-  const getFollowedOrNot = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
-      { withCredentials: true },
-    );
-    console.log(data);
-    data ? setIsFollowed(true) : setIsFollowed(false);
-  };
-  getFollowedOrNot();
-},[]);
+    const getFollowedOrNot = async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
+        { withCredentials: true },
+      );
+      console.log(data);
+      data ? setIsFollowed(true) : setIsFollowed(false);
+    };
+    getFollowedOrNot();
+  }, []);
 
   return (
     <div className="packageitem">
