@@ -145,27 +145,27 @@ const PackageItem = ({
             {name} <span> ({articleList.length} articles) </span>
           </h2>
           <div className="packageitem__container__title__button">
-              {isFollowed && (
-                <button
-                  type="button"
-                  className="button button-followed"
-                  onClick={(e: React.FormEvent<HTMLButtonElement>) =>
-                    deleteFollowedPackage(e)
-                  }>
-                  <img src="/assets/icons/checked.svg" alt="unfollow" />
-                </button>
-              )}
-              {!isFollowed && (
-                <button
-                  type="button"
-                  className="button button-notfollowed"
-                  onClick={(e: React.FormEvent<HTMLButtonElement>) =>
-                    addFollowedPackage(e)
-                  }>
-                  <img src="/assets/icons/plus.svg" alt="follow" />
-                  SUIVRE
-                </button>
-              )}
+            {isFollowed && (
+              <button
+                type="button"
+                className="button button-followed"
+                onClick={(e: React.FormEvent<HTMLButtonElement>) =>
+                  deleteFollowedPackage(e)
+                }>
+                <img src="/assets/icons/checked.svg" alt="unfollow" />
+              </button>
+            )}
+            {!isFollowed && (
+              <button
+                type="button"
+                className="button button-notfollowed"
+                onClick={(e: React.FormEvent<HTMLButtonElement>) =>
+                  addFollowedPackage(e)
+                }>
+                <img src="/assets/icons/plus.svg" alt="follow" />
+                SUIVRE
+              </button>
+            )}
           </div>
         </div>
       </div>
