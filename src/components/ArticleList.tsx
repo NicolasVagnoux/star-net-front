@@ -15,7 +15,7 @@ const ArticleList = ({ id }: Props) => {
   useEffect(() => {
     const getArticleList = async () => {
       const url = `${import.meta.env.VITE_DB_URL}api/packages/${id}/articles`;
-      const { data } = await axios.get(url);
+      const { data } = await axios.get(url,{ withCredentials: true });
       setArticleList(data);
     };
     getArticleList();
