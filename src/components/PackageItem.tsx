@@ -15,9 +15,10 @@ interface Props {
   id: number;
   name: string;
   description: string;
+  userId: number;
 }
 
-const PackageItem = ({ name, id, description }: Props) => {
+const PackageItem = ({ name, id: packageId, description, userId }: Props) => {
   // We Collect the userId (the one connected) with the cookie
   const cookie = useCookies(['user_token'])[0];
   const user: IUser = jwt_decode(cookie.user_token);
@@ -27,17 +28,18 @@ const PackageItem = ({ name, id, description }: Props) => {
   const [completion, setCompletion] = useState<number | any>(0);
   useEffect(() => {
     const getArticleList = async () => {
+      // Function to get all articles in the package
       const articleListResponse = await axios.get<IArticle[]>(
-        `${import.meta.env.VITE_DB_URL}api/packages/${id}/articles`,
+        `${import.meta.env.VITE_DB_URL}api/packages/${packageId}/articles`,
         { withCredentials: true },
       );
       setArticleList(articleListResponse.data);
-      // Function and API call to get completedArticleLenght
 
+      // Function and API call to get completedArticleLenght
       const completedArticlesResponse = await axios.get(
         `${import.meta.env.VITE_DB_URL}api/users/${
           user.id
-        }/packages/${id}/completedArticles`,
+        }/packages/${packageId}/completedArticles`,
         { withCredentials: true },
       );
 
@@ -59,14 +61,14 @@ const PackageItem = ({ name, id, description }: Props) => {
             {name} <span> ({articleList.length} articles) </span>
           </h2>
           <div className="packageitem__container__title__button">
-            <FollowedButton />
+            <FollowedButton userId={userId} packageId={packageId} />
           </div>
         </div>
       </div>
       <div className="packageitem__taglist">
-        <TagList id={id} name={name} description={description} />
+        <TagList id={packageId} name={name} description={description} />
       </div>
-      <ArticleList id={id} />
+      <ArticleList id={packageId} />
     </div>
   );
 };
