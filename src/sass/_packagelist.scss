@@ -1,0 +1,22 @@
+.packagelist {
+ margin: 8vh 0 0 0;
+    
+ &__title {
+    color : $primaryColor2 ;
+    font-size: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2vw;
+
+    h2 {
+        margin: 0 0 0 2vw;
+    }
+
+    &__line {
+        background-color: $primaryColor2 ;
+        height: 1px;
+        width: 50vw;
+    }
+ }
+}
