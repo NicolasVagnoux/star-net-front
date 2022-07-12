@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
 import BadgesButton from '../components/BadgesButton';
@@ -8,7 +9,6 @@ import CatalogButton from '../components/CatalogButton';
 import Navbar from '../components/Navbar';
 import PackageList from '../components/PackageList';
 import IUser from '../interfaces/IUser';
-import axios from 'axios';
 
 const Home = () => {
   // Get information from connected user to display a personalized homepage
@@ -31,7 +31,7 @@ const Home = () => {
       <div className="home">
         <h1>Hello {userInfo?.firstName} </h1>
         <h2> Lisez, découvrez, apprenez </h2>
-        <PackageList />
+        <PackageList userId={user.id} />
         <div className="home__button">
           <CatalogButton />
           <BookmarksButton />
