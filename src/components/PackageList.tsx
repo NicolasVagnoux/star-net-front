@@ -14,7 +14,7 @@ const PackageList = ({ userId }: Props) => {
 
   useEffect(() => {
     const getPackageItems = async () => {
-      const url = `${import.meta.env.VITE_DB_URL}api/users/2/packages`;
+      const url = `${import.meta.env.VITE_DB_URL}api/users/${userId}/packages`;
       const { data } = await axios.get(url, { withCredentials: true });
       setPackageItems(data);
     };
