@@ -19,8 +19,6 @@ interface Props {
   userId: number;
   setRefreshListFlag: React.Dispatch<React.SetStateAction<boolean>>;
   refreshListFlag: boolean;
-  // isFollowed: boolean;
-  // setIsFollowed: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const PackageItem = ({
@@ -147,7 +145,6 @@ const PackageItem = ({
             {name} <span> ({articleList.length} articles) </span>
           </h2>
           <div className="packageitem__container__title__button">
-            <div>
               {isFollowed && (
                 <button
                   type="button"
@@ -156,7 +153,6 @@ const PackageItem = ({
                     deleteFollowedPackage(e)
                   }>
                   <img src="/assets/icons/checked.svg" alt="unfollow" />
-                  SUIVI
                 </button>
               )}
               {!isFollowed && (
@@ -170,7 +166,6 @@ const PackageItem = ({
                   SUIVRE
                 </button>
               )}
-            </div>
           </div>
         </div>
       </div>
