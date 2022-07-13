@@ -4,14 +4,30 @@
   align-items: flex-start;
   width: 100%;
   gap: 2rem;
-
-  label {
-    justify-content: center;
+  &__form {
     margin: auto;
+    justify-content: center;
+    button {
+      padding: 10px;
+      background-color: $primaryColor2;
+      height: 40px;
+      border-radius: 100px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 6px;
+      align-items: center;
+      cursor: pointer;
+      color: white;
+      font-weight: 400;
+    }
+  }
+  label {
     font-family: $primaryFont;
     color: $primaryColor2;
     font-size: 2rem;
   }
+  input,
   textarea {
     padding: 20px;
     resize: none;

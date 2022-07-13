@@ -122,7 +122,7 @@ const Article = () => {
                 </div>
               )}
             </div>
-            <Comments idArticle={idArticleNumber} />
+            <Comments idArticle={idArticleNumber} user={user} />
           </>
         )}
       </article>
