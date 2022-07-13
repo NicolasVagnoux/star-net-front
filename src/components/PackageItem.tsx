@@ -1,6 +1,6 @@
-import { debounce } from 'lodash';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
@@ -129,16 +129,16 @@ const PackageItem = ({
   const addFollowedPackageDebounce = debounce(addFollowedPackage, 300);
 
   // Check and update if the followed button state (followed or unfollowed) for all package items
-    const getFollowedOrNot = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
-        { withCredentials: true },
-      );
-      console.log(data);
-      data ? setIsFollowed(true) : setIsFollowed(false);
-    };
-    
-    useEffect(() => {
+  const getFollowedOrNot = async () => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
+      { withCredentials: true },
+    );
+    console.log(data);
+    data ? setIsFollowed(true) : setIsFollowed(false);
+  };
+
+  useEffect(() => {
     getFollowedOrNot();
   }, []);
 
@@ -151,27 +151,27 @@ const PackageItem = ({
             {name} <span> ({articleList.length} articles) </span>
           </h2>
           <div className="packageitem__container__title__button">
-              {isFollowed && (
-                <button
-                  type="button"
-                  className="button button-followed"
-                  onClick={(e: React.FormEvent<HTMLButtonElement>) =>
-                    deleteFollowedPackageDebounce(e)
-                  }>
-                  <img src="/assets/icons/checked.svg" alt="unfollow" />
-                </button>
-              )}
-              {!isFollowed && (
-                <button
-                  type="button"
-                  className="button button-notfollowed"
-                  onClick={(e: React.FormEvent<HTMLButtonElement>) =>
-                    addFollowedPackageDebounce(e)
-                  }>
-                  <img src="/assets/icons/plus.svg" alt="follow" />
-                  SUIVRE
-                </button>
-              )}
+            {isFollowed && (
+              <button
+                type="button"
+                className="button button-followed"
+                onClick={(e: React.FormEvent<HTMLButtonElement>) =>
+                  deleteFollowedPackageDebounce(e)
+                }>
+                <img src="/assets/icons/checked.svg" alt="unfollow" />
+              </button>
+            )}
+            {!isFollowed && (
+              <button
+                type="button"
+                className="button button-notfollowed"
+                onClick={(e: React.FormEvent<HTMLButtonElement>) =>
+                  addFollowedPackageDebounce(e)
+                }>
+                <img src="/assets/icons/plus.svg" alt="follow" />
+                SUIVRE
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -184,4 +184,3 @@ const PackageItem = ({
 };
 
 export default PackageItem;
-

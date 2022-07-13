@@ -2,31 +2,36 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import IComment from '../interfaces/IComment';
-
-const Comments = () => {
-  const [commentList, setCommentList] = useState<IComment[]>([]);
+import CommentBox from './CommentBox';
+interface Props {
+  idArticle: number;
+}
+const comments = ({ idArticle }: Props) => {
+  const [commentsList, setCommentsList] = useState<IComment[]>([]);
 
   useEffect(() => {
     const getGuideList = async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_DB_URL}api/comments`);
-      setCommentList(data);
+      const url = `${import.meta.env.VITE_DB_URL}api/articles/${idArticle}/comments`;
+      const { data } = await axios.get(url);
+
+      setCommentsList(data);
     };
     getGuideList();
   }, []);
-  console.log(commentList);
+
   return (
     <div className="messages">
-      <label htmlFor="message"> Laissez nous un commentaire</label>
+      <label htmlFor="message">Laissez nous un commentaire</label>
       <textarea
         id="message"
         placeholder="Entrez votre message"
         // required
         rows={8}
       />
-
-      <div></div>
+      {commentsList &&
+        commentsList.map((comments) => <CommentBox key={comments.id} {...comments} />)}
     </div>
   );
 };
 
-export default Comments;
+export default comments;
