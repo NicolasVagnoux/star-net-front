@@ -60,6 +60,7 @@
           font-weight: 400;
           font-size: 0.9rem;
           padding-left: 20px;
+
           box-shadow: 0px 1px 2px grey;
 
           &:focus {
@@ -101,6 +102,25 @@
         font-weight: 500;
         margin-top: 15px;
         cursor: pointer;
+      }
+
+      &__delete {
+        width: 40%;
+        height: 40px;
+        text-align: center;
+        border: 1px solid $primaryRed;
+        background-color: $primaryWhite;
+        border-radius: 35px;
+        border-color: $primaryRed;
+        color: $primaryRed;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-top: 15px;
+        cursor: pointer;
+        &:hover {
+          background-color: $primaryRed;
+          color: $primaryWhite;
+        }
       }
     }
   }

@@ -98,6 +98,21 @@ const Account = () => {
     }
   };
 
+  // delete user data edit in DB with axios
+  const deleteUser = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.delete<IUser>(`${import.meta.env.VITE_DB_URL}api/users/${user.id}`, {
+        withCredentials: true,
+      });
+      notifySuccess();
+      setErrorMessage('');
+    } catch (err: any) {
+      console.log(err);
+      err.response?.status === 422;
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -230,11 +245,18 @@ const Account = () => {
                 <HighlightOffIcon />
               </button>
             </div>
+
             <input
               className="account__myaccount__form__submit"
               type="submit"
               value="Sauvegarder"
             />
+            <button
+              className="account__myaccount__form__delete"
+              type="button"
+              onClick={(e: React.FormEvent<HTMLButtonElement>) => deleteUser(e)}>
+              Supprimer mon compte
+            </button>
           </form>
         </div>
       </div>
