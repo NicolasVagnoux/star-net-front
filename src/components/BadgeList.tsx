@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import jwt_decode from 'jwt-decode';
 import AllInclusiveOutlinedIcon from '@mui/icons-material/AllInclusiveOutlined';
 import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
 import AndroidOutlinedIcon from '@mui/icons-material/AndroidOutlined';
@@ -14,15 +17,48 @@ import OnlinePredictionOutlinedIcon from '@mui/icons-material/OnlinePredictionOu
 import SchoolIcon from '@mui/icons-material/School';
 import StarsIcon from '@mui/icons-material/Stars';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import React from 'react';
+import axios from 'axios';
+import IUser from '../interfaces/IUser';
+import IArticle from '../interfaces/IArticle';
 
 const BadgeList = () => {
+  // Get user info 
+  const cookie = useCookies(['user_token'])[0];
+  const user: IUser = jwt_decode(cookie.user_token);
+
+  // Get current state (reward rule included) for each icons 
+  const [articleCompleted, setArticleCompleted] = useState<IArticle[]>([]);
+  const [packageFollowed, setPackageFollowed] = useState<IArticle[]>([]);
+
+  // Axios calls to collect completed articles by user 
+  useEffect(() => {
+    const getCompletedArticles = async () => {
+      const url = `${import.meta.env.VITE_DB_URL}api/users/${user.id}/completedarticles`;
+      const { data } = await axios.get(url, { withCredentials: true });
+      setArticleCompleted(data);
+    };
+    getCompletedArticles();
+    console.log(articleCompleted);
+  }, []);
+
+  // Axios calls to collect followed packages by user 
+  useEffect(() => {
+    const getFollowedPackages = async () => {
+      const url = `${import.meta.env.VITE_DB_URL}api/users/${user.id}/followedpackages`;
+      const { data } = await axios.get(url, { withCredentials: true });
+      setPackageFollowed(data);
+    };
+    getFollowedPackages();
+    console.log(packageFollowed);
+  }, []);
+
+
   return (
     <div className="badgeList">
       <div className="badgeList__icons">
-        <StarsIcon sx={{ fontSize: 100, color: 'black' }} />
-        <WorkspacePremiumIcon sx={{ fontSize: 100, color: 'black' }} />
-        <SchoolIcon sx={{ fontSize: 100, color: 'black' }} />
+        <StarsIcon sx={articleCompleted.length > 0 ? { fontSize: 100, color: 'red' } : { fontSize: 100, color: 'black' } } />
+        <WorkspacePremiumIcon sx={articleCompleted.length > 4 ? { fontSize: 100, color: 'red' }: { fontSize: 100, color: 'black' }} />
+        <SchoolIcon sx={packageFollowed.length > 0? { fontSize: 100, color: 'red' } : { fontSize: 100, color: 'black' }} />
         <MilitaryTechIcon sx={{ fontSize: 100, color: 'black' }} />
         <LocalPoliceOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
         <EmojiEventsOutlinedIcon sx={{ fontSize: 100, color: 'black' }} />
