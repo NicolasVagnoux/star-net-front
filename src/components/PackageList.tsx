@@ -37,7 +37,7 @@ const PackageList = ({ userId }: Props) => {
   }, [refreshListFlag]);
 
   return (
-    <div className='packagelist'>
+    <div className="packagelist">
       {followedPackageItems.length > 0 && (
         <div className="packagelist__title">
           <h2> Mes packages </h2>

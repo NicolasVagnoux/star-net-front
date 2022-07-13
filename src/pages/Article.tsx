@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { Link, useParams } from 'react-router-dom';
 
 import ArticleRating from '../components/ArticleRating';
+import Comments from '../components/Comments';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
 import TagListArticle from '../components/TagListArticle';
@@ -121,6 +122,7 @@ const Article = () => {
                 </div>
               )}
             </div>
+            <Comments idArticle={idArticleNumber} />
           </>
         )}
       </article>
