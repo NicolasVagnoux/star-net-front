@@ -101,7 +101,7 @@ const Account = () => {
       <div className="account">
         <div className="account__myaccount">
           <h1 className="account__myaccount__title">Mon Compte</h1>
-          <h2 className="account__myaccount__secondtitle">Modifiez mes données</h2>
+          <h2 className="account__myaccount__secondtitle">Modifier mes données</h2>
           <form
             className="account__myaccount__form"
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {

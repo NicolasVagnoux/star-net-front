@@ -8,12 +8,20 @@
         font-family: 'Ubuntu Mono';
         font-size: 3rem;
         margin: 3vh 0 5vh 2vw;
+        @media screen and (max-width: 800px) {
+            text-align: center;
+            width: 100%;
+        }
     }
     &__count {
         font-family: $primaryFont;
         font-size: 1.8rem;
         color: $secondaryColor5;
         margin-left: 2vw;
+        @media screen and (max-width: 800px) {
+            text-align: center;
+            width: 100%;
+        }
     }
     &__list {
         padding: 50px 75px;
@@ -22,5 +30,8 @@
         justify-content: flex-start;
         align-items: center;
         gap: 3rem;
+        @media screen and (max-width: 800px) {
+            justify-content: center;
+        }
     }
 }

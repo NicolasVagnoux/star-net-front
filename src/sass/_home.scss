@@ -20,5 +20,8 @@
     flex-direction: row;
     justify-content: flex-end;
     gap: 7px;
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+  }
   }
 }

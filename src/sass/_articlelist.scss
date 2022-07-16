@@ -17,5 +17,8 @@
     gap: 2rem;
     margin-left: 1rem;
     margin-right: 1rem;
+    @media screen and (max-width: 800px) {
+      margin-right: 0.5rem;
+    }
   }
 }

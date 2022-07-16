@@ -8,6 +8,9 @@
         font-family: 'Ubuntu Mono';
         font-size: 3rem;
         margin: 3vh 0 5vh 2vw;
+        @media screen and (max-width: 800px) {
+            text-align: center;
+        }
     }
     &__content {
         display: flex;
@@ -33,7 +36,7 @@
             align-items: center;
             @media screen and (max-width: 800px) {
                 width: 80%;
-              }
+            }
             &__title {
                 margin-top: 1.5rem;
                 margin-bottom: 1.5rem;
@@ -116,6 +119,9 @@
                 color: rgb(26, 27, 65);
                 font-size: 2.2rem;
                 font-weight: 400;
+                @media screen and (max-width: 800px) {
+                    text-align: center;
+                }
             }
             &__list {
                 width: 100%;
