@@ -1,8 +1,9 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
+import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 import BeGuided from './BeGuided';
 
@@ -21,6 +22,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isGuideOpened, setIsGuideOpened] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
+  const { setUserId } = useContext(CurrentUserContext);
 
   const redirectHome = () => {
     navigate('/home');
@@ -49,7 +51,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
       );
       setErrorMessage('');
       // Login route
-      await axios.post<IUser>(
+      const { data } = await axios.post<IUser>(
         `${import.meta.env.VITE_DB_URL}api/login`,
         { email: email, password: password2 },
         {
@@ -60,6 +62,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
       );
       setIsGuideOpened(true);
       notifySuccess();
+      setUserId(data.id);
     } catch (err: any) {
       if (err.response?.status === 409) {
         setErrorMessage('Cet email est déjà utilisé');

@@ -4,20 +4,22 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
+// import jwt_decode from 'jwt-decode';
+import React, { useContext, useEffect, useState } from 'react';
+// import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import CurrentUserContext from '../contexts/CurrentUser';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
 
 const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUser>();
-  const cookie = useCookies(['user_token'])[0];
-  const user: IUser = jwt_decode(cookie.user_token);
+  // const cookie = useCookies(['user_token'])[0];
+  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
+  const { userId } = useContext(CurrentUserContext);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,7 +31,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
 
     const getBookmarkOrNot = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/bookmarks/${id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/bookmarks/${id}`,
         { withCredentials: true },
       );
       data ? setIsBookmarked(true) : setIsBookmarked(false);
@@ -37,7 +39,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
 
     const getCompletedOrNot = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/completedarticles/${id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/completedarticles/${id}`,
         { withCredentials: true },
       );
       data ? setIsCompleted(true) : setIsCompleted(false);
@@ -67,7 +69,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
     try {
       e.preventDefault();
       await axios.post<IBookmark>(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/bookmarks`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/bookmarks`,
         { idArticle: id },
         {
           method: 'POST',
@@ -97,7 +99,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
     try {
       e.preventDefault();
       await axios.delete<IBookmark>(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/bookmarks/${id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/bookmarks/${id}`,
         { withCredentials: true },
       );
       setIsBookmarked(false);
