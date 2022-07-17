@@ -1,17 +1,19 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
+// import jwt_decode from 'jwt-decode';
+import React, { useContext, useEffect, useState } from 'react';
+// import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 
 import Navbar from '../components/Navbar';
+import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 
 const Account = () => {
   // Collect idUser connected with the cookie
-  const cookie = useCookies(['user_token'])[0];
-  const user: IUser = jwt_decode(cookie.user_token);
+  // const cookie = useCookies(['user_token'])[0];
+  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
+  const { userId } = useContext(CurrentUserContext);
 
   const [userData, setUserData] = useState<IUser>();
 
@@ -35,7 +37,7 @@ const Account = () => {
     const getData = async () => {
       // get user data
       const { data } = await axios.get<IUser>(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}`,
         { withCredentials: true },
       );
       setUserData(data);
@@ -69,7 +71,7 @@ const Account = () => {
     try {
       e.preventDefault();
       await axios.put<IUser>(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}`,
         newpassword && newpassword2 && newPasswordsEqual
           ? { firstName: firstname, lastName: lastname, password: newpassword2 }
           : { firstName: firstname, lastName: lastname },

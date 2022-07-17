@@ -2,15 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import IComment from '../interfaces/IComment';
-import IUser from '../interfaces/IUser';
+// import IUser from '../interfaces/IUser';
 import CommentBox from './CommentBox';
 
 interface Props {
   idArticle: number;
-  user: IUser;
+  userId: number;
 }
 
-const comments = ({ idArticle, user }: Props) => {
+const comments = ({ idArticle, userId }: Props) => {
   const [userTitle, setUserTitle] = useState<string>('');
   const [userComment, setUserComment] = useState<string>('');
   const [isCommentSubmited, setIsCommentSubmited] = useState<boolean>(false);
@@ -34,7 +34,7 @@ const comments = ({ idArticle, user }: Props) => {
     try {
       e.preventDefault();
       await axios.post<IComment>(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}/comments`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/comments`,
 
         {
           title: userTitle,

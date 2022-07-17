@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import BackgroundParticles from './components/BackgroundParticles';
+import { CurrentUserContextProvider } from './contexts/CurrentUser';
 import Account from './pages/Account';
 import Article from './pages/Article';
 import Bookmarks from './pages/Bookmarks';
@@ -18,20 +19,22 @@ import Support from './pages/Support';
 function App() {
   return (
     <div className="App">
-      <CookiesProvider>
-        <BackgroundParticles />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/articles/:idArticle" element={<Article />} />
-          <Route path="/bookmarks" element={<Bookmarks />} />
-          <Route path="/myaccount" element={<Account />} />
-          <Route path="/rewards" element={<Rewards />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/support" element={<Support />} />
-        </Routes>
-        <ToastContainer />
-      </CookiesProvider>
+      <CurrentUserContextProvider>
+        <CookiesProvider>
+          <BackgroundParticles />
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/articles/:idArticle" element={<Article />} />
+            <Route path="/bookmarks" element={<Bookmarks />} />
+            <Route path="/myaccount" element={<Account />} />
+            <Route path="/rewards" element={<Rewards />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/support" element={<Support />} />
+          </Routes>
+          <ToastContainer />
+        </CookiesProvider>
+      </CurrentUserContextProvider>
     </div>
   );
 }

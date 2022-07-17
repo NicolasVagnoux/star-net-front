@@ -1,7 +1,7 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
+// import jwt_decode from 'jwt-decode';
+import React, { useContext, useEffect, useState } from 'react';
+// import { useCookies } from 'react-cookie';
 import { Link, useParams } from 'react-router-dom';
 
 import ArticleRating from '../components/ArticleRating';
@@ -9,6 +9,7 @@ import Comments from '../components/Comments';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
 import TagListArticle from '../components/TagListArticle';
+import CurrentUserContext from '../contexts/CurrentUser';
 import IArticle from '../interfaces/IArticle';
 import IUser from '../interfaces/IUser';
 
@@ -24,8 +25,9 @@ const Article = () => {
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   // We Collect the userId (the one connected) with the cookie
-  const cookie = useCookies(['user_token'])[0];
-  const user: IUser = jwt_decode(cookie.user_token);
+  // const cookie = useCookies(['user_token'])[0];
+  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
+  const { userId } = useContext(CurrentUserContext);
 
   useEffect(() => {
     const getArticleInfos = async () => {
@@ -47,9 +49,9 @@ const Article = () => {
     // check if article is completed/read
     const getCompletedOrNot = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_DB_URL}api/users/${
-          user.id
-        }/completedarticles/${idArticleNumber}`,
+        `${
+          import.meta.env.VITE_DB_URL
+        }api/users/${userId}/completedarticles/${idArticleNumber}`,
         { withCredentials: true },
       );
       data ? setIsCompleted(true) : setIsCompleted(false);
@@ -63,7 +65,7 @@ const Article = () => {
     <>
       <Navbar />
       <article className="article">
-        {article && user && (
+        {article && userId && (
           <>
             <div className="article__button">
               <ReturnButton />
@@ -122,7 +124,7 @@ const Article = () => {
                 </div>
               )}
             </div>
-            <Comments idArticle={idArticleNumber} user={user} />
+            <Comments idArticle={idArticleNumber} userId={userId} />
           </>
         )}
       </article>
