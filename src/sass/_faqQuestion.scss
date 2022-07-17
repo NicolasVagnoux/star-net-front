@@ -12,6 +12,9 @@
         grid-template-columns: 30px 1fr 30px;
         align-items: center;
         color: $primaryColor2;
+        @media screen and (max-width: 800px) {
+            grid-template-columns: 1fr 30px;
+        }
         h4 {
             font-family: $primaryFont;
             font-size: 1.6rem;
@@ -22,6 +25,9 @@
             height: 30px;
             width: 30px;
             margin-left: -10px;
+            @media screen and (max-width: 800px) {
+                display: none;
+            }
         }
         button {
             border: none;
