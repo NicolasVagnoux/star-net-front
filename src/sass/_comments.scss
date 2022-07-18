@@ -4,6 +4,7 @@
   align-items: flex-start;
   width: 100%;
   gap: 2rem;
+  justify-content: center;
   &__form {
     margin: auto;
     justify-content: center;
@@ -44,7 +45,8 @@
     margin-bottom: 1.5rem;
     &:focus {
       outline: none;
-      border: 2px solid $primaryColor2;
+      border: 1px solid $primaryColor2;
+      background-color: rgb(255, 255, 255, 0.5);
     }
   }
 }
