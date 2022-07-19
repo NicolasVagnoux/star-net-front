@@ -86,7 +86,8 @@ const FollowedButton = ({ userId, packageId, setIsFollowed, isFollowed }: Props)
         <button
           type="button"
           className="button button-notfollowed"
-          onClick={(e: React.FormEvent<HTMLButtonElement>) => deleteFollowedPackage(e)}>
+          onClick={(e: React.FormEvent<HTMLButtonElement>) => deleteFollowedPackage(e)}
+        >
           <img src="/assets/icons/plus.svg" alt="unfollow" />
           SUIVI
         </button>
@@ -95,7 +96,8 @@ const FollowedButton = ({ userId, packageId, setIsFollowed, isFollowed }: Props)
         <button
           type="button"
           className="button button-followed"
-          onClick={(e: React.FormEvent<HTMLButtonElement>) => addFollowedPackage(e)}>
+          onClick={(e: React.FormEvent<HTMLButtonElement>) => addFollowedPackage(e)}
+        >
           <img src="/assets/icons/checked.svg" alt="follow" />
           SUIVRE
         </button>

@@ -12,6 +12,13 @@
   justify-content: flex-start;
   align-items: center;
   box-shadow: 0px 2px 5px grey;
+  @media screen and (max-width: 1000px) {
+    margin-left: 5px;
+    margin-bottom: 0;
+  }
+  @media screen and (max-width: 800px) {
+    margin-right: 5px;
+}
   &__title {
     width: 100%;
     font-family: $secondaryFont;
@@ -29,6 +36,9 @@
     font-size: 1.1rem;
     padding-left: 15px;
     color: rgb(26, 27, 65);
+    @media screen and (max-width: 800px) {
+      padding-right: 15px;
+    }
   }
   &__form {
     margin-top: 1rem;

@@ -3,18 +3,22 @@ import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlin
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
+import CurrentUserContext from '../contexts/CurrentUser';
 
 const Navbar = () => {
   const removeCookie = useCookies(['user_token'])[2];
   const navigate: NavigateFunction = useNavigate();
   const [isLogoutModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
+  const { setUserId } = useContext(CurrentUserContext);
 
   const logout = () => {
     removeCookie('user_token');
+    setUserId(0);
     navigate('/');
   };
 
@@ -55,7 +59,8 @@ const Navbar = () => {
             type="button"
             onClick={() => {
               setIsLoginModalOpened(true);
-            }}>
+            }}
+          >
             <LogoutIcon
               className="main-menu__element-logout__nav__icon"
               fontSize="large"
@@ -76,7 +81,8 @@ const Navbar = () => {
                 type="button"
                 onClick={() => {
                   setIsLoginModalOpened(false);
-                }}>
+                }}
+              >
                 NON
               </button>
             </div>

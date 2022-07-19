@@ -1,8 +1,9 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
+import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 import BeGuided from './BeGuided';
 
@@ -21,6 +22,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isGuideOpened, setIsGuideOpened] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
+  const { setUserId } = useContext(CurrentUserContext);
 
   const redirectHome = () => {
     navigate('/home');
@@ -49,7 +51,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
       );
       setErrorMessage('');
       // Login route
-      await axios.post<IUser>(
+      const { data } = await axios.post<IUser>(
         `${import.meta.env.VITE_DB_URL}api/login`,
         { email: email, password: password2 },
         {
@@ -60,6 +62,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
       );
       setIsGuideOpened(true);
       notifySuccess();
+      setUserId(data.id);
     } catch (err: any) {
       if (err.response?.status === 409) {
         setErrorMessage('Cet email est déjà utilisé');
@@ -86,7 +89,8 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
           className="signupForm__form"
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             passwordsAreEqual ? signup(e) : e.preventDefault();
-          }}>
+          }}
+        >
           <div className="signupForm__form__name">
             <div className="signupForm__form__name__firstname">
               <label htmlFor="firstname">Prénom</label>
@@ -104,7 +108,8 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
                 type="button"
                 onClick={() => {
                   setFirstname('');
-                }}>
+                }}
+              >
                 <HighlightOffIcon />
               </button>
             </div>
@@ -124,7 +129,8 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
                 type="button"
                 onClick={() => {
                   setLastname('');
-                }}>
+                }}
+              >
                 <HighlightOffIcon />
               </button>
             </div>
@@ -145,7 +151,8 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
               type="button"
               onClick={() => {
                 setEmail('');
-              }}>
+              }}
+            >
               <HighlightOffIcon />
             </button>
           </div>
@@ -166,14 +173,16 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
               type="button"
               onClick={() => {
                 setPassword('');
-              }}>
+              }}
+            >
               <HighlightOffIcon />
             </button>
           </div>
           <div
             className={`signupForm__form__password2 ${
               !passwordsAreEqual && 'signupForm__form__password2--wrong'
-            }`}>
+            }`}
+          >
             <label htmlFor="password2">
               {passwordsAreEqual
                 ? 'Confirmation de mot de passe'
@@ -194,7 +203,8 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
               type="button"
               onClick={() => {
                 setPassword2('');
-              }}>
+              }}
+            >
               <HighlightOffIcon />
             </button>
           </div>
@@ -213,7 +223,8 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
             onClick={() => {
               setHasAccount(true);
             }}
-            type="button">
+            type="button"
+          >
             J&apos;ai déjà un compte
           </button>
         )}

@@ -37,9 +37,14 @@ const PackageList = ({ userId }: Props) => {
   }, [refreshListFlag]);
 
   return (
-    <>
-      {followedPackageItems.length > 0 && <h2> Mes packages </h2>}
-      <div>
+    <div className="packagelist">
+      {followedPackageItems.length > 0 && (
+        <div className="packagelist__title">
+          <h2> Mes packages </h2>
+          <div className="packagelist__title__line"></div>
+        </div>
+      )}
+      <div className="packagelist__followedpackages">
         {followedPackageItems &&
           followedPackageItems.map((followedpackageitem) => (
             <PackageItem
@@ -51,14 +56,19 @@ const PackageList = ({ userId }: Props) => {
             />
           ))}
       </div>
-      <h2> Découvrez de nouveaux packages </h2>
-      <div>
+      {packageItems.length > 0 && (
+        <div className="packagelist__title">
+          <h2> Découvrez de nouveaux packages </h2>
+          <div className="packagelist__title__line"></div>
+        </div>
+      )}
+      <div className="packagelist__packagesitems">
         {packageItems &&
           packageItems
             // .filter((packageitem) => !followedIdList?.includes(packageitem.id))
-            .map((packageitem, index) => (
+            .map((packageitem) => (
               <PackageItem
-                key={index}
+                key={packageitem.id}
                 {...packageitem}
                 userId={userId}
                 setRefreshListFlag={setRefreshListFlag}
@@ -66,7 +76,7 @@ const PackageList = ({ userId }: Props) => {
               />
             ))}
       </div>
-    </>
+    </div>
   );
 };
 

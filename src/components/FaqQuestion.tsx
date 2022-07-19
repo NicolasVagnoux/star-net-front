@@ -13,11 +13,13 @@ const FaqQuestion = ({ id, question, answer }: IFaq) => {
       onClick={() => {
         setAnswerOpened(!answerOpened);
       }}
-      key={id}>
+      key={id}
+    >
       <div
         className={`faqQuestion__question ${
           answerOpened && 'faqQuestion__question--withanswer'
-        }`}>
+        }`}
+      >
         <QuestionMarkIcon />
         <h4>{question}</h4>
         <button type="button">

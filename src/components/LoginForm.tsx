@@ -1,8 +1,9 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
+import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 
 interface Props {
@@ -14,6 +15,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
   const [password, setPassword] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate: NavigateFunction = useNavigate();
+  const { setUserId } = useContext(CurrentUserContext);
 
   const redirectHome = () => {
     navigate('/home');
@@ -23,7 +25,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
     try {
       const url = `${import.meta.env.VITE_DB_URL}api/login`;
       e.preventDefault();
-      await axios.post<IUser>(
+      const { data } = await axios.post<IUser>(
         url,
         { email, password },
         {
@@ -33,6 +35,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
         },
       );
       setErrorMessage('');
+      setUserId(data.id);
       redirectHome();
     } catch (err: any) {
       if (err.response?.status === 401) {
@@ -59,7 +62,8 @@ const LoginForm = ({ setHasAccount }: Props) => {
         className="loginForm__form"
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           login(e);
-        }}>
+        }}
+      >
         <div className="loginForm__form__email">
           <label htmlFor="email">E-mail</label>
           <input
@@ -76,7 +80,8 @@ const LoginForm = ({ setHasAccount }: Props) => {
             type="button"
             onClick={() => {
               setEmail('');
-            }}>
+            }}
+          >
             <HighlightOffIcon />
           </button>
         </div>
@@ -96,7 +101,8 @@ const LoginForm = ({ setHasAccount }: Props) => {
             type="button"
             onClick={() => {
               setPassword('');
-            }}>
+            }}
+          >
             <HighlightOffIcon />
           </button>
         </div>
@@ -112,7 +118,8 @@ const LoginForm = ({ setHasAccount }: Props) => {
         onClick={() => {
           setHasAccount(false);
         }}
-        type="button">
+        type="button"
+      >
         Je n&apos;ai pas encore de compte
       </button>
     </div>

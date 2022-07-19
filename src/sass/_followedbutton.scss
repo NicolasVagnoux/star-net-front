@@ -1,6 +1,5 @@
 .button {
   border: 1px $primaryColor2 solid;
-  width: 102px;
   height: 40px;
   border-radius: 100px;
   display: flex;
@@ -13,10 +12,12 @@
   &-followed {
     color: $secondaryColor4;
     background-color: $primaryColor2;
+    width: 40px;
   }
 
   &-notfollowed {
     color: $primaryColor2;
     background-color: $secondaryColor4;
+    width: 102px;
   }
 }
