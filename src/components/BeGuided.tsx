@@ -35,8 +35,7 @@ const BeGuided = ({ redirectHome }: Props) => {
             }}
             navigation
             modules={[Navigation, Pagination]}
-            className="beGuided__carousel__content__mySwiper"
-          >
+            className="beGuided__carousel__content__mySwiper">
             {guideList &&
               guideList.map((guide) => (
                 <SwiperSlide key={guide.id}>
@@ -50,8 +49,7 @@ const BeGuided = ({ redirectHome }: Props) => {
             type="button"
             onClick={() => {
               redirectHome();
-            }}
-          >
+            }}>
             ACCEDER AU SITE
           </button>
         </div>

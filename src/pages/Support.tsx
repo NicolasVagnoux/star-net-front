@@ -59,8 +59,7 @@ const Support = () => {
             className="support__content__contactForm"
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               handleSubmit(e);
-            }}
-          >
+            }}>
             <h2 className="support__content__contactForm__title">
               Pour toute demande après de l&apos;équipe *Net, merci de remplir ce
               formulaire :

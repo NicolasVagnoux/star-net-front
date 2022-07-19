@@ -80,8 +80,7 @@ const Catalog = () => {
                 onClick={() => {
                   setTitleFilter('');
                 }}
-                type="button"
-              >
+                type="button">
                 <HighlightOffIcon />
               </button>
             )}
@@ -98,16 +97,14 @@ const Catalog = () => {
                     tagFilter === tag.id && 'catalog__tagList__list__tag--active'
                   }`}
                   onClick={() => setTagFilter(tag.id)}
-                  type="button"
-                >
+                  type="button">
                   <TagItemArticle {...tag} />
                 </button>
               ))}
             <button
               className="catalog__tagList__list__reset"
               onClick={() => setTagFilter(0)}
-              type="button"
-            >
+              type="button">
               Réinitialiser les filtres
             </button>
           </div>

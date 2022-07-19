@@ -62,8 +62,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
         className="loginForm__form"
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           login(e);
-        }}
-      >
+        }}>
         <div className="loginForm__form__email">
           <label htmlFor="email">E-mail</label>
           <input
@@ -80,8 +79,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
             type="button"
             onClick={() => {
               setEmail('');
-            }}
-          >
+            }}>
             <HighlightOffIcon />
           </button>
         </div>
@@ -101,8 +99,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
             type="button"
             onClick={() => {
               setPassword('');
-            }}
-          >
+            }}>
             <HighlightOffIcon />
           </button>
         </div>
@@ -118,8 +115,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
         onClick={() => {
           setHasAccount(false);
         }}
-        type="button"
-      >
+        type="button">
         Je n&apos;ai pas encore de compte
       </button>
     </div>

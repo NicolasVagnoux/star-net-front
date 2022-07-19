@@ -135,8 +135,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
             className="articleContainer__bookmark__svg"
             onClick={(e: React.FormEvent<HTMLButtonElement>) => {
               deleteBookmark(e);
-            }}
-          >
+            }}>
             <BookmarkIcon />
           </button>
         )}
@@ -145,8 +144,7 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
             className="articleContainer__bookmark__svg"
             onClick={(e: React.FormEvent<HTMLButtonElement>) => {
               addBookmark(e);
-            }}
-          >
+            }}>
             <BookmarkBorderIcon />
           </button>
         )}

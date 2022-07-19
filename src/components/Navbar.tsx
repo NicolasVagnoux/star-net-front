@@ -59,8 +59,7 @@ const Navbar = () => {
             type="button"
             onClick={() => {
               setIsLoginModalOpened(true);
-            }}
-          >
+            }}>
             <LogoutIcon
               className="main-menu__element-logout__nav__icon"
               fontSize="large"
@@ -81,8 +80,7 @@ const Navbar = () => {
                 type="button"
                 onClick={() => {
                   setIsLoginModalOpened(false);
-                }}
-              >
+                }}>
                 NON
               </button>
             </div>

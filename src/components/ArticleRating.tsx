@@ -67,8 +67,7 @@ const ArticleRating = ({ id, setIsCompleted }: Props) => {
         className="comment__form"
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           handleSubmit(e);
-        }}
-      >
+        }}>
         <Rating
           name="hover-feedback"
           sx={{

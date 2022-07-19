@@ -89,8 +89,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
           className="signupForm__form"
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             passwordsAreEqual ? signup(e) : e.preventDefault();
-          }}
-        >
+          }}>
           <div className="signupForm__form__name">
             <div className="signupForm__form__name__firstname">
               <label htmlFor="firstname">Prénom</label>
@@ -108,8 +107,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
                 type="button"
                 onClick={() => {
                   setFirstname('');
-                }}
-              >
+                }}>
                 <HighlightOffIcon />
               </button>
             </div>
@@ -129,8 +127,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
                 type="button"
                 onClick={() => {
                   setLastname('');
-                }}
-              >
+                }}>
                 <HighlightOffIcon />
               </button>
             </div>
@@ -151,8 +148,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
               type="button"
               onClick={() => {
                 setEmail('');
-              }}
-            >
+              }}>
               <HighlightOffIcon />
             </button>
           </div>
@@ -173,16 +169,14 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
               type="button"
               onClick={() => {
                 setPassword('');
-              }}
-            >
+              }}>
               <HighlightOffIcon />
             </button>
           </div>
           <div
             className={`signupForm__form__password2 ${
               !passwordsAreEqual && 'signupForm__form__password2--wrong'
-            }`}
-          >
+            }`}>
             <label htmlFor="password2">
               {passwordsAreEqual
                 ? 'Confirmation de mot de passe'
@@ -203,8 +197,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
               type="button"
               onClick={() => {
                 setPassword2('');
-              }}
-            >
+              }}>
               <HighlightOffIcon />
             </button>
           </div>
@@ -223,8 +216,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
             onClick={() => {
               setHasAccount(true);
             }}
-            type="button"
-          >
+            type="button">
             J&apos;ai déjà un compte
           </button>
         )}

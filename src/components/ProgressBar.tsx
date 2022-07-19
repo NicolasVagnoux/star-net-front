@@ -21,8 +21,7 @@ const BadgeList = () => {
         <div className="progressBar__card__readArticles">
           <div
             style={stylesArticle.determinate}
-            className="progressBar__card__readArticles__bar determinate"
-          >
+            className="progressBar__card__readArticles__bar determinate">
             {progressionArticle}
           </div>
         </div>
@@ -37,8 +36,7 @@ const BadgeList = () => {
         <div className="progressBar__card__packagesCompleted">
           <div
             style={stylesPackage.determinate}
-            className="progressBar__card__packageCompleted__bar determinate"
-          >
+            className="progressBar__card__packageCompleted__bar determinate">
             {progressionPackage}
           </div>
         </div>
@@ -53,8 +51,7 @@ const BadgeList = () => {
         <div className="progressBar__card__quizz">
           <div
             style={stylesQuiz.determinate}
-            className="progressBar__card__quiz__bar determinate"
-          >
+            className="progressBar__card__quiz__bar determinate">
             {progressionQuiz}
           </div>
         </div>

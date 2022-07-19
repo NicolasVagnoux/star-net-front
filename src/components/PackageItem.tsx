@@ -157,8 +157,7 @@ const PackageItem = ({
                 className="button button-followed"
                 onClick={(e: React.FormEvent<HTMLButtonElement>) =>
                   deleteFollowedPackageDebounce(e)
-                }
-              >
+                }>
                 <img src="/assets/icons/checked.svg" alt="unfollow" />
               </button>
             )}
@@ -168,8 +167,7 @@ const PackageItem = ({
                 className="button button-notfollowed"
                 onClick={(e: React.FormEvent<HTMLButtonElement>) =>
                   addFollowedPackageDebounce(e)
-                }
-              >
+                }>
                 <img src="/assets/icons/plus.svg" alt="follow" />
                 SUIVRE
               </button>
