@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import IComment from '../interfaces/IComment';
 // import IUser from '../interfaces/IUser';
@@ -28,6 +29,17 @@ const comments = ({ idArticle, userId }: Props) => {
     getCommentsList();
   }, [isCommentSubmited]);
 
+  // Notify success comment
+  const notifySuccess = () =>
+    toast.info('Merci pour votre commentaire !', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   // Function to handle sumbit input comment
 
   const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,6 +62,7 @@ const comments = ({ idArticle, userId }: Props) => {
       setUserTitle('');
       setUserComment('');
       setIsCommentSubmited(!isCommentSubmited);
+      notifySuccess();
     } catch (err: any) {
       console.log(err.response);
     }

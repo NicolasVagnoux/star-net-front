@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import Navbar from '../components/Navbar';
+import ReturnButton from '../components/ReturnButton';
 import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 
@@ -15,12 +16,15 @@ const Account = () => {
   // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
   const { userId } = useContext(CurrentUserContext);
 
+  // useState to stock user data
   const [userData, setUserData] = useState<IUser>();
 
   // useState to edit your firstname
   const [firstname, setFirstname] = useState<string>('');
   // useState to edit your lastname
   const [lastname, setLastname] = useState<string>('');
+  // useState to valid your password
+  const [oldpassword, setOldPassword] = useState<string>('');
   // useState to edit your new password
   const [newpassword, setNewPassword] = useState<string>('');
   // useState to confirm your new password
@@ -43,6 +47,7 @@ const Account = () => {
       setUserData(data);
       setFirstname(data.firstName);
       setLastname(data.lastName);
+      console.log(data);
     };
     getData();
   }, []);
@@ -95,9 +100,27 @@ const Account = () => {
     }
   };
 
+  // delete user data edit in DB with axios
+  const deleteUser = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.delete<IUser>(`${import.meta.env.VITE_DB_URL}api/users/${userId}`, {
+        withCredentials: true,
+      });
+      notifySuccess();
+      setErrorMessage('');
+    } catch (err: any) {
+      console.log(err);
+      err.response?.status === 422;
+    }
+  };
+
   return (
     <>
       <Navbar />
+      <div className="returnaccount">
+        <ReturnButton />
+      </div>
       <div className="account">
         <div className="account__myaccount">
           <h1 className="account__myaccount__title">Mon Compte</h1>
@@ -146,6 +169,28 @@ const Account = () => {
                 type="button"
                 onClick={() => {
                   setLastname('');
+                }}>
+                <HighlightOffIcon />
+              </button>
+            </div>
+
+            {/* oldpassword */}
+            <div className="account__myaccount__form__oldpassword">
+              <label htmlFor="oldpassword">Changer mon mot de passe</label>
+              <input
+                type="text"
+                value={oldpassword}
+                onChange={(e) => {
+                  setOldPassword(e.target.value);
+                }}
+                placeholder="Renseigner mon mot de passe actuel"
+                id="oldpassword"
+              />
+
+              <button
+                type="button"
+                onClick={() => {
+                  setOldPassword('');
                 }}>
                 <HighlightOffIcon />
               </button>
@@ -202,11 +247,18 @@ const Account = () => {
                 <HighlightOffIcon />
               </button>
             </div>
+
             <input
               className="account__myaccount__form__submit"
               type="submit"
               value="Sauvegarder"
             />
+            <button
+              className="account__myaccount__form__delete"
+              type="button"
+              onClick={(e: React.FormEvent<HTMLButtonElement>) => deleteUser(e)}>
+              Supprimer mon compte
+            </button>
           </form>
         </div>
       </div>
