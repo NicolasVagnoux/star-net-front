@@ -63,6 +63,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
       setIsGuideOpened(true);
       notifySuccess();
       setUserId(data.id);
+      localStorage.setItem('myUser', JSON.stringify({ id: data.id }));
     } catch (err: any) {
       if (err.response?.status === 409) {
         setErrorMessage('Cet email est déjà utilisé');

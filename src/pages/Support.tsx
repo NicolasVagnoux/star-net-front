@@ -1,12 +1,13 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import FaqQuestion from '../components/FaqQuestion';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
+import CurrentUserContext from '../contexts/CurrentUser';
 import IFaq from '../interfaces/IFaq';
 
 const Support = () => {
@@ -44,6 +45,12 @@ const Support = () => {
       setFaqList(data);
     };
     getFaqList();
+  }, []);
+
+  const { userId, redirectToLogin } = useContext(CurrentUserContext);
+  //Redirige directement au login si on est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
   }, []);
 
   return (

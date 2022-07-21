@@ -1,12 +1,13 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import ArticleCard from '../components/ArticleCard';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
 import TagItemArticle from '../components/TagItemArticle';
+import CurrentUserContext from '../contexts/CurrentUser';
 import IArticle from '../interfaces/IArticle';
 import ITagItemArticle from '../interfaces/ITagItemArticle';
 
@@ -55,6 +56,12 @@ const Catalog = () => {
     }
     return 0;
   };
+
+  const { userId, redirectToLogin } = useContext(CurrentUserContext);
+  //Redirige directement au login si on n'est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
+  }, []);
 
   return (
     <>

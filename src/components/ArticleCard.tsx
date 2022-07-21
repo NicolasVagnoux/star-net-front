@@ -4,9 +4,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode';
 import React, { useContext, useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -17,8 +15,6 @@ import IUser from '../interfaces/IUser';
 const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle) => {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUser>();
-  // const cookie = useCookies(['user_token'])[0];
-  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
   const { userId } = useContext(CurrentUserContext);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
@@ -118,7 +114,12 @@ const ArticleCard = ({ title, mainImage, idUser, lastUpdateDate, id }: IArticle)
             <h4 className="articleContainer__articleCard__text__title">{title}</h4>
             <p className="articleContainer__articleCard__text__author">
               Par {userData?.firstName} {userData?.lastName},<br /> le{' '}
-              {lastUpdateDate.toLocaleString('en-GB').slice(0, 10)}
+              {lastUpdateDate
+                .toLocaleString('fr-FR')
+                .slice(0, 10)
+                .split('-')
+                .reverse()
+                .join('/')}
             </p>
           </div>
         </div>

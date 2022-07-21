@@ -1,8 +1,6 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode';
 import React, { useContext, useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 
 import Navbar from '../components/Navbar';
@@ -11,10 +9,7 @@ import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 
 const Account = () => {
-  // Collect idUser connected with the cookie
-  // const cookie = useCookies(['user_token'])[0];
-  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
-  const { userId } = useContext(CurrentUserContext);
+  const { userId, redirectToLogin } = useContext(CurrentUserContext);
 
   // useState to stock user data
   const [userData, setUserData] = useState<IUser>();
@@ -33,8 +28,6 @@ const Account = () => {
   const [newPasswordsEqual, setNewPasswordsEqual] = useState<boolean>(true);
   // usestate to set error messages
   const [errorMessage, setErrorMessage] = useState<string>('');
-
-  console.log(errorMessage);
 
   // useEffect to catch user connected data
   useEffect(() => {
@@ -98,6 +91,7 @@ const Account = () => {
         }
       }
     }
+    console.log(errorMessage);
   };
 
   // delete user data edit in DB with axios
@@ -114,6 +108,11 @@ const Account = () => {
       err.response?.status === 422;
     }
   };
+
+  //Redirige directement au login si on n'est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
+  }, []);
 
   return (
     <>

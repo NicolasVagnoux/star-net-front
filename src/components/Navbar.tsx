@@ -4,21 +4,20 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import React, { useContext, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import CurrentUserContext from '../contexts/CurrentUser';
 
 const Navbar = () => {
-  const removeCookie = useCookies(['user_token'])[2];
   const navigate: NavigateFunction = useNavigate();
   const [isLogoutModalOpened, setIsLoginModalOpened] = useState<boolean>(false);
   const { setUserId } = useContext(CurrentUserContext);
 
   const logout = () => {
-    removeCookie('user_token');
-    setUserId(0);
+    setUserId(0); // remet immédiatement l'id du contexte à 0
+    localStorage.clear(); // vide le local storage
+    sessionStorage.clear(); // vide le session storage
     navigate('/');
   };
 

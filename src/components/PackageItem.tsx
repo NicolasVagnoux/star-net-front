@@ -1,13 +1,10 @@
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode';
 import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
-// import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 
 import IArticle from '../interfaces/IArticle';
 import IPackageItem from '../interfaces/IPackageItem';
-// import IUser from '../interfaces/IUser';
 import ArticleList from './ArticleList';
 import CompletionChart from './CompletionChart';
 import TagList from './TagList';
@@ -30,10 +27,6 @@ const PackageItem = ({
   setRefreshListFlag,
   refreshListFlag,
 }: Props) => {
-  // We Collect the userId (the one connected) with the cookie
-  // const cookie = useCookies(['user_token'])[0];
-  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
-
   // Set a boolean to handle button suivi/suivre state
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
 

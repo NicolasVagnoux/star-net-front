@@ -15,7 +15,8 @@ const LoginForm = ({ setHasAccount }: Props) => {
   const [password, setPassword] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate: NavigateFunction = useNavigate();
-  const { setUserId } = useContext(CurrentUserContext);
+  const { setUserId, stayLogged, setStayLogged } = useContext(CurrentUserContext);
+  console.log(stayLogged);
 
   const redirectHome = () => {
     navigate('/home');
@@ -35,7 +36,13 @@ const LoginForm = ({ setHasAccount }: Props) => {
         },
       );
       setErrorMessage('');
-      setUserId(data.id);
+      setUserId(data.id); // a) Envoie tout de suite l'id dans le useState id du contexte, pour une utilisation immédiate
+      if (stayLogged) {
+        localStorage.setItem('myUser', JSON.stringify({ id: data.id })); // b) Envoie l'id dans le local storage pour les prochaines actualisations
+      }
+      if (!stayLogged) {
+        sessionStorage.setItem('myUser', JSON.stringify({ id: data.id })); // b) Envoie l'id dans le session storage pour les prochaines actualisations
+      }
       redirectHome();
     } catch (err: any) {
       if (err.response?.status === 401) {
@@ -104,7 +111,14 @@ const LoginForm = ({ setHasAccount }: Props) => {
           </button>
         </div>
         <div className="loginForm__form__check">
-          <input type="checkbox" id="check" />
+          <input
+            type="checkbox"
+            checked={stayLogged}
+            onChange={() => {
+              setStayLogged(!stayLogged);
+            }}
+            id="check"
+          />
           <label htmlFor="check">Rester connecté sur le site.</label>
         </div>
         {errorMessage && <span className="loginForm__form__error">{errorMessage}</span>}

@@ -1,8 +1,6 @@
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-// import { useCookies } from 'react-cookie';
 import { Link, useParams } from 'react-router-dom';
 
 import ArticleRating from '../components/ArticleRating';
@@ -25,10 +23,7 @@ const Article = () => {
   // we gather the article completion
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
-  // We Collect the userId (the one connected) with the cookie
-  // const cookie = useCookies(['user_token'])[0];
-  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
-  const { userId } = useContext(CurrentUserContext);
+  const { userId, redirectToLogin } = useContext(CurrentUserContext);
 
   useEffect(() => {
     const getArticleInfos = async () => {
@@ -62,6 +57,11 @@ const Article = () => {
     getCompletedOrNot();
   }, []);
 
+  //Redirige directement au login si on n'est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -76,7 +76,13 @@ const Article = () => {
             </div>
             <div className="article__desc">
               <h2 className="article__desc__articledesc">
-                Par {author?.firstName} {author?.lastName}, le {article.lastUpdateDate}
+                Par {author?.firstName} {author?.lastName}, le{' '}
+                {article.lastUpdateDate
+                  .toLocaleString('fr-FR')
+                  .slice(0, 10)
+                  .split('-')
+                  .reverse()
+                  .join('/')}
               </h2>
             </div>
             <div className="article__tag">
