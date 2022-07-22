@@ -19,7 +19,6 @@ const Bookmarks = () => {
     };
     getBookmarksList();
   }, []);
-  console.log(bookmarkList);
 
   //Redirige directement au login si on n'est pas connecté
   useEffect(() => {

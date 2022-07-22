@@ -40,7 +40,6 @@ const Account = () => {
       setUserData(data);
       setFirstname(data.firstName);
       setLastname(data.lastName);
-      console.log(data);
     };
     getData();
   }, []);

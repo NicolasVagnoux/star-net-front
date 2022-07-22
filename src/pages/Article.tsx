@@ -98,9 +98,9 @@ const Article = () => {
               />
             </div>
             <div className="article__text">
-              <p className="article__text__articletext">
+              <div className="article__text__articletext">
                 <ReactMarkdown>{article.mainContent}</ReactMarkdown>
-              </p>
+              </div>
             </div>
             <div className="article__ranking">
               {!isCompleted ? (

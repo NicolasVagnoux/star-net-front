@@ -127,7 +127,6 @@ const PackageItem = ({
       `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
       { withCredentials: true },
     );
-    console.log(data);
     data ? setIsFollowed(true) : setIsFollowed(false);
   };
 
