@@ -29,6 +29,19 @@
       &__mySwiper {
         width: 80%;
         height: 80%;
+        &__container {
+          position: relative;
+          width: 200px;
+          height: 200px;
+
+          img {
+            position: absolute;
+            overflow: hidden;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
       &__button {
         border: 1px solid $primaryColor2;
