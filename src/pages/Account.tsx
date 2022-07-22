@@ -1,6 +1,7 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Navbar from '../components/Navbar';
@@ -9,7 +10,15 @@ import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 
 const Account = () => {
-  const { userId, redirectToLogin } = useContext(CurrentUserContext);
+  const { userId, setUserId, redirectToLogin } = useContext(CurrentUserContext);
+  
+  const navigate: NavigateFunction = useNavigate();
+  const logout = () => {
+    setUserId(0); // remet immédiatement l'id du contexte à 0
+    localStorage.clear(); // vide le local storage
+    sessionStorage.clear(); // vide le session storage
+    navigate('/');
+  };
 
   // useState to stock user data
   const [userData, setUserData] = useState<IUser>();
@@ -64,6 +73,17 @@ const Account = () => {
       progress: undefined,
     });
 
+  // Notify  delete
+  const notifyDelete = () =>
+    toast.info('Le compte a bien été supprimé !', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   // update user data edit in DB with axios , handling with/out password
   const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -101,7 +121,8 @@ const Account = () => {
       await axios.delete<IUser>(`${import.meta.env.VITE_DB_URL}api/users/${userId}`, {
         withCredentials: true,
       });
-      notifySuccess();
+      notifyDelete();
+      logout();
       setErrorMessage('');
     } catch (err: any) {
       console.log(err);
