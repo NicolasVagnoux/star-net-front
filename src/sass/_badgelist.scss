@@ -1,24 +1,45 @@
 .badgeList {
-  margin-top: 20px;
+  margin: 20px;
   width: 600px;
-  height: 600px;
+  height: auto;
   background-color: $primaryWhite;
   padding: 30px;
   border-radius: 20px;
-  &__icons {
+
+  &__list {
     margin: auto;
     justify-content: space-evenly;
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
     color: $primaryColor5;
+
+    &__icon {
+      display: flex;
+      flex-direction: column;
+      color: $primaryBlack;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      position: relative;
+      height: 200px;
+
+      &:hover .badgeList__list__icon__description {
+        padding-top: 4px;
+        font-size: 0.9rem;
+        font-family: $primaryFont;
+        text-align: center;
+        visibility: visible;
+      }
+
+      &__description {
+        visibility: hidden;
+        position: absolute;
+        bottom: 0;
+      }
+    }
   }
   svg {
     opacity: 0.2;
-  }
-  :hover {
-    transition: 300ms;
-    color: $secondaryColor5;
-    opacity: 1;
   }
 }
