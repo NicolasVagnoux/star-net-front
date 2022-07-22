@@ -1,8 +1,6 @@
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode';
 import React, { useContext, useEffect, useState } from 'react';
 
-// import { useCookies } from 'react-cookie';
 import BadgesButton from '../components/BadgesButton';
 import BookmarksButton from '../components/BookmarksButton';
 import CatalogButton from '../components/CatalogButton';
@@ -13,9 +11,7 @@ import IUser from '../interfaces/IUser';
 
 const Home = () => {
   // Get information from connected user to display a personalized homepage
-  // const cookie = useCookies(['user_token'])[0];
-  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
-  const { userId } = useContext(CurrentUserContext);
+  const { userId, redirectToLogin } = useContext(CurrentUserContext);
   const [userInfo, setUserInfo] = useState<IUser>();
 
   useEffect(() => {
@@ -26,13 +22,17 @@ const Home = () => {
     };
     getUserInfo();
   }, []);
-  console.log(userId);
+
+  //Redirige directement au login si on n'est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
+  }, []);
 
   return (
     <>
       <Navbar />
       <div className="home">
-        <h1>Hello {userInfo?.firstName} </h1>
+        <h1>Bonjour {userInfo?.firstName} </h1>
         <h2> Lisez, découvrez, apprenez </h2>
         <PackageList userId={userId} />
         <div className="home__button">

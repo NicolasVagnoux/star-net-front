@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import IComment from '../interfaces/IComment';
-// import IUser from '../interfaces/IUser';
 import CommentBox from './CommentBox';
 
 interface Props {

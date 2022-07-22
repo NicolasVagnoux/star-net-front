@@ -1,19 +1,14 @@
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode';
 import React, { useContext, useEffect, useState } from 'react';
 
-// import { useCookies } from 'react-cookie';
 import ArticleCard from '../components/ArticleCard';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
 import CurrentUserContext from '../contexts/CurrentUser';
 import IArticle from '../interfaces/IArticle';
-// import IUser from '../interfaces/IUser';
 
 const Bookmarks = () => {
-  // const cookie = useCookies(['user_token'])[0];
-  // const user: IUser = jwt_decode(cookie.user_token); -> Old version with token
-  const { userId } = useContext(CurrentUserContext);
+  const { userId, redirectToLogin } = useContext(CurrentUserContext);
   const [bookmarkList, setBookmarkList] = useState<IArticle[]>([]);
 
   useEffect(() => {
@@ -25,6 +20,11 @@ const Bookmarks = () => {
     getBookmarksList();
   }, []);
   console.log(bookmarkList);
+
+  //Redirige directement au login si on n'est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
+  }, []);
 
   return (
     <>

@@ -1,5 +1,4 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Rating from '@mui/material/Rating';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -13,7 +12,6 @@ const CommentBox = (comment: IComment) => {
     const getAuthorInfo = async () => {
       const url = `${import.meta.env.VITE_DB_URL}api/users/${comment.idUser}`;
       const { data } = await axios.get(url);
-
       setAuthorInfo(data);
     };
     getAuthorInfo();
@@ -29,14 +27,6 @@ const CommentBox = (comment: IComment) => {
         <p className="box__left__name">
           {authorInfo?.firstName} {authorInfo?.lastName}
         </p>
-        <Rating
-          className="chat__left__rating"
-          sx={{
-            fontSize: '2.3rem',
-          }}
-          value={3}
-          precision={0.5}
-        />
         <p className=" box__left__date">{comment.date} </p>
       </div>
       <div className="box__body">
