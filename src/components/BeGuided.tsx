@@ -39,7 +39,13 @@ const BeGuided = ({ redirectHome }: Props) => {
             {guideList &&
               guideList.map((guide) => (
                 <SwiperSlide key={guide.id}>
-                  <h1>{guide.title}</h1> <img src={guide.mainPicture} alt="guideImage" width="200px" height="200px" />
+                  <h1>{guide.title}</h1>{' '}
+                  <img
+                    src={guide.mainPicture}
+                    alt="guideImage"
+                    width="200px"
+                    height="200px"
+                  />
                   <p>{guide.description}</p>
                 </SwiperSlide>
               ))}

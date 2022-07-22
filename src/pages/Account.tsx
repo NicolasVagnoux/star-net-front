@@ -11,7 +11,7 @@ import IUser from '../interfaces/IUser';
 
 const Account = () => {
   const { userId, setUserId, redirectToLogin } = useContext(CurrentUserContext);
-  
+
   const navigate: NavigateFunction = useNavigate();
   const logout = () => {
     setUserId(0); // remet immédiatement l'id du contexte à 0
