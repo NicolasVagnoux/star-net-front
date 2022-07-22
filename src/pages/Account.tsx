@@ -1,15 +1,15 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
 import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 
 const Account = () => {
-  const { userId, redirectToLogin } = useContext(CurrentUserContext);
+  const { userId, setUserId, redirectToLogin } = useContext(CurrentUserContext);
 
   // useState to stock user data
   const [userData, setUserData] = useState<IUser>();
@@ -28,6 +28,17 @@ const Account = () => {
   const [newPasswordsEqual, setNewPasswordsEqual] = useState<boolean>(true);
   // usestate to set error messages
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  console.log(errorMessage);
+
+  const navigate: NavigateFunction = useNavigate();
+
+  const redirectLoggout = () => {
+    setUserId(0); // remet immédiatement l'id du contexte à 0
+    localStorage.clear(); // vide le local storage
+    sessionStorage.clear(); // vide le session storage
+    navigate('/');
+  };
 
   // useEffect to catch user connected data
   useEffect(() => {
@@ -56,6 +67,16 @@ const Account = () => {
   // Notify success update
   const notifySuccess = () =>
     toast.info('Les données ont bien été modifiées !', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const notifySuccess2 = () =>
+    toast.info('Votre compte a bien été supprimé !', {
       position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
@@ -101,7 +122,8 @@ const Account = () => {
       await axios.delete<IUser>(`${import.meta.env.VITE_DB_URL}api/users/${userId}`, {
         withCredentials: true,
       });
-      notifySuccess();
+      notifySuccess2();
+      redirectLoggout();
       setErrorMessage('');
     } catch (err: any) {
       console.log(err);
