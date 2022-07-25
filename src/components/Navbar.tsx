@@ -1,8 +1,8 @@
 import CachedIcon from '@mui/icons-material/Cached';
 import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import React, { useContext, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -27,7 +27,10 @@ const Navbar = () => {
         <ul className="main-menu__element">
           <Link to="/home" style={{ textDecoration: 'none' }}>
             <li className="main-menu__element__nav">
-              <HomeOutlinedIcon className="main-menu__element__nav__icon" fontSize="large" />
+              <HomeOutlinedIcon
+                className="main-menu__element__nav__icon"
+                fontSize="large"
+              />
               <p className="main-menu__element__nav__nav-text">Découvrir</p>
             </li>
           </Link>
