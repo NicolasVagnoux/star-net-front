@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 const BadgesButton = () => {
   return (
-    <div className="badgesbutton">
-      <Link to="/rewards">
+    <Link to="/rewards">
+      <div className="badgesbutton">
         <WorkspacePremiumIcon />
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

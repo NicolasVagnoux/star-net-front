@@ -1,24 +1,34 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useContext, useEffect, useState } from 'react';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Navbar from '../components/Navbar';
+import ReturnButton from '../components/ReturnButton';
+import CurrentUserContext from '../contexts/CurrentUser';
 import IUser from '../interfaces/IUser';
 
 const Account = () => {
-  // Collect idUser connected with the cookie
-  const cookie = useCookies(['user_token'])[0];
-  const user: IUser = jwt_decode(cookie.user_token);
+  const { userId, setUserId, redirectToLogin } = useContext(CurrentUserContext);
 
+  const navigate: NavigateFunction = useNavigate();
+  const logout = () => {
+    setUserId(0); // remet immédiatement l'id du contexte à 0
+    localStorage.clear(); // vide le local storage
+    sessionStorage.clear(); // vide le session storage
+    navigate('/');
+  };
+
+  // useState to stock user data
   const [userData, setUserData] = useState<IUser>();
 
   // useState to edit your firstname
   const [firstname, setFirstname] = useState<string>('');
   // useState to edit your lastname
   const [lastname, setLastname] = useState<string>('');
+  // useState to valid your password
+  const [oldpassword, setOldPassword] = useState<string>('');
   // useState to edit your new password
   const [newpassword, setNewPassword] = useState<string>('');
   // useState to confirm your new password
@@ -28,19 +38,18 @@ const Account = () => {
   // usestate to set error messages
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  console.log(errorMessage);
-
   // useEffect to catch user connected data
   useEffect(() => {
     const getData = async () => {
       // get user data
       const { data } = await axios.get<IUser>(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}`,
         { withCredentials: true },
       );
       setUserData(data);
       setFirstname(data.firstName);
       setLastname(data.lastName);
+      console.log(data);
     };
     getData();
   }, []);
@@ -64,12 +73,23 @@ const Account = () => {
       progress: undefined,
     });
 
+  // Notify  delete
+  const notifyDelete = () =>
+    toast.info('Le compte a bien été supprimé !', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   // update user data edit in DB with axios , handling with/out password
   const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       await axios.put<IUser>(
-        `${import.meta.env.VITE_DB_URL}api/users/${user.id}`,
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}`,
         newpassword && newpassword2 && newPasswordsEqual
           ? { firstName: firstname, lastName: lastname, password: newpassword2 }
           : { firstName: firstname, lastName: lastname },
@@ -91,15 +111,40 @@ const Account = () => {
         }
       }
     }
+    console.log(errorMessage);
   };
+
+  // delete user data edit in DB with axios
+  const deleteUser = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.delete<IUser>(`${import.meta.env.VITE_DB_URL}api/users/${userId}`, {
+        withCredentials: true,
+      });
+      notifyDelete();
+      logout();
+      setErrorMessage('');
+    } catch (err: any) {
+      console.log(err);
+      err.response?.status === 422;
+    }
+  };
+
+  //Redirige directement au login si on n'est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
+  }, []);
 
   return (
     <>
       <Navbar />
+      <div className="returnaccount">
+        <ReturnButton />
+      </div>
       <div className="account">
         <div className="account__myaccount">
           <h1 className="account__myaccount__title">Mon Compte</h1>
-          <h2 className="account__myaccount__secondtitle">Modifiez mes données</h2>
+          <h2 className="account__myaccount__secondtitle">Modifier mes données</h2>
           <form
             className="account__myaccount__form"
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -144,6 +189,28 @@ const Account = () => {
                 type="button"
                 onClick={() => {
                   setLastname('');
+                }}>
+                <HighlightOffIcon />
+              </button>
+            </div>
+
+            {/* oldpassword */}
+            <div className="account__myaccount__form__oldpassword">
+              <label htmlFor="oldpassword">Changer mon mot de passe</label>
+              <input
+                type="text"
+                value={oldpassword}
+                onChange={(e) => {
+                  setOldPassword(e.target.value);
+                }}
+                placeholder="Renseigner mon mot de passe actuel"
+                id="oldpassword"
+              />
+
+              <button
+                type="button"
+                onClick={() => {
+                  setOldPassword('');
                 }}>
                 <HighlightOffIcon />
               </button>
@@ -200,11 +267,18 @@ const Account = () => {
                 <HighlightOffIcon />
               </button>
             </div>
+
             <input
               className="account__myaccount__form__submit"
               type="submit"
               value="Sauvegarder"
             />
+            <button
+              className="account__myaccount__form__delete"
+              type="button"
+              onClick={(e: React.FormEvent<HTMLButtonElement>) => deleteUser(e)}>
+              Supprimer mon compte
+            </button>
           </form>
         </div>
       </div>

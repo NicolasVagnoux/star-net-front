@@ -10,7 +10,7 @@
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
     "lint": "npm run lint:format && npm run lint:fix ",
     "type-check": "tsc",
-    "prepare": "husky install && chmod ug+x .husky/*",
+    "prepare": "husky install",
     "ts": "tsc -w"
   },
   "dependencies": {
@@ -20,17 +20,21 @@
     "@mui/icons-material": "^5.8.4",
     "axios": "^0.24.0",
     "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-circular-progressbar": "^2.1.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
+    "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",
     "react-toastify": "^9.0.4",
     "react-tsparticles": "^2.0.6",
     "sass": "^1.52.1",
+    "swiper": "^8.3.0",
     "tsparticles": "^2.0.6"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.182",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.28.2",

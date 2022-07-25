@@ -1,28 +1,30 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useContext, useEffect, useState } from 'react';
 
 import ArticleCard from '../components/ArticleCard';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
+import CurrentUserContext from '../contexts/CurrentUser';
 import IArticle from '../interfaces/IArticle';
-import IUser from '../interfaces/IUser';
 
 const Bookmarks = () => {
-  const cookie = useCookies(['user_token'])[0];
-  const user: IUser = jwt_decode(cookie.user_token);
+  const { userId, redirectToLogin } = useContext(CurrentUserContext);
   const [bookmarkList, setBookmarkList] = useState<IArticle[]>([]);
 
   useEffect(() => {
     const getBookmarksList = async () => {
-      const url = `${import.meta.env.VITE_DB_URL}api/users/${user.id}/articles`;
+      const url = `${import.meta.env.VITE_DB_URL}api/users/${userId}/articles`;
       const { data } = await axios.get(url, { withCredentials: true });
       setBookmarkList(data);
     };
     getBookmarksList();
   }, []);
   console.log(bookmarkList);
+
+  //Redirige directement au login si on n'est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
+  }, []);
 
   return (
     <>

@@ -46,7 +46,7 @@ const BackgroundParticles = () => {
             },
             links: {
               color: '#a6a6f3',
-              distance: 170,
+              distance: 150,
               enable: true,
               opacity: 0.7,
               width: 1,

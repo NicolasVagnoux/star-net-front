@@ -1,31 +1,105 @@
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
-const FollowedButton = () => {
-  // Declaration of 3 variables which changes on click to set styles to Followed button
-  const [isFollowed, setIsFollowed] = useState(false);
-  const [text, setText] = useState('SUIVRE');
-  const [src, setSrc] = useState('/assets/icons/plus.svg');
+import IPackageItem from '../interfaces/IPackageItem';
 
-  // Definition of the function which changes the attributes of the button
-  const handleFollowed = () => {
-    isFollowed ? setText('SUIVI') : setText('SUIVRE');
-    isFollowed ? setSrc('/assets/icons/checked.svg') : setSrc('/assets/icons/plus.svg');
+interface Props {
+  userId: number;
+  packageId: number;
+  setIsFollowed: React.Dispatch<React.SetStateAction<boolean>>;
+  isFollowed: boolean;
+}
+
+const FollowedButton = ({ userId, packageId, setIsFollowed, isFollowed }: Props) => {
+  //toast when a PACKAGE is unfollowed
+  const notifyUnfollowed = () =>
+    toast.info('Vous ne suivez plus ce package', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+  //toast when a PACKAGE is Followed
+  const notifyFollowed = () =>
+    toast.info('Le package a été suivi avec succès !', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  // Add a followed article for one user
+  const addFollowedPackage = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.post<IPackageItem>(
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages`,
+        { idPackage: packageId },
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        },
+      );
+      setIsFollowed(true);
+      notifyFollowed();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  // Use effect to control the function call
+  // Delete a followed for one user
+  const deleteFollowedPackage = async (e: React.FormEvent<HTMLButtonElement>) => {
+    try {
+      e.preventDefault();
+      await axios.delete<IPackageItem>(
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
+      );
+      setIsFollowed(false);
+      notifyUnfollowed();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Check if the followed button should be follow or unfollow
   useEffect(() => {
-    handleFollowed();
+    const getFollowedOrNot = async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_DB_URL}api/users/${userId}/followedpackages/${packageId}`,
+        { withCredentials: true },
+      );
+      console.log(data);
+      data ? setIsFollowed(true) : setIsFollowed(false);
+    };
+    getFollowedOrNot();
   }, [isFollowed]);
 
   return (
     <div>
-      <button
-        type="button"
-        className={isFollowed ? 'button button-followed' : 'button button-notfollowed'}
-        onClick={() => setIsFollowed(!isFollowed)}>
-        <img src={src} alt={src} />
-        {text}
-      </button>
+      {isFollowed && (
+        <button
+          type="button"
+          className="button button-notfollowed"
+          onClick={(e: React.FormEvent<HTMLButtonElement>) => deleteFollowedPackage(e)}>
+          <img src="/assets/icons/plus.svg" alt="unfollow" />
+          SUIVI
+        </button>
+      )}
+      {!isFollowed && (
+        <button
+          type="button"
+          className="button button-followed"
+          onClick={(e: React.FormEvent<HTMLButtonElement>) => addFollowedPackage(e)}>
+          <img src="/assets/icons/checked.svg" alt="follow" />
+          SUIVRE
+        </button>
+      )}
     </div>
   );
 };

@@ -1,6 +1,11 @@
 .taglistarticle {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 7px;
   overflow: auto;
+  height: 22px;
+  @media screen and (max-width: 600px) {
+    height: 52px; 
+   }
 }

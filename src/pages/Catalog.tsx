@@ -1,12 +1,13 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import ArticleCard from '../components/ArticleCard';
 import Navbar from '../components/Navbar';
 import ReturnButton from '../components/ReturnButton';
 import TagItemArticle from '../components/TagItemArticle';
+import CurrentUserContext from '../contexts/CurrentUser';
 import IArticle from '../interfaces/IArticle';
 import ITagItemArticle from '../interfaces/ITagItemArticle';
 
@@ -46,15 +47,21 @@ const Catalog = () => {
   }, []);
 
   // Function that handle sort by article name
-  const sortByTitle = (a: IArticle, b: IArticle) => {
-    if (a.title < b.title) {
+  const sortByDate = (a: IArticle, b: IArticle) => {
+    if (a.lastUpdateDate < b.lastUpdateDate) {
       return -1;
     }
-    if (a.title > b.title) {
+    if (a.lastUpdateDate > b.lastUpdateDate) {
       return 1;
     }
     return 0;
   };
+
+  const { userId, redirectToLogin } = useContext(CurrentUserContext);
+  //Redirige directement au login si on n'est pas connecté
+  useEffect(() => {
+    !userId && redirectToLogin();
+  }, []);
 
   return (
     <>
@@ -112,7 +119,8 @@ const Catalog = () => {
         <div className="catalog__articleList">
           {articleList &&
             articleList
-              .sort(sortByTitle)
+              .sort(sortByDate)
+              .reverse()
               .map((article) => <ArticleCard key={article.id} {...article} />)}
         </div>
       </div>
