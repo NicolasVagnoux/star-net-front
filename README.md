@@ -1,4 +1,4 @@
-# STARNET
+# STARNET FRONT
 
 ## Project
 
