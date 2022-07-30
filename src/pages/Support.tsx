@@ -30,13 +30,23 @@ const Support = () => {
       },
     );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setName('');
-    setEmail('');
-    setSubject('');
-    setMessage('');
-    notifySuccess();
+    try {
+      await axios.post(`${import.meta.env.VITE_DB_URL}api/contact`, {
+        name: name,
+        email: email,
+        subject: subject,
+        message: message,
+      });
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+      notifySuccess();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
