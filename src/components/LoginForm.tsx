@@ -16,7 +16,6 @@ const LoginForm = ({ setHasAccount }: Props) => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate: NavigateFunction = useNavigate();
   const { setUserId, stayLogged, setStayLogged } = useContext(CurrentUserContext);
-  console.log(stayLogged);
 
   const redirectHome = () => {
     navigate('/home');
