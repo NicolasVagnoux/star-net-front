@@ -179,4 +179,25 @@
         font-size: 0.9rem;
         color: red;
     }
+    .loading-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 70px;
+        height: 70px;
+        animation: spin 1.5s linear infinite;
+      }
+    
+      @keyframes spin {
+        0% {
+          transform: translateX(-50%) translateY(-50%) rotate(0deg);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-50%) rotate(180deg);
+        }
+        100% {
+          transform: translateX(-50%) translateY(-50%) rotate(360deg);
+        }
+      }
 }

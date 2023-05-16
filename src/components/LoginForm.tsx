@@ -16,6 +16,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate: NavigateFunction = useNavigate();
   const { setUserId, stayLogged, setStayLogged } = useContext(CurrentUserContext);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const redirectHome = () => {
     navigate('/home');
@@ -23,6 +24,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
+      setLoading(true);
       const url = `${import.meta.env.VITE_DB_URL}api/login`;
       e.preventDefault();
       const { data } = await axios.post<IUser>(
@@ -35,6 +37,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
         },
       );
       setErrorMessage('');
+      setLoading(false);
       setUserId(data.id); // a) Envoie tout de suite l'id dans le useState id du contexte, pour une utilisation immédiate
       if (stayLogged) {
         localStorage.setItem('myUser', JSON.stringify({ id: data.id })); // b) Envoie l'id dans le local storage pour les prochaines actualisations
@@ -131,6 +134,7 @@ const LoginForm = ({ setHasAccount }: Props) => {
         type="button">
         Je n&apos;ai pas encore de compte
       </button>
+      {loading && <img className="loading-logo" src="/assets/icons/loading.svg" alt='loading' />}
     </div>
   );
 };

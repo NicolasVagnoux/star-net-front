@@ -23,6 +23,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
   const [isGuideOpened, setIsGuideOpened] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
   const { setUserId } = useContext(CurrentUserContext);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const redirectHome = () => {
     navigate('/home');
@@ -37,6 +38,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
 
   const signup = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
+      setLoading(true);
       const url = `${import.meta.env.VITE_DB_URL}api/users`;
       e.preventDefault();
       // Add user route
@@ -60,6 +62,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
           withCredentials: true,
         },
       );
+      setLoading(false);
       setIsGuideOpened(true);
       notifySuccess();
       setUserId(data.id);
@@ -222,6 +225,7 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
           </button>
         )}
         {errorMessage && <span className="signupForm__error">{errorMessage}</span>}
+        {loading && <img className="loading-logo" src="/assets/icons/loading.svg" alt='loading' />}
       </div>
       {isGuideOpened && <BeGuided redirectHome={redirectHome} />}
     </>
