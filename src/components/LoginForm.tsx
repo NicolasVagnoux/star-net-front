@@ -134,7 +134,9 @@ const LoginForm = ({ setHasAccount }: Props) => {
         type="button">
         Je n&apos;ai pas encore de compte
       </button>
-      {loading && <img className="loading-logo" src="/assets/icons/loading.svg" alt='loading' />}
+      {loading && (
+        <img className="loading-logo" src="/assets/icons/loading.svg" alt="loading" />
+      )}
     </div>
   );
 };

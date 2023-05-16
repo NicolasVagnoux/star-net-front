@@ -225,7 +225,9 @@ const SignupForm = ({ setHasAccount, notifySuccess }: Props) => {
           </button>
         )}
         {errorMessage && <span className="signupForm__error">{errorMessage}</span>}
-        {loading && <img className="loading-logo" src="/assets/icons/loading.svg" alt='loading' />}
+        {loading && (
+          <img className="loading-logo" src="/assets/icons/loading.svg" alt="loading" />
+        )}
       </div>
       {isGuideOpened && <BeGuided redirectHome={redirectHome} />}
     </>
